@@ -190,6 +190,7 @@ function FlowerCard({
             <div className={styles.mediaViewport}>
               {hi?.isSale && <div className={styles.saleBadge}>SALE</div>}
               {hi?.isHot && <div className={styles.topPickBadge}>TOP PICK</div>}
+              {hi?.thc && <div className={styles.imgThcBadge}>{fmtTHC(hi.thc)}</div>}
               {prevImg && (
                 <img src={prevImg} alt="" className={`${styles.budImg} ${styles.budImgFadeOut}`}
                   referrerPolicy="no-referrer" />
@@ -294,7 +295,6 @@ function FlowerCard({
                     {f.isHot && <span className={`${styles.tag} ${styles.tagHot}`}>TOP PICK</span>}
                     {f.isMustTry && <span className={`${styles.tag} ${styles.tagMust}`}>MUST TRY</span>}
                     <TypeTag type={f.type} />
-                    <EffectIcons type={f.type} />
                   </div>
                   <div className={`${styles.mc} ${styles.mcThc}`}>{fmtTHC(f.thc)}</div>
                   {/* Price: 2 rows — 2G=3G line + 3G=6G line */}
@@ -331,7 +331,6 @@ function FlowerCard({
                     {f.isHot && <span className={`${styles.tag} ${styles.tagHot}`}>TOP PICK</span>}
                     {f.isMustTry && <span className={`${styles.tag} ${styles.tagMust}`}>MUST TRY</span>}
                     <TypeTag type={f.type} />
-                    <EffectIcons type={f.type} />
                   </div>
                   <div className={`${styles.mc} ${styles.mcThc}`}>{fmtTHC(f.thc)}</div>
                   <div className={`${styles.mc} ${styles.mcPrice} ${styles.mcPriceDeal}`}>
@@ -361,7 +360,6 @@ function FlowerCard({
                   {f.isHot && <span className={`${styles.tag} ${styles.tagHot}`}>TOP PICK</span>}
                   {f.isMustTry && <span className={`${styles.tag} ${styles.tagMust}`}>MUST TRY</span>}
                   <TypeTag type={f.type} />
-                  <EffectIcons type={f.type} />
                 </div>
                 <div className={`${styles.mc} ${styles.mcThc}`}>{fmtTHC(f.thc)}</div>
                 <div className={`${styles.mc} ${styles.mcPrice} ${styles.mcPriceDeal}`}>
@@ -458,7 +456,6 @@ function OZCard({ flowers, hiIdx }: { flowers: Flower[]; hiIdx: number }) {
                   {f.isHot && <span className={`${styles.tag} ${styles.tagHot}`}>TOP PICK</span>}
                   {f.isMustTry && <span className={`${styles.tag} ${styles.tagMust}`}>MUST TRY</span>}
                   <TypeTag type={f.type} />
-                  <EffectIcons type={f.type} />
                   <span style={{fontSize:14,opacity:0.6,marginLeft:4}}>{fmtTHC(f.thc)}</span>
                 </span>
                 <span className={styles.ozPrice}>${f.price28g?.sale ?? f.price28g?.regular ?? "—"}</span>
@@ -478,7 +475,6 @@ function OZCard({ flowers, hiIdx }: { flowers: Flower[]; hiIdx: number }) {
                   {f.isHot && <span className={`${styles.tag} ${styles.tagHot}`}>TOP PICK</span>}
                   {f.isMustTry && <span className={`${styles.tag} ${styles.tagMust}`}>MUST TRY</span>}
                   <TypeTag type={f.type} />
-                  <EffectIcons type={f.type} />
                   <span style={{fontSize:14,opacity:0.6,marginLeft:4}}>{fmtTHC(f.thc)}</span>
                 </span>
                 <span className={styles.ozPrice}>${f.price28g?.sale ?? f.price28g?.regular ?? "—"}</span>
@@ -691,6 +687,24 @@ export default function TVMenuPage() {
 
   return (
     <div className={styles.tvPage}>
+      {/* ── Floating Particles ── */}
+      <div className={styles.particles}>
+        {Array.from({length: 30}, (_, i) => {
+          const size = 6 + Math.random() * 10;
+          const colors = ['rgba(99,102,241,.35)','rgba(168,85,247,.30)','rgba(34,211,238,.30)','rgba(52,211,153,.25)','rgba(251,146,60,.20)','rgba(244,63,94,.20)'];
+          const color = colors[i % colors.length];
+          return (
+            <span key={i} className={styles.dot} style={{
+              width: size, height: size,
+              left: `${5 + Math.random() * 90}%`,
+              background: color,
+              boxShadow: `0 0 ${size*2}px ${color}`,
+              animationDuration: `${14 + Math.random() * 20}s`,
+              animationDelay: `${-Math.random() * 20}s`,
+            }} />
+          );
+        })}
+      </div>
       <div className={styles.wrap} ref={wrapRef}>
 
         {/* TITLE BAR REMOVED — more room for cards */}

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import {
   getItemsByCategory,
   getCategoryFromSlug,
@@ -27,8 +27,8 @@ export async function generateMetadata({
   const items = getItemsByCategory(catInfo.key);
 
   return {
-    title: `${catInfo.config.name} — ${items.length} Products`,
-    description: `Shop ${items.length} ${catInfo.config.name.toLowerCase()} at Always Lit Cannabis. Top brands, best prices. Toronto dispensary.`,
+    title: catInfo.config.seoTitle || `${catInfo.config.name} — ${items.length} Products`,
+    description: catInfo.config.seoIntro || `Shop ${items.length} ${catInfo.config.name.toLowerCase()} at Castle Heights Cannabis.`,
   };
 }
 
@@ -41,45 +41,98 @@ export default async function ItemsCategoryPage({
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) notFound();
 
-  const items = getItemsByCategory(catInfo.key);
+  /* Pre-Rolls also shows accessories (ADD ONS) */
+  let items = getItemsByCategory(catInfo.key);
+  if (catInfo.key === "PREROLLS") {
+    const accessories = getItemsByCategory("ADD ONS");
+    items = [...items, ...accessories];
+  }
   const { config } = catInfo;
 
   return (
     <main className={styles.main}>
       <Navbar />
 
+      {/* Category Banner */}
+      {config.banner && (
+        <section className={styles.bannerSection}>
+          <img
+            src={config.banner}
+            alt={`${config.name} — Castle Heights Cannabis`}
+            className={styles.bannerImg}
+          />
+        </section>
+      )}
+
+      {/* Hero */}
       <section className={styles.hero} style={{ "--cat-color": config.color } as React.CSSProperties}>
-        {catSlug === "edibles" && (
-          <div className={styles.heroBannerWrap}>
-            <img
-              src="/banners/neon_lit_edible_product_promotion_banner.webp"
-              alt="Edibles & More — Gummies, vapes, pre-rolls, hash"
-              className={styles.heroBannerImg}
-            />
-          </div>
-        )}
         <div className={styles.heroContent}>
-          {catSlug !== "edibles" && (
-            <>
-              <span className={styles.heroIcon}>{config.icon}</span>
-              <h1 className={styles.heroTitle}>
-                <span style={{ color: config.color }}>{config.name}</span>
-              </h1>
-            </>
-          )}
+          <span className={styles.heroIcon}>{config.icon}</span>
+          <h1 className={styles.heroTitle}>
+            <span style={{ color: config.color }}>{config.name}</span>
+          </h1>
           <p className={styles.heroSub}>{items.length} products available</p>
+          <p className={styles.heroIntro}>{config.seoIntro}</p>
         </div>
       </section>
 
+      {/* Product Grid */}
       <section className={styles.products}>
         <div className={styles.container}>
-          <div className={styles.grid}>
-            {items.map((item) => (
-              <ItemCard key={item.sku} item={item} catColor={config.color} />
-            ))}
+          {items.length > 0 ? (
+            <div className={styles.grid}>
+              {items.map((item) => (
+                <ItemCard key={item.sku} item={item} catColor={config.color} />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              <span className={styles.emptyIcon}>🌱</span>
+              <h3>Coming Soon</h3>
+              <p>We&apos;re stocking this category. Check back soon!</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* SEO Content */}
+      <section className={styles.seoSection}>
+        <div className={styles.container}>
+          <h2 className={styles.seoTitle}>{config.seoTitle}</h2>
+          <p className={styles.seoBody}>{config.seoDescription}</p>
+
+          {/* FAQ */}
+          {config.faqs.length > 0 && (
+            <div className={styles.faqBlock}>
+              <h3 className={styles.faqTitle}>Frequently Asked Questions</h3>
+              {config.faqs.map((faq, i) => (
+                <details key={i} className={styles.faqItem}>
+                  <summary className={styles.faqQuestion}>{faq.q}</summary>
+                  <p className={styles.faqAnswer}>{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          )}
+
+          {/* Visit CTA */}
+          <div className={styles.visitCta}>
+            <h3 className={styles.visitTitle}>Visit Castle Heights Cannabis</h3>
+            <p className={styles.visitText}>
+              605 Center St, Ottawa, ON K1K 2N8 · Open 24 Hours
+            </p>
+            <a
+              href="https://maps.app.goo.gl/6VfAL3aJzuRDL3gbA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.visitBtn}
+            >
+              📍 Get Directions
+            </a>
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }

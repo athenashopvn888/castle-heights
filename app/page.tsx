@@ -1,4 +1,7 @@
 import styles from "./page.module.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { allFlowers } from "./lib/products";
 
 /* ── Tier data (will come from Supabase later) ── */
 const TIERS = [
@@ -7,91 +10,120 @@ const TIERS = [
     slug: "exotic",
     tagline: "Ultra-rare, top-shelf genetics",
     thc: "35-39%",
-    price: "$40/3g",
-    bonus: "Buy 2g Get 1g FREE",
+    unitPrice: 20,
+    deal3g: "Buy 2g Get 1g FREE = $40/3G",
+    deal6g: "Buy 3g Get 3g FREE = $60/6G",
     color: "#f59e0b",
     glow: "rgba(245, 158, 11, 0.2)",
     icon: "🔥",
     count: 42,
-    banner: "/banners/exotic_premium_cannabis_with_glowing_accents.webp",
+    banner: "/banners/chc-exotic.webp",
   },
   {
     name: "PREMIUM",
     slug: "premium",
     tagline: "Hand-picked connoisseur grade",
     thc: "32-34%",
-    price: "$30/3g",
-    bonus: "Buy 2g Get 1g FREE",
+    unitPrice: 15,
+    deal3g: "Buy 2g Get 1g FREE = $30/3G",
+    deal6g: "Buy 3g Get 3g FREE = $45/6G",
     color: "#a78bfa",
     glow: "rgba(167, 139, 250, 0.2)",
     icon: "💎",
     count: 38,
-    banner: "/banners/premium_cannabis_with_glowing_accents.webp",
+    banner: "/banners/chc-premium.webp",
   },
   {
     name: "AAA+",
     slug: "aaa",
     tagline: "Heavy hitters, proven strains",
     thc: "30-32%",
-    price: "$20/3g",
-    bonus: "Buy 2g Get 1g FREE",
+    unitPrice: 10,
+    deal3g: "Buy 2g Get 1g FREE = $20/3G",
+    deal6g: "Buy 3g Get 3g FREE = $30/6G",
     color: "#22d3ee",
     glow: "rgba(34, 211, 238, 0.2)",
     icon: "⚡",
     count: 55,
-    banner: "/banners/electric_neon_cannabis_ad_banner.webp",
+    banner: "/banners/chc-aaa.webp",
   },
   {
     name: "AA",
     slug: "aa",
     tagline: "Quality daily drivers",
     thc: "27-29%",
-    price: "$20/5g",
-    bonus: "Great value, great smoke",
+    unitPrice: 4,
+    deal3g: null,
+    deal6g: null,
     color: "#34d399",
     glow: "rgba(52, 211, 153, 0.2)",
-    icon: "🌿",
+    icon: "✦",
     count: 35,
-    banner: "/banners/neon_cannabis_product_showcase.webp",
+    banner: "/banners/chc-aa.webp",
   },
   {
     name: "BUDGET",
     slug: "budget",
     tagline: "Shreds & value OZs",
     thc: "24-27%",
-    price: "From $40/oz",
-    bonus: "Stack up, save more",
+    unitPrice: 3,
+    deal3g: "Buy 2g Get 1g FREE = $10/3G",
+    deal6g: null,
     color: "#94a3b8",
     glow: "rgba(148, 163, 184, 0.15)",
     icon: "💰",
     count: 18,
-    banner: "/banners/premium_budget_cannabis_deal_showcase.webp",
+    banner: "/banners/chc-budget.webp",
   },
   {
     name: "EDIBLES & MORE",
-    slug: "edibles",
+    slug: "items/edibles",
     tagline: "Gummies, vapes, pre-rolls, hash",
     thc: "Up to 98%",
-    price: "From $3",
-    bonus: "100+ products available",
+    unitPrice: null,
+    deal3g: null,
+    deal6g: null,
     color: "#fb923c",
     glow: "rgba(251, 146, 60, 0.2)",
     icon: "🍬",
     count: 80,
-    banner: "/banners/neon_lit_edible_product_promotion_banner.webp",
+    banner: "/banners/chc-edibles-more.webp",
   },
 ];
 
-const FEATURED_STRAINS = [
-  { name: "PINK GODFATHER", sku: "500", tier: "EXOTIC", thc: "36%", type: "IH", price3g: "$40", image: "https://afterdarkcannabis.com/wp-content/uploads/2025/11/500-Pink-Godfather-500.jpg" },
-  { name: "HAN SOLO", sku: "522", tier: "EXOTIC", thc: "39%", type: "IH", price3g: "$40", image: "https://afterdarkcannabis.com/wp-content/uploads/2025/06/522-Han-Solo.jpeg" },
-  { name: "PINK VELVET", sku: "542", tier: "EXOTIC", thc: "39%", type: "IH", price3g: "$40", image: "https://kennedyloudcannabis.com/wp-content/uploads/2026/03/505-542PINK-VELVET.webp" },
-  { name: "TOASTED STRUDEL", sku: "412", tier: "PREMIUM", thc: "33%", type: "IH", price3g: "$30", image: "https://afterdarkcannabis.com/wp-content/uploads/2025/11/412-Toasted-Strudel-Sativa.jpg" },
-  { name: "PINK TOM GAS", sku: "374", tier: "AAA+", thc: "31%", type: "IH", price3g: "$20", image: "https://afterdarkcannabis.com/wp-content/uploads/2025/11/374-PINK-TOM-GAS-99144.jpg" },
-  { name: "PINEAPPLE EXPRESS", sku: "300", tier: "AAA+", thc: "30%", type: "SH", price3g: "$20", image: "https://afterdarkcannabis.com/wp-content/uploads/2025/05/300-PINEAPPLE-EXPRESS-SATIVA.jpg" },
-  { name: "PINK GODZILLA", sku: "466", tier: "PREMIUM", thc: "34%", type: "IH", price3g: "$30", image: "https://kennedyloudcannabis.com/wp-content/uploads/2025/12/461__466__PINK_GODZILLA.webp" },
-  { name: "BRUCE BANNER", sku: "541", tier: "EXOTIC", thc: "38%", type: "SH", price3g: "$40", image: "https://kennedyloudcannabis.com/wp-content/uploads/2026/03/501-541-BRUCE-BANNER.webp" },
-];
+/* ── Build featured strains dynamically from real inventory ── */
+function buildFeatured() {
+  // Prioritize: hot strains first, then sale, then highest THC
+  const hot = allFlowers.filter((f) => f.isHot);
+  const sale = allFlowers.filter((f) => f.isSale && !f.isHot);
+  const rest = allFlowers
+    .filter((f) => !f.isHot && !f.isSale && f.image)
+    .sort((a, b) => parseFloat(b.thc) - parseFloat(a.thc));
+
+  const pool = [...hot, ...sale, ...rest];
+  // Pick up to 8, ensuring variety across tiers
+  const picked: typeof pool = [];
+  const tierCounts: Record<string, number> = {};
+  for (const f of pool) {
+    if (picked.length >= 8) break;
+    const tc = tierCounts[f.tier] || 0;
+    if (tc >= 3) continue; // max 3 per tier
+    if (!f.image) continue; // skip strains without images
+    picked.push(f);
+    tierCounts[f.tier] = tc + 1;
+  }
+  return picked.map((f) => ({
+    name: f.name,
+    sku: f.sku,
+    tier: f.tier.toUpperCase(),
+    thc: f.thc,
+    type: f.type === "indica" ? "IH" : f.type === "sativa" ? "SH" : "H",
+    price3g: f.price3g ? `$${f.price3g.sale ?? f.price3g.regular}` : "—",
+    image: f.image,
+  }));
+}
+
+const FEATURED_STRAINS = buildFeatured();
 
 function getTypeLabel(type: string) {
   if (type.startsWith("IH")) return "Indica";
@@ -114,44 +146,14 @@ export default function HomePage() {
   return (
     <main className={styles.main}>
       {/* ── NAVBAR ── */}
-      <nav className={styles.navbar} id="main-nav">
-        <div className={styles.navInner}>
-          <a href="/" className={styles.navLogo}>
-            <img
-              src="/banners/logo.jpg"
-              alt="Always Lit Cannabis"
-              className={styles.navLogoImg}
-            />
-            <span className={styles.navBrand}>
-              ALWAYS<span className={styles.navBrandFire}>🔥</span>LIT
-            </span>
-          </a>
-          <div className={styles.navLinks}>
-            <a href="#menu" className={styles.navLink}>
-              Menu
-            </a>
-            <a href="/games" className={styles.navLink}>
-              Games
-            </a>
-            <a href="/contact" className={styles.navLink}>
-              Contact
-            </a>
-          </div>
-          <div className={styles.navActions}>
-            <span className={styles.navOpen}>
-              <span className={styles.navOpenDot}></span>
-              Open Now
-            </span>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* ── HERO BANNER ── */}
       <section className={styles.hero} id="hero">
         <div className={styles.heroBanner}>
           <img
-            src="/banners/always_lit_premium_cannabis_showcase.webp"
-            alt="Always Lit Cannabis — Premium Cannabis, Always Fire"
+            src="/banners/chc-storefront.webp"
+            alt="Castle Heights Cannabis — Premium Ottawa Cannabis Dispensary"
             className={styles.heroBannerImg}
           />
           <div className={styles.heroBannerOverlay}></div>
@@ -159,20 +161,17 @@ export default function HomePage() {
         <div className={styles.heroContent}>
           <div className={styles.heroBadge}>
             <span className={styles.heroBadgeDot}></span>
-            TORONTO&apos;S MOST FIRE DISPENSARY
+            OTTAWA'S FORTRESS OF CANNABIS
           </div>
           <h1 className={styles.heroTitle}>
-            <span className={styles.heroTitleLine1}>Premium Cannabis.</span>
-            <span className={styles.heroTitleLine2}>
-              Always <span className={styles.heroFire}>Fire.</span>
-            </span>
-            <span className={styles.heroTitleLine3}>
-              Always <span className={styles.heroLit}>Lit.</span>
-            </span>
+            Premium Cannabis.
+            <br />
+            <span className={styles.heroFire}>Ascend to New Heights.</span>{" "}
+            <span className={styles.heroLit}>Castle Heights.</span>
           </h1>
           <p className={styles.heroSubtitle}>
             200+ hand-picked strains · Exotic to Budget · THC up to 39% ·
-            Real-time inventory · No BS
+            Real-time inventory · 605 Center St, Ottawa
           </p>
           <div className={styles.heroButtons}>
             <a href="#menu" className={styles.heroBtn}>
@@ -210,12 +209,12 @@ export default function HomePage() {
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>$5</span>
+              <span className={styles.heroStatNum}>$3</span>
               <span className={styles.heroStatLabel}>From /g</span>
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>24/7</span>
+              <span className={styles.heroStatNum}>24h</span>
               <span className={styles.heroStatLabel}>Open</span>
             </div>
           </div>
@@ -227,7 +226,7 @@ export default function HomePage() {
         <div className={styles.container}>
           <div className={styles.sectionBanner}>
             <img
-              src="/banners/neon_crafted_cannabis_tier_shop_banner.webp"
+              src="/banners/chc-tier-pricing.webp"
               alt="Shop by Tier — From exotic craft flower to value budget OZs"
               className={styles.sectionBannerImg}
             />
@@ -270,11 +269,18 @@ export default function HomePage() {
                     </span>
                   </div>
                   <div className={styles.tierCardPrice}>
-                    <span className={styles.tierCardPriceMain}>
-                      {tier.price}
-                    </span>
-                    <span className={styles.tierCardBonus}>{tier.bonus}</span>
+                    {tier.unitPrice !== null && (
+                      <span className={styles.tierCardUnitPrice}>
+                        ${tier.unitPrice}/g
+                      </span>
+                    )}
                   </div>
+                  {tier.deal3g && (
+                    <div className={styles.tierCardDeals}>
+                      <span className={styles.tierCardDeal}>🎁 {tier.deal3g}</span>
+                      {tier.deal6g && <span className={styles.tierCardDeal}>🎁 {tier.deal6g}</span>}
+                    </div>
+                  )}
                 </div>
                 <div className={styles.tierCardArrow}>→</div>
               </a>
@@ -356,12 +362,34 @@ export default function HomePage() {
         </a>
       </section>
 
+      {/* ── DEALS & PROMOS BANNER ── */}
+      <section className={styles.promoSection}>
+        <a href="/items/edibles" className={styles.promoBannerLink}>
+          <img
+            src="/banners/chc-edibles-gummies.webp"
+            alt="High THC Gummies & Edibles — Castle Heights Cannabis"
+            className={styles.promoBannerImg}
+          />
+        </a>
+      </section>
+
+      {/* ── VAPES & PREROLL DEALS BANNER ── */}
+      <section className={styles.promoSection}>
+        <a href="/items/vapes" className={styles.promoBannerLink}>
+          <img
+            src="/banners/chc-deals-vapes.webp"
+            alt="24 Hour Cannabis Deals — Vapes, Pre-Rolls & More"
+            className={styles.promoBannerImg}
+          />
+        </a>
+      </section>
+
       {/* ── STORE INFO ── */}
       <section className={styles.storeSection} id="contact">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Visit <span className="text-gradient-neon">Always Lit</span>
+              Visit <span className="text-gradient-neon">Castle Heights</span>
             </h2>
           </div>
           <div className={styles.storeGrid}>
@@ -369,12 +397,12 @@ export default function HomePage() {
               <div className={styles.storeIcon}>📍</div>
               <h3 className={styles.storeCardTitle}>Location</h3>
               <p className={styles.storeCardText}>
-                644 Queen St W
+                605 Center St
                 <br />
-                Toronto, ON M6J 1E4
+                Ottawa, ON K1K 2N8
                 <br />
                 <a
-                  href="https://maps.app.goo.gl/YFPDuRCjwiuZL4J86"
+                  href="https://maps.app.goo.gl/6VfAL3aJzuRDL3gbA"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.storeLink}
@@ -389,7 +417,7 @@ export default function HomePage() {
               <p className={styles.storeCardText}>
                 Open 7 Days a Week
                 <br />
-                <span className={styles.storeHighlight}>10 AM – 3 AM Daily</span>
+                <span className={styles.storeHighlight}>Open 24 Hours</span>
               </p>
             </div>
             <div className={styles.storeCard}>
@@ -399,7 +427,7 @@ export default function HomePage() {
                 No appointment needed
                 <br />
                 <span className={styles.storeHighlight}>
-                  Queen West &amp; Bathurst
+                  Center St, Ottawa
                 </span>
               </p>
             </div>
@@ -408,37 +436,21 @@ export default function HomePage() {
           {/* Embedded map */}
           <div className={styles.mapWrap}>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.0!2d-79.4028!3d43.6483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de48e69e9d%3A0x0!2s644+Queen+St+W%2C+Toronto%2C+ON+M6J+1E4!5e0!3m2!1sen!2sca!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.0!2d-75.6616!3d45.4432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce05f437c5e95b%3A0xb496c5c5cc1d2c54!2s605+Center+St%2C+Ottawa%2C+ON+K1K+2N8!5e0!3m2!1sen!2sca!4v1"
               width="100%"
               height="300"
               style={{ border: 0, borderRadius: "var(--radius-lg)" }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Always Lit Cannabis — 644 Queen St W, Toronto"
+              title="Castle Heights Cannabis — 605 Center St, Ottawa"
             ></iframe>
           </div>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className={styles.footer}>
-        <div className={styles.footerInner}>
-          <div className={styles.footerBrand}>
-            ALWAYS<span style={{ color: "var(--fire-orange)" }}>🔥</span>LIT
-          </div>
-          <p className={styles.footerText}>
-            644 Queen St W, Toronto, ON M6J 1E4 · Open Daily 10AM–3AM
-          </p>
-          <p className={styles.footerText}>
-            Premium Cannabis · Always Fire · Always Lit
-          </p>
-          <p className={styles.footerLegal}>
-            © {new Date().getFullYear()} Always Lit Cannabis. Must be 19+ to
-            enter. Please consume responsibly.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

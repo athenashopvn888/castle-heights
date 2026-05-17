@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import styles from "./contact.module.css";
 
 export const metadata: Metadata = {
-  title: "Contact Us — Always Lit Cannabis | 644 Queen St W, Toronto",
+  title: "Contact Us — Castle Heights Cannabis | 605 Center St, Ottawa",
   description:
-    "Visit Always Lit Cannabis at 644 Queen St W, Toronto, ON M6J 1E4. Open 7 days a week, 10AM–3AM. Walk-ins welcome. Queen West & Bathurst area.",
+    "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open 24 hours, 7 days a week. Walk-ins welcome. Vanier area.",
   openGraph: {
-    title: "Contact Always Lit Cannabis — Toronto Dispensary",
+    title: "Contact Castle Heights Cannabis — Ottawa Dispensary",
     description:
-      "644 Queen St W, Toronto. Open daily 10AM–3AM. Premium cannabis, always fire.",
+      "605 Center St, Ottawa. Open 24 hours, 7 days a week. Premium cannabis, always fire.",
   },
 };
 
@@ -22,10 +23,10 @@ export default function ContactPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>
-            Visit <span className={styles.heroAccent}>Always Lit</span>
+            Visit <span className={styles.heroAccent}>Castle Heights</span>
           </h1>
           <p className={styles.heroSub}>
-            644 Queen St W · Toronto, ON M6J 1E4
+            605 Center St · Ottawa, ON K1K 2N8
           </p>
         </div>
       </section>
@@ -39,11 +40,11 @@ export default function ContactPage() {
               <div className={styles.infoIcon}>📍</div>
               <h2 className={styles.infoTitle}>Location</h2>
               <p className={styles.infoText}>
-                644 Queen St W
+                605 Center St
                 <br />
-                Toronto, ON M6J 1E4
+                Ottawa, ON K1K 2N8
                 <br />
-                <span className={styles.infoMuted}>Queen West &amp; Bathurst</span>
+                <span className={styles.infoMuted}>Vanier area &amp; Bathurst</span>
               </p>
               <a
                 href="https://maps.app.goo.gl/YFPDuRCjwiuZL4J86"
@@ -62,36 +63,36 @@ export default function ContactPage() {
               <div className={styles.hoursTable}>
                 <div className={styles.hoursRow}>
                   <span>Monday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Tuesday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Wednesday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Thursday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Friday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Saturday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Sunday</span>
-                  <span className={styles.hoursTime}>10 AM – 3 AM</span>
+                  <span className={styles.hoursTime}>24 Hours</span>
                 </div>
               </div>
               <div className={styles.openBadge}>
                 <span className={styles.openDot}></span>
-                Open 7 Days a Week
+                Open 24/7 — Never Closed
               </div>
             </div>
 
@@ -130,34 +131,21 @@ export default function ContactPage() {
           {/* Map */}
           <div className={styles.mapSection}>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.0!2d-79.4028!3d43.6483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34de48e69e9d%3A0x0!2s644+Queen+St+W%2C+Toronto%2C+ON+M6J+1E4!5e0!3m2!1sen!2sca!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.5!2d-75.6654!3d45.4393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce04fad3a7f3e1%3A0x0!2s605+Center+St%2C+Ottawa%2C+ON+K1K+2N8!5e0!3m2!1sen!2sca!4v1"
               width="100%"
               height="400"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Always Lit Cannabis — 644 Queen St W, Toronto"
+              title="Castle Heights Cannabis — 605 Center St, Ottawa"
             ></iframe>
           </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer className={styles.footer}>
-        <div className={styles.footerInner}>
-          <div className={styles.footerBrand}>
-            ALWAYS<span style={{ color: "var(--fire-orange)" }}>🔥</span>LIT
-          </div>
-          <p className={styles.footerText}>
-            644 Queen St W, Toronto, ON M6J 1E4 · Open Daily 10AM–3AM
-          </p>
-          <p className={styles.footerLegal}>
-            © {new Date().getFullYear()} Always Lit Cannabis. Must be 19+ to
-            enter. Please consume responsibly.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
