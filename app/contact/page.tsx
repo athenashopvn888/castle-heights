@@ -47,7 +47,7 @@ export default function ContactPage() {
                 <span className={styles.infoMuted}>Vanier area &amp; Bathurst</span>
               </p>
               <a
-                href="https://maps.app.goo.gl/YFPDuRCjwiuZL4J86"
+                href="https://www.google.com/maps/dir//605+Center+St,+Ottawa,+ON+K1K+2N8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.infoBtn}
@@ -131,7 +131,7 @@ export default function ContactPage() {
           {/* Map */}
           <div className={styles.mapSection}>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.5!2d-75.6654!3d45.4393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce04fad3a7f3e1%3A0x0!2s605+Center+St%2C+Ottawa%2C+ON+K1K+2N8!5e0!3m2!1sen!2sca!4v1"
+              src="https://maps.google.com/maps?q=605%20Center%20St,%20Ottawa,%20ON%20K1K%202N8&t=&z=15&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="400"
               style={{ border: 0 }}
