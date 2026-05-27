@@ -120,7 +120,7 @@ function ItemCard({ title, accent, items, hiIdx, preset }: {
 const TICKER_SLIDES = [
   "🔥 Mohawk Medicine — 2655 Eglinton Ave E, Scarborough",
   "200+ Strains In Stock",
-  "Open 24 Hours",
+  "Open Daily with Late Hours",
   "Pre-Rolls · Edibles · Vapes · Concentrates",
   "ALL SALES ARE FINAL",
   "🎮 Play Games at mohawkmedicine.com/games",
@@ -220,6 +220,25 @@ export default function TV2Page() {
           <div className={styles.grid}>
             {CARD_CONFIG.map(card => {
               const filtered = items.filter(card.filter);
+
+              if (card.id === "CIGARETTES" && daytime) {
+                return (
+                  <div key={card.id} className={styles.card} style={{"--accent":card.accent} as React.CSSProperties}>
+                    <div className={styles.cardHeader}>PROMO</div>
+                    <div className={styles.promoMain}>
+                      <div className={styles.promoViewport}>
+                        <img
+                          className={`${styles.promoImg} ${styles.promoActive}`}
+                          src="/banners/cig-poster-1.png"
+                          alt="Cigarettes Promo"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <ItemCard key={card.id} title={card.title} accent={card.accent}
                   items={filtered} hiIdx={highlights[card.id]||0} preset={card.preset} />

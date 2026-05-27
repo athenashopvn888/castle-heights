@@ -214,7 +214,7 @@ export default function HomePage() {
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>24h</span>
+              <span className={styles.heroStatNum}>Late</span>
               <span className={styles.heroStatLabel}>Open</span>
             </div>
           </div>
@@ -378,7 +378,7 @@ export default function HomePage() {
         <a href="/items/vapes" className={styles.promoBannerLink}>
           <img
             src="/banners/chc-deals-vapes.webp"
-            alt="24 Hour Cannabis Deals — Vapes, Pre-Rolls & More"
+            alt="Late Night Cannabis Deals — Vapes, Pre-Rolls & More"
             className={styles.promoBannerImg}
           />
         </a>
@@ -417,7 +417,7 @@ export default function HomePage() {
               <p className={styles.storeCardText}>
                 Open 7 Days a Week
                 <br />
-                <span className={styles.storeHighlight}>Open 24 Hours</span>
+                <span className={styles.storeHighlight}>Mon-Wed 12PM-2AM, Thu-Sun 12PM-4AM</span>
               </p>
             </div>
             <div className={styles.storeCard}>

@@ -14,7 +14,7 @@ const FAQ_CATEGORIES = [
     title: "📍 Location & Hours",
     faqs: [
       { q: "Where is Castle Heights Cannabis located?", a: "We are located at 605 Center St, Ottawa, ON K1K 2N8 — in the heart of Vanier area. We're near the Rideau Centre, Parliament Hill, and major OC Transpo bus routes." },
-      { q: "What are your hours?", a: "We are open 24 hours a day, 7 days a week, 365 days a year. Walk in anytime — no appointment needed." },
+      { q: "What are your hours?", a: "We are open Monday to Wednesday from 12:00 PM to 2:00 AM, and Thursday to Sunday from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
       { q: "Is there parking nearby?", a: "Yes. Free street parking is available on Center St and surrounding streets in the evenings. Paid parking lots are available nearby during the day. We're also accessible by OC Transpo and STO buses." },
       { q: "How far are you from Gatineau?", a: "We're just 5 minutes from the Portage Bridge and 7 minutes from the Macdonald-Cartier Bridge. We're one of the closest dispensaries to the Quebec border." },
       { q: "What's the best way to get to Castle Heights?", a: "We're easily accessible by car, bus, or foot. From Rideau Centre, walk north on Center St — we're a 5-minute walk. By bus, several OC Transpo routes stop within walking distance. Free evening parking is available on surrounding streets." },
@@ -45,7 +45,7 @@ const FAQ_CATEGORIES = [
   {
     title: "🛒 Shopping & Experience",
     faqs: [
-      { q: "Do I need an appointment?", a: "No! Castle Heights Cannabis is walk-in only. Just show up anytime — we're open 24 hours." },
+      { q: "Do I need an appointment?", a: "No! Castle Heights Cannabis is walk-in only. Just show up anytime during open hours." },
       { q: "Can I order online?", a: "Currently, Castle Heights is an in-store shopping experience only. You can browse our live menu online to see what's in stock before visiting." },
       { q: "Do you offer delivery?", a: "Delivery is coming soon! Visit our delivery page to sign up for email notifications when we launch our delivery service." },
       { q: "What payment methods do you accept?", a: "We accept cash and debit. No credit cards at this time." },
@@ -93,7 +93,7 @@ export default function FAQPage() {
         <div className={styles.content}>
           <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
           <p className={styles.pageSubtitle}>
-            Everything you need to know about Castle Heights Cannabis — Ottawa&apos;s 24-hour dispensary at 605 Center St in Vanier area.
+            Everything you need to know about Castle Heights Cannabis — Ottawa's late-night dispensary at 605 Center St in Vanier area.
           </p>
 
           {FAQ_CATEGORIES.map((cat) => (

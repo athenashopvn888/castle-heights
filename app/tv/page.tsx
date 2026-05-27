@@ -617,7 +617,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
 const TICKER_SLIDES = [
   "🔥 Mohawk Medicine — 2655 Eglinton Ave E, Scarborough",
   "200+ Strains In Stock",
-  "Open 24 Hours",
+  "Open Daily with Late Hours",
   "ALL SALES ARE FINAL",
   "🎮 Play Games at mohawkmedicine.com/games",
 ];
