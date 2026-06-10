@@ -6,11 +6,14 @@ import styles from "./contact.module.css";
 export const metadata: Metadata = {
   title: "Contact Us — Castle Heights Cannabis | 605 Center St, Ottawa",
   description:
-    "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open daily with late hours. Walk-ins welcome. Vanier area.",
+    "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open 24 Hours a day, 7 days a week. Walk-ins welcome.",
+  alternates: {
+    canonical: "https://castleheightscannabis.com/contact",
+  },
   openGraph: {
     title: "Contact Castle Heights Cannabis — Ottawa Dispensary",
     description:
-      "605 Center St, Ottawa. Open daily with late hours. Premium cannabis, always fire.",
+      "605 Center St, Ottawa. Open 24 Hours a day, 7 days a week. Premium cannabis, always fire.",
   },
 };
 

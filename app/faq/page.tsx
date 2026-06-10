@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "FAQ — Castle Heights Cannabis | Ottawa Dispensary Questions",
   description:
     "Frequently asked questions about Castle Heights Cannabis in Ottawa. Hours, location, products, pricing, promotions, and everything you need to know before visiting.",
+  alternates: {
+    canonical: "https://castleheightscannabis.com/faq",
+  },
 };
 
 const FAQ_CATEGORIES = [
