@@ -74,6 +74,7 @@ export default function Footer() {
               <Link href="/info/cheap-weed-ottawa">Cheap Weed Ottawa</Link>
               <Link href="/info/native-cigarettes-ottawa">Native Cigarettes</Link>
               <Link href="/info/weed-store-near-gatineau">Weed Store Near Gatineau</Link>
+              <Link href="/weed-dispensary-ottawa/">Castle Heights Cannabis Weed Dispensary in Ottawa</Link>
               <Link href="/contact">Contact Us</Link>
               <a
                 href="https://maps.app.goo.gl/6VfAL3aJzuRDL3gbA"
