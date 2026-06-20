@@ -673,7 +673,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
 const TICKER_SLIDES = [
   "🔥 Castle Heights Cannabis — 605 Center St, Ottawa",
   "200+ Strains In Stock",
-  "Open 24 Hours",
+  "Open daily 12 PM–4 AM",
   "ALL SALES ARE FINAL",
   "🎮 Play Games at castleheightscannabis.com/games",
 ];

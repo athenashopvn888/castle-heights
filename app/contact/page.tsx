@@ -6,14 +6,14 @@ import styles from "./contact.module.css";
 export const metadata: Metadata = {
   title: "Contact Us — Castle Heights Cannabis | 605 Center St, Ottawa",
   description:
-    "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open 24 Hours a day, 7 days a week. Walk-ins welcome.",
+    "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open daily 12 PM–4 AM. Walk-ins welcome.",
   alternates: {
     canonical: "https://castleheightscannabis.com/contact",
   },
   openGraph: {
     title: "Contact Castle Heights Cannabis — Ottawa Dispensary",
     description:
-      "605 Center St, Ottawa. Open 24 Hours a day, 7 days a week. Premium cannabis, always fire.",
+      "605 Center St, Ottawa. Open daily 12 PM–4 AM. Premium cannabis, always fire.",
   },
 };
 
@@ -49,14 +49,6 @@ export default function ContactPage() {
                 <br />
                 <span className={styles.infoMuted}>Vanier area &amp; Bathurst</span>
               </p>
-              <a
-                href="https://www.google.com/maps/dir//605+Center+St,+Ottawa,+ON+K1K+2N8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.infoBtn}
-              >
-                Get Directions →
-              </a>
             </div>
 
             {/* Hours */}
@@ -66,15 +58,15 @@ export default function ContactPage() {
               <div className={styles.hoursTable}>
                 <div className={styles.hoursRow}>
                   <span>Monday</span>
-                  <span className={styles.hoursTime}>12:00 PM – 2:00 AM</span>
+                  <span className={styles.hoursTime}>12:00 PM – 4:00 AM</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Tuesday</span>
-                  <span className={styles.hoursTime}>12:00 PM – 2:00 AM</span>
+                  <span className={styles.hoursTime}>12:00 PM – 4:00 AM</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Wednesday</span>
-                  <span className={styles.hoursTime}>12:00 PM – 2:00 AM</span>
+                  <span className={styles.hoursTime}>12:00 PM – 4:00 AM</span>
                 </div>
                 <div className={styles.hoursRow}>
                   <span>Thursday</span>
@@ -133,16 +125,6 @@ export default function ContactPage() {
 
           {/* Map */}
           <div className={styles.mapSection}>
-            <iframe
-              src="https://maps.google.com/maps?q=605%20Center%20St,%20Ottawa,%20ON%20K1K%202N8&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="400"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Castle Heights Cannabis — 605 Center St, Ottawa"
-            ></iframe>
           </div>
         </div>
       </section>

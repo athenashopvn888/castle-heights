@@ -17,7 +17,7 @@ const FAQ_CATEGORIES = [
     title: "📍 Location & Hours",
     faqs: [
       { q: "Where is Castle Heights Cannabis located?", a: "We are located at 605 Center St, Ottawa, ON K1K 2N8 — in the heart of Vanier area. We're near the Rideau Centre, Parliament Hill, and major OC Transpo bus routes." },
-      { q: "What are your hours?", a: "We are open Monday to Wednesday from 12:00 PM to 2:00 AM, and Thursday to Sunday from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
+      { q: "What are your hours?", a: "We are open daily from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
       { q: "Is there parking nearby?", a: "Yes. Free street parking is available on Center St and surrounding streets in the evenings. Paid parking lots are available nearby during the day. We're also accessible by OC Transpo and STO buses." },
       { q: "How far are you from Gatineau?", a: "We're just 5 minutes from the Portage Bridge and 7 minutes from the Macdonald-Cartier Bridge. We're one of the closest dispensaries to the Quebec border." },
       { q: "What's the best way to get to Castle Heights?", a: "We're easily accessible by car, bus, or foot. From Rideau Centre, walk north on Center St — we're a 5-minute walk. By bus, several OC Transpo routes stop within walking distance. Free evening parking is available on surrounding streets." },
@@ -26,13 +26,12 @@ const FAQ_CATEGORIES = [
   {
     title: "🌿 Products & Menu",
     faqs: [
-      { q: "What products do you carry?", a: "We carry over 200 strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles (gummies, chocolates, baked goods), vape pens, disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, magic mushrooms, native cigarettes, and accessories." },
+      { q: "What products do you carry?", a: "We carry over 200 strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles (gummies, chocolates, baked goods), vape pens, disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, and accessories." },
       { q: "Do you have a live menu?", a: "Yes! Our online menu at castleheightscannabis.com updates in real time with current stock, prices, THC levels, and availability. You can check what's in stock before you visit." },
       { q: "What are your flower tiers?", a: "Exotic ($10-$12/g, THC 35-39%) — ultra-rare top-shelf genetics. Premium ($7-$10/g, THC 32-34%) — connoisseur-grade. AAA+ ($5-$6/g, THC 30-32%) — heavy hitters, our most popular tier. AA ($4/g, THC 27-29%) — quality daily drivers. Budget ($3/g, THC 24-27%) — reliable value flower." },
       { q: "Do you sell edibles?", a: "Yes! We carry a variety of edibles including gummies, chocolates, baked goods, and more. THC content varies. Check our live menu for current availability." },
       { q: "Do you sell vapes?", a: "Yes — both disposable vapes and refillable vape pens. We carry both nicotine vapes and THC vapes from top brands." },
       { q: "Do you sell native cigarettes?", a: "Yes! We carry one of the widest selections of native cigarettes in downtown Ottawa, including premium and value brands in multiple varieties." },
-      { q: "Do you sell magic mushrooms?", a: "Yes. We carry a selection of magic mushroom products. Visit us in-store or check our live menu for current availability." },
     ],
   },
   {
@@ -116,14 +115,6 @@ export default function FAQPage() {
             <p className={styles.ctaText}>
               Call us at <strong>(343) 573-4401</strong> or visit us at 605 Center St, Ottawa.
             </p>
-            <a
-              href="https://www.google.com/maps/dir/?api=1&destination=605+Center+St+Ottawa+ON"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaLink}
-            >
-              📍 Get Directions
-            </a>
           </div>
         </div>
         <Footer />

@@ -32,11 +32,11 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Beyond Flower — Edibles, Vapes, Concentrates & More",
-        body: "Castle Heights Cannabis is more than just a flower shop. We carry a comprehensive selection of cannabis edibles (gummies, chocolates, baked goods), vape pens and disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, magic mushrooms, native cigarettes, rolling papers, and accessories. Our live digital menu at castleheightscannabis.com updates in real time so you always know exactly what's in stock before you make the trip.",
+        body: "Castle Heights Cannabis is more than just a flower shop. We carry a comprehensive selection of cannabis edibles (gummies, chocolates, baked goods), vape pens and disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, rolling papers, and accessories. Our live digital menu at castleheightscannabis.com updates in real time so you always know exactly what's in stock before you make the trip.",
       },
       {
         heading: "Open Daily with Late Hours in Vanier area",
-        body: "Castle Heights Cannabis is open every day with late-night hours: Mon-Wed 12:00 PM to 2:00 AM, and Thu-Sun 12:00 PM to 4:00 AM. Whether you're finishing a late shift or heading out for the night, our doors are open late. We're centrally located at 605 Center St, steps from the Vanier area, near major OC Transpo bus routes, and minutes from the Rideau Centre and Parliament Hill. Free street parking is available in the evenings.",
+        body: "Castle Heights Cannabis is open daily from 12:00 PM to 4:00 AM. Whether you're finishing a late shift or heading out for the night, our doors are open late. We're centrally located at 605 Center St, steps from the Vanier area, near major OC Transpo bus routes, and minutes from the Rideau Centre and Parliament Hill. Free street parking is available in the evenings.",
       },
       {
         heading: "Unbeatable Promotions on Every Purchase",
@@ -44,13 +44,13 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Serving Ottawa & Gatineau",
-        body: "Castle Heights Cannabis proudly serves customers from across the National Capital Region. Whether you're coming from Vanier area, Sandy Hill, Lower Town, Centretown, the Glebe, Old Ottawa South, Vanier, Orleans, Kanata, Barrhaven, or across the bridge from Gatineau and Hull, we welcome you. Our 24-hour operation means you can visit on your own schedule. Call us at (343) 573-4401 or visit us at 605 Center St, Ottawa, ON K1K 2N8.",
+        body: "Castle Heights Cannabis proudly serves customers from across the National Capital Region. Whether you're coming from Vanier area, Sandy Hill, Lower Town, Centretown, the Glebe, Old Ottawa South, Vanier, Orleans, Kanata, Barrhaven, or across the bridge from Gatineau and Hull, we welcome you. We are open daily 12 PM–4 AM. Call us at (343) 573-4401 or visit us at 605 Center St, Ottawa, ON K1K 2N8.",
       },
     ],
     faqs: [
       { q: "Where is Castle Heights Cannabis located?", a: "We are located at 605 Center St, Ottawa, ON K1K 2N8 — in the heart of Vanier area, one of Ottawa's most popular and accessible neighbourhoods. We're near the Rideau Centre, Parliament Hill, and major bus routes." },
-      { q: "What are the hours for Castle Heights Cannabis?", a: "We are open Monday to Wednesday from 12:00 PM to 2:00 AM, and Thursday to Sunday from 12:00 PM to 4:00 AM. Walk in anytime during our open hours. Whether it's 2 PM or 2 AM, our staff is here to help." },
-      { q: "What cannabis products does Castle Heights carry?", a: "We carry 200+ strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles, vapes, concentrates, pre-rolls, magic mushrooms, native cigarettes, and accessories. Our menu updates in real time online." },
+      { q: "What are the hours for Castle Heights Cannabis?", a: "We are open daily from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
+      { q: "What cannabis products does Castle Heights carry?", a: "We carry 200+ strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles, vapes, concentrates, pre-rolls, native cigarettes, and accessories. Our menu updates in real time online." },
       { q: "What is the cheapest weed at Castle Heights?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. Every tier includes our Buy 2g Get 1g FREE promotion, making our prices even more competitive." },
       { q: "Does Castle Heights have a live menu?", a: "Yes! Our online menu at castleheightscannabis.com updates in real time with current stock, prices, and availability. You can see exactly what we have before you visit." },
       { q: "What makes Castle Heights different from other Ottawa dispensaries?", a: "Three things set us apart: (1) We're open daily with late hours, (2) our transparent 5-tier pricing system means no confusing markups, and (3) every purchase includes our Buy 2g Get 1g FREE promotion. Plus we carry one of Ottawa's largest selections with over 200 strains." },
@@ -158,7 +158,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Full Menu — Cannabis, Edibles, Vapes & More",
-        body: "When you make the trip across the bridge, make it count. Castle Heights carries a full selection including 200+ flower strains, edibles, vape pens, disposable vapes, concentrates (shatter, wax, hash, live resin), pre-rolled joints, magic mushrooms, native cigarettes, and accessories. Check our live online menu at castleheightscannabis.com before you visit to see exactly what's in stock.",
+        body: "When you make the trip across the bridge, make it count. Castle Heights carries a full selection including 200+ flower strains, edibles, vape pens, disposable vapes, concentrates (shatter, wax, hash, live resin), pre-rolled joints, native cigarettes, and accessories. Check our live online menu at castleheightscannabis.com before you visit to see exactly what's in stock.",
       },
     ],
     faqs: [

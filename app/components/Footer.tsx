@@ -14,7 +14,7 @@ export default function Footer() {
             <p className={styles.desc}>
               Your Local Cannabis Dispensary At 605 Center St, Ottawa. Visit
               Castle Heights Cannabis For Premium Flower, Edibles, Vapes &amp; More.
-              Open 24 Hours.
+              Open daily 12 PM–4 AM.
             </p>
             <div className={styles.buttons}>
               <a
@@ -22,14 +22,6 @@ export default function Footer() {
                 className={styles.btnPrimary}
               >
                 Call Now
-              </a>
-              <a
-                href="https://maps.app.goo.gl/6VfAL3aJzuRDL3gbA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnSecondary}
-              >
-                Get Directions
               </a>
             </div>
           </div>
@@ -49,7 +41,7 @@ export default function Footer() {
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
-              <span className={styles.highlight}>Open 24 Hours</span>
+              <span className={styles.highlight}>Open daily 12 PM–4 AM</span>
             </div>
           </div>
 
@@ -76,13 +68,6 @@ export default function Footer() {
               <Link href="/info/weed-store-near-gatineau">Weed Store Near Gatineau</Link>
               <Link href="/weed-dispensary-ottawa/">Castle Heights Cannabis Weed Dispensary in Ottawa</Link>
               <Link href="/contact">Contact Us</Link>
-              <a
-                href="https://maps.app.goo.gl/6VfAL3aJzuRDL3gbA"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google Maps
-              </a>
             </nav>
           </div>
         </div>

@@ -121,16 +121,8 @@ export default async function ItemsCategoryPage({
           <div className={styles.visitCta}>
             <h3 className={styles.visitTitle}>Visit Castle Heights Cannabis</h3>
             <p className={styles.visitText}>
-              605 Center St, Ottawa, ON K1K 2N8 · Open 24 Hours
+              605 Center St, Ottawa, ON K1K 2N8 · Open daily 12 PM–4 AM
             </p>
-            <a
-              href="https://maps.app.goo.gl/6VfAL3aJzuRDL3gbA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.visitBtn}
-            >
-              📍 Get Directions
-            </a>
           </div>
         </div>
       </section>

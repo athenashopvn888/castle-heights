@@ -112,7 +112,7 @@ export default function BlogContent() {
           </h1>
           <p className={styles.heroSub}>
             Cannabis guides, strain reviews, and dispensary news from Ottawa&apos;s
-            24-hour dispensary.
+            dispensary open daily 12 PM–4 AM.
           </p>
         </div>
       </section>
@@ -182,14 +182,6 @@ export default function BlogContent() {
             ))}
           </div>
           <div className={styles.reviewsCta}>
-            <a
-              href="https://maps.app.goo.gl/YFPDuRCjwiuZL4J86"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.reviewsBtn}
-            >
-              📍 See All Reviews on Google
-            </a>
           </div>
         </div>
       </section>

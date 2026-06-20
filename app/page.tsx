@@ -401,14 +401,6 @@ export default function HomePage() {
                 <br />
                 Ottawa, ON K1K 2N8
                 <br />
-                <a
-                  href="https://www.google.com/maps/dir//605+Center+St,+Ottawa,+ON+K1K+2N8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.storeLink}
-                >
-                  Get Directions →
-                </a>
               </p>
             </div>
             <div className={styles.storeCard}>
@@ -435,16 +427,6 @@ export default function HomePage() {
 
           {/* Embedded map */}
           <div className={styles.mapWrap}>
-            <iframe
-              src="https://maps.google.com/maps?q=605%20Center%20St,%20Ottawa,%20ON%20K1K%202N8&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="300"
-              style={{ border: 0, borderRadius: "var(--radius-lg)" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Castle Heights Cannabis — 605 Center St, Ottawa"
-            ></iframe>
           </div>
         </div>
       </section>

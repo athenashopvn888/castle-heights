@@ -98,7 +98,7 @@ export const TIER_SEO: Record<string, TierSeoData> = {
 
   BUDGET: {
     seoTitle: "Budget Cannabis Ottawa — Cheap Weed From $3/g",
-    seoIntro: "Cheap weed in Ottawa starting at $3/g. Castle Heights Cannabis Budget tier features shreds and value ounces for cost-conscious smokers. Open daily on Center St.",
+    seoIntro: "Cheap weed in Ottawa starting at $3/g. Castle Heights Cannabis Budget tier features shreds and value ounces for cost-conscious smokers. Check current store hours before visiting Castle Heights Cannabis.",
     sections: [
       {
         heading: "Affordable Cannabis Without Compromise",
