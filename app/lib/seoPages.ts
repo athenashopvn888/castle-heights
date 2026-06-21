@@ -39,8 +39,8 @@ export const SEO_PAGES: SeoPageData[] = [
         body: "Castle Heights Cannabis is open daily from 12:00 PM to 4:00 AM. Whether you're finishing a late shift or heading out for the night, our doors are open late. We're centrally located at 605 Center St, steps from the Vanier area, near major OC Transpo bus routes, and minutes from the Rideau Centre and Parliament Hill. Free street parking is available in the evenings.",
       },
       {
-        heading: "Unbeatable Promotions on Every Purchase",
-        body: "Every purchase at Castle Heights Cannabis comes with our signature promotions. Our Buy 2g Get 1g FREE deal applies to every single tier — you always get a bonus gram. Our top three tiers (Exotic, Premium, and AAA+) also qualify for Buy 3g Get 3g FREE, effectively doubling your order. Combined with our already competitive pricing, Castle Heights offers some of the best cannabis value in Ottawa and the surrounding area.",
+        heading: "Clear Bundle Pricing on Flower",
+        body: "Every purchase at Castle Heights Cannabis uses clear flower bundle pricing. The 3g bundle offer applies to every single tier — the 3g total is shown clearly before purchase. Our top three tiers (Exotic, Premium, and AAA+) also qualify for 6g bundle pricing for 6g total. Combined with our already competitive pricing, Castle Heights offers some of the best cannabis value in Ottawa and the surrounding area.",
       },
       {
         heading: "Serving Ottawa & Gatineau",
@@ -51,9 +51,9 @@ export const SEO_PAGES: SeoPageData[] = [
       { q: "Where is Castle Heights Cannabis located?", a: "We are located at 605 Center St, Ottawa, ON K1K 2N8 — in the heart of Vanier area, one of Ottawa's most popular and accessible neighbourhoods. We're near the Rideau Centre, Parliament Hill, and major bus routes." },
       { q: "What are the hours for Castle Heights Cannabis?", a: "We are open daily from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
       { q: "What cannabis products does Castle Heights carry?", a: "We carry 200+ strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles, vapes, concentrates, pre-rolls, native cigarettes, and accessories. Our menu updates in real time online." },
-      { q: "What is the cheapest weed at Castle Heights?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. Every tier includes our Buy 2g Get 1g FREE promotion, making our prices even more competitive." },
+      { q: "What is the cheapest weed at Castle Heights?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. The flower menu includes 3g bundle pricing, making our prices even more competitive." },
       { q: "Does Castle Heights have a live menu?", a: "Yes! Our online menu at castleheightscannabis.com updates in real time with current stock, prices, and availability. You can see exactly what we have before you visit." },
-      { q: "What makes Castle Heights different from other Ottawa dispensaries?", a: "Three things set us apart: (1) We're open daily with late hours, (2) our transparent 5-tier pricing system means no confusing markups, and (3) every purchase includes our Buy 2g Get 1g FREE promotion. Plus we carry one of Ottawa's largest selections with over 200 strains." },
+      { q: "What makes Castle Heights different from other Ottawa dispensaries?", a: "Three things set us apart: (1) We're open daily with late hours, (2) our transparent 5-tier pricing system means no confusing markups, and (3) the flower menu includes 3g bundle pricing. Plus we carry one of Ottawa's largest selections with over 200 strains." },
       { q: "Can I check stock before visiting?", a: "Absolutely. Visit castleheightscannabis.com to see our live menu. All flower, edibles, vapes, and accessories are listed with real-time stock status, THC levels, and pricing." },
       { q: "Is there parking near Castle Heights Cannabis?", a: "Yes. Free street parking is available in the evenings on Center St and surrounding streets. Paid lots are available nearby during the day. We're also easily accessible via OC Transpo." },
     ],
@@ -62,7 +62,7 @@ export const SEO_PAGES: SeoPageData[] = [
   {
     slug: "cheap-weed-ottawa",
     title: "Cheap Weed Ottawa — Budget Cannabis Deals From $3/g | Castle Heights",
-    metaDescription: "Looking for cheap weed in Ottawa? Castle Heights Cannabis has budget flower from $3/g, ounces from $40, and Buy 2g Get 1g FREE promos. Open daily with late hours at 605 Center St.",
+    metaDescription: "Looking for cheap weed in Ottawa? Castle Heights Cannabis has budget flower from $3/g, ounces from $40, and 3g bundle pricing. Open daily with late hours at 605 Center St.",
     h1: "Cheap Weed Ottawa — Budget Cannabis Deals",
     icon: "💰",
     heroTagline: "Budget Flower From $3/g · Ounces From $40 · Always Open",
@@ -73,8 +73,8 @@ export const SEO_PAGES: SeoPageData[] = [
         body: "Looking for cheap weed in Ottawa without sacrificing quality? Castle Heights Cannabis offers some of the most competitive cannabis prices in the city. Our Budget tier starts at just $3/g with value ounces from $40. Our AA tier ($4/g) and AAA+ tier ($5-$6/g) also deliver incredible value with THC levels from 27% to 32%. We believe great cannabis shouldn't break the bank, and our transparent tier-based pricing ensures you always get exactly what you pay for — no hidden markups, no gimmicks.",
       },
       {
-        heading: "Unbeatable Promotions That Stack",
-        body: "Every tier at Castle Heights Cannabis comes with our signature Buy 2g Get 1g FREE promotion — meaning you always get a free gram with every purchase. Our top three tiers (Exotic, Premium, AAA+) also offer Buy 3g Get 3g FREE, effectively doubling your order. When you combine our already low prices with these promos, Castle Heights delivers the best cannabis value in Ottawa. A $15 AAA+ 3g purchase actually gets you 3g of flower — that's just $5/g for THC 30%+ cannabis.",
+        heading: "Flower Bundle Pricing",
+        body: "Every tier at Castle Heights Cannabis uses clear 3g bundle pricing so the total grams and price are shown before purchase. Our top three tiers (Exotic, Premium, AAA+) also offer 6g bundle pricing for 6g total. When you combine our already low prices with these bundle offers, Castle Heights delivers the best cannabis value in Ottawa. A $15 AAA+ 3g purchase actually gets you 3g of flower — that's just $5/g for THC 30%+ cannabis.",
       },
       {
         heading: "Budget Doesn't Mean Low Quality",
@@ -82,15 +82,15 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Compare Our Prices",
-        body: "Budget: $3/g — $40/oz. AA: $4/g — $90/oz. AAA+: $5-$6/g — $100/oz. Premium: $7-$10/g. Exotic: $10-$12/g. Every tier includes Buy 2g Get 1g FREE. Top tiers include Buy 3g Get 3g FREE. These are some of the lowest prices you'll find at any dispensary in Ottawa, Vanier, Sandy Hill, Lower Town, or the Vanier area area.",
+        body: "Budget: $3/g — $40/oz. AA: $4/g — $90/oz. AAA+: $5-$6/g — $100/oz. Premium: $7-$10/g. Exotic: $10-$12/g. Every tier includes 3g bundle pricing. Top tiers include 6g bundle pricing. These are some of the lowest prices you'll find at any dispensary in Ottawa, Vanier, Sandy Hill, Lower Town, or the Vanier area area.",
       },
     ],
     faqs: [
       { q: "What is the cheapest weed at Castle Heights Cannabis?", a: "Our Budget tier starts at $3/g with value ounces from $40. These are quality, properly-cured strains at Ottawa's most competitive prices." },
-      { q: "Do you have ounce deals?", a: "Yes! Budget ounces from $40, AA ounces from $90, AAA+ ounces from $100. All with excellent quality, freshness guaranteed, and Buy 2g Get 1g FREE promotions on top." },
+      { q: "Do you have ounce deals?", a: "Yes! Budget ounces from $40, AA ounces from $90, AAA+ ounces from $100. All with excellent quality, freshness guaranteed, and 3g bundle pricing on top." },
       { q: "Is cheap weed still good quality?", a: "Absolutely. Our Budget flower delivers THC 24-27% from trusted Canadian growers. We never sell old, dry, or improperly stored flower. Every product meets our quality standards regardless of price point." },
       { q: "Where can I buy cheap weed in Ottawa?", a: "Castle Heights Cannabis at 605 Center St, Ottawa. Open daily with late hours, walk in anytime. We're in the heart of Vanier area." },
-      { q: "What promotions do you offer?", a: "Every tier includes Buy 2g Get 1g FREE (pay for 2g, get 3g). Our Exotic, Premium, and AAA+ tiers also offer Buy 3g Get 3g FREE (pay for 3g, get 6g). These promos apply on every visit." },
+      { q: "What bundle pricing do you offer?", a: "Every tier includes 3g bundle pricing (pay for 3g total). Our Exotic, Premium, and AAA+ tiers also offer 6g bundle pricing (pay for 6g total). These bundle offers apply on every visit." },
       { q: "Do you offer bulk discounts?", a: "Yes — our ounce pricing is deeply discounted compared to per-gram rates. Budget ounces are $40, AA ounces $90, and AAA+ ounces $100. The more you buy, the more you save." },
     ],
   },
@@ -146,7 +146,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Why Cross the Bridge to Castle Heights?",
-        body: "Ontario's cannabis market offers a wider selection and more competitive pricing than Quebec's SQDC. At Castle Heights, you'll find over 200 strains across five quality tiers — from ultra-rare Exotic genetics (THC 35-39%) to affordable Budget flower at just $3/g. Our Buy 2g Get 1g FREE promotion applies to every tier, and our top three tiers offer Buy 3g Get 3g FREE. With prices starting at $3/g and ounces from $40, Castle Heights delivers value that's worth the 5-minute drive.",
+        body: "Ontario's cannabis market offers a wider selection and more competitive pricing than Quebec's SQDC. At Castle Heights, you'll find over 200 strains across five quality tiers — from ultra-rare Exotic genetics (THC 35-39%) to affordable Budget flower at just $3/g. Our 3g bundle pricing applies to every tier, and our top three tiers offer 6g bundle pricing. With prices starting at $3/g and ounces from $40, Castle Heights delivers value that's worth the 5-minute drive.",
       },
       {
         heading: "Open Daily with Late Hours — Perfect for Cross-Border Visits",
@@ -163,9 +163,9 @@ export const SEO_PAGES: SeoPageData[] = [
     ],
     faqs: [
       { q: "How far is Castle Heights from Gatineau?", a: "We're located at 605 Center St in Ottawa's Vanier area — just 5 minutes from the Portage Bridge and 7 minutes from the Macdonald-Cartier Bridge. It's one of the closest dispensaries to the Quebec border." },
-      { q: "Is it worth crossing the bridge for cannabis?", a: "Absolutely. Castle Heights offers 200+ strains, prices starting at $3/g, and promotions like Buy 2g Get 1g FREE that you won't find at Quebec's SQDC locations. The selection and value are significantly better." },
+      { q: "Is it worth crossing the bridge for cannabis?", a: "Absolutely. Castle Heights offers 200+ strains, prices starting at $3/g, and bundle pricing options like 3g total that you won't find at Quebec's SQDC locations. The selection and value are significantly better." },
       { q: "Is Castle Heights Cannabis open late?", a: "We're open daily with late hours a day, 7 days a week. Whether you're crossing the bridge at noon or midnight, we're open and ready to serve you." },
-      { q: "What's the cheapest weed near Gatineau?", a: "Castle Heights Cannabis has Budget flower from $3/g and value ounces from $40. With our Buy 2g Get 1g FREE promo, these are some of the best prices near the Gatineau border." },
+      { q: "What's the cheapest weed near Gatineau?", a: "Castle Heights Cannabis has Budget flower from $3/g and value ounces from $40. With our 3g bundle pricing, these are some of the best prices near the Gatineau border." },
       { q: "Is there parking at Castle Heights?", a: "Yes. Free evening street parking is available on Center St and surrounding streets. Paid parking lots are also nearby during the day." },
       { q: "Can I take the bus from Gatineau to Castle Heights?", a: "Yes! STO (Gatineau transit) buses cross into downtown Ottawa. Castle Heights is also near major OC Transpo routes. The store is walking distance from several downtown bus stops." },
       { q: "Do you carry products besides cannabis?", a: "Yes — we also carry native cigarettes, rolling papers, grinders, and other accessories. Many Gatineau customers appreciate the one-stop convenience." },
@@ -187,7 +187,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Why Choose Castle Heights Over Other Dispensaries?",
-        body: "What sets Castle Heights apart from other Ottawa dispensaries is our combination of selection, pricing, and convenience. We carry 200+ strains across five clear quality tiers — no confusing markups, no inconsistent pricing. Our Buy 2g Get 1g FREE promotion applies to every tier, every purchase. And unlike most dispensaries that close at midnight, we're open daily with late hours a day, 7 days a week. Whether you need flower, edibles, vapes, or concentrates at any hour, Castle Heights is here.",
+        body: "What sets Castle Heights apart from other Ottawa dispensaries is our combination of selection, pricing, and convenience. We carry 200+ strains across five clear quality tiers — no confusing markups, no inconsistent pricing. Our 3g bundle pricing applies to every tier, every purchase. And unlike most dispensaries that close at midnight, we're open daily with late hours a day, 7 days a week. Whether you need flower, edibles, vapes, or concentrates at any hour, Castle Heights is here.",
       },
       {
         heading: "Areas We Serve in Ottawa & Gatineau",
