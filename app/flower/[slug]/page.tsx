@@ -57,7 +57,7 @@ function getJsonLd(flower: FlowerProduct) {
 
   const offers: any = {
     "@type": "Offer",
-    url: `https://castleheightscannabis.com/flower/${flower.slug}`,
+    url: `https://castleheightscannabis.ca/flower/${flower.slug}`,
     priceCurrency: "CAD",
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
@@ -77,7 +77,7 @@ function getJsonLd(flower: FlowerProduct) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: flower.name,
-    image: flower.image ? [flower.image.startsWith('http') ? flower.image : `https://castleheightscannabis.com${flower.image.startsWith('/') ? '' : '/'}${flower.image}`] : undefined,
+    image: flower.image ? [flower.image.startsWith('http') ? flower.image : `https://castleheightscannabis.ca${flower.image.startsWith('/') ? '' : '/'}${flower.image}`] : undefined,
     description: strainData.description,
     brand: { "@type": "Brand", name: "Castle Heights Cannabis" },
     sku: cleanSku(flower.sku || flower.slug),
@@ -98,19 +98,19 @@ function getBreadcrumbJsonLd(flower: FlowerProduct) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://castleheightscannabis.com"
+        "item": "https://castleheightscannabis.ca"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": tierName,
-        "item": `https://castleheightscannabis.com/${tierSlug}`
+        "item": `https://castleheightscannabis.ca/${tierSlug}`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": flower.name,
-        "item": `https://castleheightscannabis.com/flower/${flower.slug}`
+        "item": `https://castleheightscannabis.ca/flower/${flower.slug}`
       }
     ]
   };

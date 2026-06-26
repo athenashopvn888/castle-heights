@@ -139,7 +139,7 @@ const TICKER_SLIDES = [
   "Open daily 12 PM–4 AM",
   "Pre-Rolls · Edibles · Vapes · Concentrates",
   "ALL SALES ARE FINAL",
-  "🎮 Play Games at castleheightscannabis.com/games",
+  "🎮 Play Games at castleheightscannabis.ca/games",
 ];
 
 function VerticalTicker() {

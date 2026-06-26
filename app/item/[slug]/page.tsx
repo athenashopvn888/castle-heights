@@ -29,7 +29,7 @@ export async function generateMetadata({
     title: `${item.name} | ${item.category} | Castle Heights Cannabis Ottawa`,
     description: itemData.metaDescription,
     alternates: {
-      canonical: `https://castleheightscannabis.com/item/${slug}`,
+      canonical: `https://castleheightscannabis.ca/item/${slug}`,
     },
     openGraph: {
       title: `${item.name} | Castle Heights Cannabis`,
@@ -54,7 +54,7 @@ function getJsonLd(item: ItemProduct) {
 
   const offers: any = {
     "@type": "Offer",
-    url: `https://castleheightscannabis.com/item/${item.slug}`,
+    url: `https://castleheightscannabis.ca/item/${item.slug}`,
     priceCurrency: "CAD",
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
@@ -74,7 +74,7 @@ function getJsonLd(item: ItemProduct) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: item.name,
-    image: item.image ? [item.image.startsWith('http') ? item.image : `https://castleheightscannabis.com${item.image.startsWith('/') ? '' : '/'}${item.image}`] : undefined,
+    image: item.image ? [item.image.startsWith('http') ? item.image : `https://castleheightscannabis.ca${item.image.startsWith('/') ? '' : '/'}${item.image}`] : undefined,
     description: itemData.description,
     brand: { "@type": "Brand", name: "Castle Heights Cannabis" },
     sku: cleanSku(item.sku || item.slug),
@@ -93,19 +93,19 @@ function getBreadcrumbJsonLd(item: ItemProduct) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://castleheightscannabis.com"
+        "item": "https://castleheightscannabis.ca"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": item.category,
-        "item": `https://castleheightscannabis.com/items/${catSlug}`
+        "item": `https://castleheightscannabis.ca/items/${catSlug}`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": item.name,
-        "item": `https://castleheightscannabis.com/item/${item.slug}`
+        "item": `https://castleheightscannabis.ca/item/${item.slug}`
       }
     ]
   };

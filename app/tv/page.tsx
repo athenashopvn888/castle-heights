@@ -675,7 +675,7 @@ const TICKER_SLIDES = [
   "200+ Strains In Stock",
   "Open daily 12 PM–4 AM",
   "ALL SALES ARE FINAL",
-  "🎮 Play Games at castleheightscannabis.com/games",
+  "🎮 Play Games at castleheightscannabis.ca/games",
 ];
 
 function VerticalTicker() {

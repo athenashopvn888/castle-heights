@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open daily 12 PM–4 AM. Walk-ins welcome.",
   alternates: {
-    canonical: "https://castleheightscannabis.com/contact",
+    canonical: "https://castleheightscannabis.ca/contact",
   },
   openGraph: {
     title: "Contact Castle Heights Cannabis — Ottawa Dispensary",

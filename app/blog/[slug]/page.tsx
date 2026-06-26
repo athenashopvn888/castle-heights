@@ -16,7 +16,7 @@ export async function generateMetadata({
     title: `${title} — Blog | Castle Heights Cannabis`,
     description: `Read about ${title.toLowerCase()} and other cannabis guides from Castle Heights Cannabis in Ottawa.`,
     alternates: {
-      canonical: `https://castleheightscannabis.com/blog/${slug}`,
+      canonical: `https://castleheightscannabis.ca/blog/${slug}`,
     },
   };
 }

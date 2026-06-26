@@ -32,7 +32,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Beyond Flower — Edibles, Vapes, Concentrates & More",
-        body: "Castle Heights Cannabis is more than just a flower shop. We carry a comprehensive selection of cannabis edibles (gummies, chocolates, baked goods), vape pens and disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, rolling papers, and accessories. Our live digital menu at castleheightscannabis.com updates in real time so you always know exactly what's in stock before you make the trip.",
+        body: "Castle Heights Cannabis is more than just a flower shop. We carry a comprehensive selection of cannabis edibles (gummies, chocolates, baked goods), vape pens and disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, rolling papers, and accessories. Our live digital menu at castleheightscannabis.ca updates in real time so you always know exactly what's in stock before you make the trip.",
       },
       {
         heading: "Open Daily with Late Hours in Vanier area",
@@ -52,9 +52,9 @@ export const SEO_PAGES: SeoPageData[] = [
       { q: "What are the hours for Castle Heights Cannabis?", a: "We are open daily from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
       { q: "What cannabis products does Castle Heights carry?", a: "We carry 200+ strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles, vapes, concentrates, pre-rolls, native cigarettes, and accessories. Our menu updates in real time online." },
       { q: "What is the cheapest weed at Castle Heights?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. The flower menu includes 3g bundle pricing, making our prices even more competitive." },
-      { q: "Does Castle Heights have a live menu?", a: "Yes! Our online menu at castleheightscannabis.com updates in real time with current stock, prices, and availability. You can see exactly what we have before you visit." },
+      { q: "Does Castle Heights have a live menu?", a: "Yes! Our online menu at castleheightscannabis.ca updates in real time with current stock, prices, and availability. You can see exactly what we have before you visit." },
       { q: "What makes Castle Heights different from other Ottawa dispensaries?", a: "Three things set us apart: (1) We're open daily with late hours, (2) our transparent 5-tier pricing system means no confusing markups, and (3) the flower menu includes 3g bundle pricing. Plus we carry one of Ottawa's largest selections with over 200 strains." },
-      { q: "Can I check stock before visiting?", a: "Absolutely. Visit castleheightscannabis.com to see our live menu. All flower, edibles, vapes, and accessories are listed with real-time stock status, THC levels, and pricing." },
+      { q: "Can I check stock before visiting?", a: "Absolutely. Visit castleheightscannabis.ca to see our live menu. All flower, edibles, vapes, and accessories are listed with real-time stock status, THC levels, and pricing." },
       { q: "Is there parking near Castle Heights Cannabis?", a: "Yes. Free street parking is available in the evenings on Center St and surrounding streets. Paid lots are available nearby during the day. We're also easily accessible via OC Transpo." },
     ],
   },
@@ -158,7 +158,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Full Menu — Cannabis, Edibles, Vapes & More",
-        body: "When you make the trip across the bridge, make it count. Castle Heights carries a full selection including 200+ flower strains, edibles, vape pens, disposable vapes, concentrates (shatter, wax, hash, live resin), pre-rolled joints, native cigarettes, and accessories. Check our live online menu at castleheightscannabis.com before you visit to see exactly what's in stock.",
+        body: "When you make the trip across the bridge, make it count. Castle Heights carries a full selection including 200+ flower strains, edibles, vape pens, disposable vapes, concentrates (shatter, wax, hash, live resin), pre-rolled joints, native cigarettes, and accessories. Check our live online menu at castleheightscannabis.ca before you visit to see exactly what's in stock.",
       },
     ],
     faqs: [
@@ -198,7 +198,7 @@ export const SEO_PAGES: SeoPageData[] = [
       { q: "Where is the closest dispensary in Vanier area?", a: "Castle Heights Cannabis at 605 Center St is conveniently located in the heart of Vanier area — one of Ottawa's most accessible neighbourhoods." },
       { q: "Is Castle Heights Cannabis walk-in friendly?", a: "Absolutely! No appointment needed. Walk in anytime — we're open daily with late hours a day, 7 days a week. Our friendly staff is always ready to help." },
       { q: "What neighbourhoods does Castle Heights serve?", a: "We serve all of Ottawa including Vanier area, Sandy Hill, Lower Town, Centretown, the Glebe, Vanier, Orleans, Kanata, Barrhaven, and Gatineau/Hull across the bridge." },
-      { q: "How do I check what's in stock?", a: "Visit castleheightscannabis.com for our live menu with real-time stock, pricing, and THC levels for all products." },
+      { q: "How do I check what's in stock?", a: "Visit castleheightscannabis.ca for our live menu with real-time stock, pricing, and THC levels for all products." },
       { q: "Do you sell edibles and vapes?", a: "Yes! In addition to 200+ flower strains, we carry edibles (gummies, chocolates), vape pens, disposable vapes, concentrates, pre-rolls, and accessories." },
     ],
   },

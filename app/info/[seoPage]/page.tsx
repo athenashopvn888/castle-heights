@@ -26,7 +26,7 @@ export async function generateMetadata({
     title: page.title,
     description: page.metaDescription,
     alternates: {
-      canonical: `https://castleheightscannabis.com/info/${slug}`,
+      canonical: `https://castleheightscannabis.ca/info/${slug}`,
     },
   };
 }
