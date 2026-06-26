@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://castleheightscannabis.com"),
+  metadataBase: new URL("https://castleheightscannabis.ca"),
   title: {
     default: "Castle Heights Cannabis — Premium Cannabis Dispensary, Ottawa",
     template: "%s | Castle Heights Cannabis",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_CA",
-    url: "https://castleheightscannabis.com",
+    url: "https://castleheightscannabis.ca",
     siteName: "Castle Heights Cannabis",
     title: "Castle Heights Cannabis — Premium Ottawa Cannabis Dispensary",
     description:
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://castleheightscannabis.com",
+    canonical: "https://castleheightscannabis.ca",
   },
   verification: {
     // google: "your-google-verification-code",
@@ -72,12 +72,12 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Store",
   additionalType: "https://schema.org/Store",
-  "@id": "https://castleheightscannabis.com",
+  "@id": "https://castleheightscannabis.ca",
   name: "Castle Heights Cannabis",
   description: "Cannabis dispensary at 605 Center St in Ottawa, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open daily 12 PM–4 AM.",
-  url: "https://castleheightscannabis.com",
+  url: "https://castleheightscannabis.ca",
   telephone: "+13435734401",
-  image: "https://castleheightscannabis.com/banners/chc-storefront.webp",
+  image: "https://castleheightscannabis.ca/banners/chc-storefront.webp",
   priceRange: "$3 - $12/g",
   address: {
     "@type": "PostalAddress",

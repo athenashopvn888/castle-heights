@@ -1,7 +1,7 @@
 // Auto-generated Google Business Profile Local SEO Location Configuration
 export const gbpLocation = {
   storeName: "Castle Heights Cannabis",
-  domain: "castleheightscannabis.com",
+  domain: "castleheightscannabis.ca",
   city: "Ottawa",
   province: "ON",
   country: "CA",
