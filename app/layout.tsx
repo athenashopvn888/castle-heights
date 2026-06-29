@@ -3,6 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://castleheightscannabis.ca"),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
   title: {
     default: "Castle Heights Cannabis — Premium Cannabis Dispensary, Ottawa",
     template: "%s | Castle Heights Cannabis",
