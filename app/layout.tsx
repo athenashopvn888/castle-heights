@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Castle Heights Cannabis",
   },
   description:
-    "Castle Heights Cannabis is an Ottawa cannabis dispensary on Center St with menu categories, local store details, and adult 19+ shopping info. Open daily 12 PM-4 AM.",
+    "Castle Heights Cannabis is an Ottawa cannabis dispensary on Center St with menu categories, local store details, and adult 19+ shopping info. Open 24 Hours.",
   keywords: [
     "cannabis dispensary Ottawa",
     "weed store Center",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Castle Heights Cannabis",
     title: "Castle Heights Cannabis — Premium Ottawa Cannabis Dispensary",
     description:
-      "200+ strains from $3/g. Exotic to Budget. Ottawa's uplifting dispensary at 605 Center St. Open daily 12 PM–4 AM.",
+      "200+ strains from $3/g. Exotic to Budget. Ottawa's uplifting dispensary at 605 Center St. Open 24 Hours.",
     images: [
       {
         url: "/banners/chc-storefront.webp",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Castle Heights Cannabis — Ottawa's Uplifting Dispensary",
-    description: "200+ strains from $3/g. Open daily 12 PM–4 AM at 605 Center St, Ottawa.",
+    description: "200+ strains from $3/g. Open 24 Hours at 605 Center St, Ottawa.",
     images: ["/banners/chc-storefront.webp"],
   },
   robots: {
@@ -74,7 +74,7 @@ const jsonLd = {
   additionalType: "https://schema.org/Store",
   "@id": "https://castleheightscannabis.com",
   name: "Castle Heights Cannabis",
-  description: "Cannabis dispensary at 605 Center St in Ottawa, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open daily 12 PM–4 AM.",
+  description: "Cannabis dispensary at 605 Center St in Ottawa, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
   url: "https://castleheightscannabis.com",
   telephone: "+13435734401",
   image: "https://castleheightscannabis.com/banners/chc-storefront.webp",
@@ -96,8 +96,8 @@ const jsonLd = {
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "12:00",
-      closes: "04:00",
+      opens: "00:00",
+      closes: "23:59",
     },
   ],
   areaServed: {

@@ -14,7 +14,7 @@ export default function Footer() {
             <p className={styles.desc}>
               Your Local Cannabis Dispensary At 605 Center St, Ottawa. Visit
               Castle Heights Cannabis For Premium Flower, Edibles, Vapes &amp; More.
-              Open daily 12 PM–4 AM.
+              Open 24 Hours.
             </p>
             <div className={styles.buttons}>
               <a
@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
-              <span className={styles.highlight}>Open daily 12 PM–4 AM</span>
+              <span className={styles.highlight}>Open 24 Hours</span>
             </div>
           </div>
 

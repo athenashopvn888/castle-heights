@@ -50,7 +50,7 @@ const STATIC_POSTS = [
   {
     slug: "best-dispensary-byward-market",
     title: "Why Castle Heights is Vanier area's Best Dispensary",
-    excerpt: "200+ strains, transparent pricing from $3/g, lab-tested products, and open daily with late hours. Here's what makes us different.",
+    excerpt: "200+ strains, transparent pricing from $3/g, lab-tested products, and open 24 hours. Here's what makes us different.",
     date: "2026-05-03",
     category: "News",
     emoji: "🔥",
@@ -104,7 +104,7 @@ export default function BlogContent() {
           </h1>
           <p className={styles.heroSub}>
             Cannabis guides, strain reviews, and dispensary news from Ottawa&apos;s
-            dispensary open daily 12 PM–4 AM.
+            dispensary open 24 hours.
           </p>
         </div>
       </section>
@@ -178,7 +178,7 @@ export default function BlogContent() {
         <div className={styles.ctaInner}>
           <h2 className={styles.ctaTitle}>Ready to Shop?</h2>
           <p className={styles.ctaSub}>
-            200+ strains · Exotic to Budget · Open Daily with Late Hours
+            200+ strains · Exotic to Budget · Open 24 Hours
           </p>
           <div className={styles.ctaBtns}>
             <Link href="/exotic" className={styles.ctaBtn}>

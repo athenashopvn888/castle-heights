@@ -162,12 +162,12 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     name: "Edibles", slug: "edibles", color: "#f97316", icon: "🍬",
     seoTitle: "Cannabis Edibles Ottawa — Gummies, Chocolates & Drinks",
     seoIntro: "Browse the full cannabis edibles menu at Castle Heights Cannabis on Center St, Ottawa. We carry THC gummies, chocolates, drinks, and more from top Canadian brands.",
-    seoDescription: "Looking for cannabis edibles in Ottawa? Castle Heights Cannabis stocks a wide range of THC-infused gummies, chocolates, beverages, and baked goods. Our edibles range from micro-dose options for beginners to high-potency products for experienced consumers. All products are lab-tested and sourced from licensed Canadian producers. Visit us at 605 Center St — open daily with late hours.",
+    seoDescription: "Looking for cannabis edibles in Ottawa? Castle Heights Cannabis stocks a wide range of THC-infused gummies, chocolates, beverages, and baked goods. Our edibles range from micro-dose options for beginners to high-potency products for experienced consumers. All products are lab-tested and sourced from licensed Canadian producers. Visit us at 605 Center St — open 24 hours.",
     banner: "/banners/chc-edibles-gummies.webp",
     faqs: [
       { q: "What cannabis edibles do you carry?", a: "We stock THC gummies, chocolates, beverages, capsules, and baked goods from top Canadian brands. Potencies range from 10mg to 1000mg+ THC." },
       { q: "How long do edibles take to kick in?", a: "Cannabis edibles typically take 30-90 minutes to take effect. Start with a low dose (5-10mg) and wait at least 2 hours before consuming more." },
-      { q: "Can I buy edibles at Castle Heights Cannabis?", a: "Yes! Visit us at 605 Center St, Ottawa. We're open daily with late hours with a full edibles selection in store." },
+      { q: "Can I buy edibles at Castle Heights Cannabis?", a: "Yes! Visit us at 605 Center St, Ottawa. We're open 24 hours with a full edibles selection in store." },
     ],
   },
   "VAPE PENS": {
@@ -205,7 +205,7 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     name: "Pre-Rolls", slug: "prerolls", color: "#22c55e", icon: "🚬",
     seoTitle: "Pre-Rolls Ottawa — Ready-to-Smoke Cannabis Joints",
     seoIntro: "Pre-rolled cannabis joints at Castle Heights Cannabis, Ottawa. Singles, multi-packs, and infused pre-rolls — ready to light up.",
-    seoDescription: "Skip the rolling and grab a pre-roll from Castle Heights Cannabis in Ottawa. We carry singles, multi-packs, and infused pre-rolls from premium flower. Whether you want a quick smoke or a party pack, our pre-roll selection has something for everyone. Visit us at 605 Center St — open daily with late hours.",
+    seoDescription: "Skip the rolling and grab a pre-roll from Castle Heights Cannabis in Ottawa. We carry singles, multi-packs, and infused pre-rolls from premium flower. Whether you want a quick smoke or a party pack, our pre-roll selection has something for everyone. Visit us at 605 Center St — open 24 hours.",
     faqs: [
       { q: "What pre-rolls do you carry?", a: "We stock singles, 3-packs, and multi-packs in various strains and potencies, including infused pre-rolls with concentrates." },
       { q: "Are your pre-rolls made with quality flower?", a: "Yes! Our pre-rolls are filled with ground flower from our regular menu tiers — not shake or trim." },
@@ -234,7 +234,7 @@ export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
     name: "Cigarettes", slug: "cigarettes", color: "#78716c", icon: "🏷️",
     seoTitle: "Native Cigarettes Ottawa — Discount Tobacco at Castle Heights",
     seoIntro: "Discount native cigarettes at Castle Heights Cannabis, Ottawa. Premium and value brands at the best prices on Center St.",
-    seoDescription: "Castle Heights Cannabis is your go-to source for affordable native cigarettes in Ottawa. We carry a wide selection of premium and value tobacco brands at competitive prices. Located at 605 Center St in the heart of Vanier area, we're open daily with late hours. Stop by for the best cigarette prices in the neighbourhood.",
+    seoDescription: "Castle Heights Cannabis is your go-to source for affordable native cigarettes in Ottawa. We carry a wide selection of premium and value tobacco brands at competitive prices. Located at 605 Center St in the heart of Vanier area, we're open 24 hours. Stop by for the best cigarette prices in the neighbourhood.",
     faqs: [
       { q: "Do you sell cigarettes at Castle Heights?", a: "Yes! We carry a wide selection of native cigarette brands at competitive prices." },
       { q: "What cigarette brands do you carry?", a: "We stock a variety of premium and value native cigarette brands. Visit us to see our full in-store selection." },

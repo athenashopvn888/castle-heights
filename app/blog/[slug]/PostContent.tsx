@@ -128,7 +128,7 @@ export default function PostContent() {
 
         <div className={styles.cta}>
           <p>
-            <strong>Castle Heights Cannabis</strong> — 605 Center St, Ottawa · Open Daily with Late Hours · (343) 573-4401
+            <strong>Castle Heights Cannabis</strong> — 605 Center St, Ottawa · Open 24 Hours · (343) 573-4401
           </p>
           <Link href="/exotic" className={styles.ctaBtn}>Browse Our Menu</Link>
         </div>

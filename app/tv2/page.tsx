@@ -136,7 +136,7 @@ function ItemCard({ title, accent, items, hiIdx, preset }: {
 const TICKER_SLIDES = [
   "🔥 Castle Heights Cannabis — 605 Center St, Ottawa",
   "200+ Strains In Stock",
-  "Open daily 12 PM–4 AM",
+  "Open 24 Hours",
   "Pre-Rolls · Edibles · Vapes · Concentrates",
   "ALL SALES ARE FINAL",
   "🎮 Play Games at castleheightscannabis.com/games",

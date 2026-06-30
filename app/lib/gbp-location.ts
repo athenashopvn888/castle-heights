@@ -28,7 +28,7 @@ export const gbpLocation = {
   mapEmbedUrl: "",
   latitude: "45.4432",
   longitude: "-75.6616",
-  hours: ["Open daily 12 PM–4 AM"],
+  hours: ["Open 24 Hours"],
   seoTitle: "Castle Heights Cannabis | Weed Dispensary in Ottawa",
   metaDescription: "Castle Heights Cannabis is a local weed dispensary in Ottawa offering flower, pre-rolls, edibles, vapes, concentrates, CBD, and service for adults 19+.",
   localLandmarks: ["Castle Heights", "Overbrook", "Vanier"],

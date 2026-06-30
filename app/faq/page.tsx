@@ -17,7 +17,7 @@ const FAQ_CATEGORIES = [
     title: "📍 Location & Hours",
     faqs: [
       { q: "Where is Castle Heights Cannabis located?", a: "We are located at 605 Center St, Ottawa, ON K1K 2N8 — in the heart of Vanier area. We're near the Rideau Centre, Parliament Hill, and major OC Transpo bus routes." },
-      { q: "What are your hours?", a: "We are open daily from 12:00 PM to 4:00 AM. Walk in anytime during our open hours." },
+      { q: "What are your hours?", a: "We are open 24 hours a day. Walk in anytime during our open hours." },
       { q: "Is there parking nearby?", a: "Yes. Free street parking is available on Center St and surrounding streets in the evenings. Paid parking lots are available nearby during the day. We're also accessible by OC Transpo and STO buses." },
       { q: "How far are you from Gatineau?", a: "We're just 5 minutes from the Portage Bridge and 7 minutes from the Macdonald-Cartier Bridge. We're one of the closest dispensaries to the Quebec border." },
       { q: "What's the best way to get to Castle Heights?", a: "We're easily accessible by car, bus, or foot. From Rideau Centre, walk north on Center St — we're a 5-minute walk. By bus, several OC Transpo routes stop within walking distance. Free evening parking is available on surrounding streets." },
