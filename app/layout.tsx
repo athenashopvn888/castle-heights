@@ -4,11 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://castleheightscannabis.com"),
   title: {
-    default: "Castle Heights Cannabis — Premium Cannabis Dispensary, Ottawa",
+    default: "Castle Heights Cannabis | Ottawa Cannabis Dispensary",
     template: "%s | Castle Heights Cannabis",
   },
   description:
-    "Shop 200+ premium cannabis strains at Castle Heights Cannabis. Exotic, Premium, AAA+, AA & Budget flower from $3/g. Ottawa's uplifting dispensary at 605 Center St. Open daily 12 PM–4 AM.",
+    "Castle Heights Cannabis is an Ottawa cannabis dispensary on Center St with menu categories, local store details, and adult 19+ shopping info. Open daily 12 PM-4 AM.",
   keywords: [
     "cannabis dispensary Ottawa",
     "weed store Center",
