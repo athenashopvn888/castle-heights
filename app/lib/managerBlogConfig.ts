@@ -1,7 +1,7 @@
-export const managerBlogConfig = {
+﻿export const managerBlogConfig = {
   storeCode: "CHC01",
   storeName: "Castle Heights Cannabis",
-  managerOwner: "Ottawa Manager",
+  managerOwner: "Tony",
   defaultAuthor: "Ottawa Manager",
   source: "manager-submitted",
   loginPath: "/manager-blog-login",
