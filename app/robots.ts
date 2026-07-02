@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://castleheightscannabis.com/sitemap.xml",
+    sitemap: "https://castleheightscannabis.ca/sitemap.xml",
   };
 }
