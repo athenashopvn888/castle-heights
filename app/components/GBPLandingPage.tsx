@@ -134,6 +134,10 @@ export function GBPLandingPage() {
         <p className={styles.infoText}>
           If you are coming from {landmarkList}, use the visit details below to confirm the location and review the main site categories without relying on live inventory, pricing, or promotional claims.
         </p>
+        <p className={styles.infoText}>
+          For a fuller local overview, read the{" "}
+          <Link href="/blog/castle-heights-ottawa-store-info-guide">Castle Heights Ottawa store guide</Link>.
+        </p>
         <div className={styles.btnRow}>
           <Link href={gbpLocation.menuUrl} className={`${styles.btn} ${styles.btnPrimary}`}>
             Start With Menu Categories
