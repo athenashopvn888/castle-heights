@@ -29,29 +29,29 @@ export default function NativeCigarettesOttawaPage() {
           <span className={styles.eyebrow}>Castle Heights Cannabis</span>
           <h1 className={styles.title}>Native Cigarettes Ottawa</h1>
           <p className={styles.subtitle}>
-            A focused adult 19+ guide for native cigarette catalog listings at Castle Heights Cannabis on Center St in Ottawa.
+            Browse native cigarette menu listings at Castle Heights Cannabis on Center St in Ottawa, with quick links for adult shoppers planning a local visit.
           </p>
         </div>
       </section>
 
       <section className={styles.content}>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Native cigarette catalog guide</h2>
+          <h2 className={styles.sectionTitle}>Native cigarette menu guide</h2>
           <p className={styles.body}>
-            This page is built for adult customers comparing native cigarette options before visiting Castle Heights Cannabis. It keeps native cigarette cartons separate from Grabba, Backwoods, nicotine pouches, and other smoke products so the page stays clear and easy to scan.
+            Castle Heights Cannabis carries native cigarette options for adult customers visiting Ottawa. This page keeps the cigarette section easy to scan, with product cards pulled from the Castle Heights menu so shoppers can quickly compare the main native cigarette listings.
           </p>
           <p className={styles.body}>
-            Castle Heights Cannabis is listed at 605 Center St in Ottawa. Use the catalog listings below as store-reference information, then confirm current shelf details with staff before relying on a specific brand or variety.
+            The full menu page is still the source for current stock details. Use this guide to find the right cigarette section faster, then open the cigarette menu or visit the store at 605 Center St for the latest shelf selection.
           </p>
           <div className={styles.note}>
-            Product entries are shown as catalog references, not a live availability guarantee. This page does not change store hours, address, phone, menu code, category routes, or Google Business Profile details.
+            Looking for related smoke products? Use the cigarette menu for the complete section, while this page stays focused on native cigarette listings.
           </div>
         </div>
 
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Native cigarette listings</h2>
           <p className={styles.listingIntro}>
-            The listings below are pulled from the Castle Heights site catalog and filtered to show native cigarette products only.
+            These cigarette listings are pulled from the Castle Heights menu data and presented in a smaller card layout so more products are visible without heavy scrolling.
           </p>
           <div className={styles.listingGrid}>
             {nativeCigaretteListings.map((item) => (
@@ -66,7 +66,7 @@ export default function NativeCigarettesOttawaPage() {
                 </div>
                 <div>
                   <h3 className={styles.listingName}>{item.name}</h3>
-                  <p className={styles.listingMeta}>Catalog reference</p>
+                  <p className={styles.listingMeta}>Menu listing</p>
                 </div>
               </article>
             ))}
@@ -76,7 +76,7 @@ export default function NativeCigarettesOttawaPage() {
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Helpful next steps</h2>
           <p className={styles.body}>
-            Use these store-scoped links if you want to compare the native cigarette guide with the broader Castle Heights site before visiting.
+            Use these Castle Heights links to move from the guide into the live menu, store information, and visit-planning pages.
           </p>
           <div className={styles.linkGrid}>
             <Link href="/items/cigarettes" className={styles.linkCard}>
@@ -95,15 +95,15 @@ export default function NativeCigarettesOttawaPage() {
           <h2 className={styles.sectionTitle}>FAQ</h2>
           <div className={styles.faqList}>
             <details className={styles.faqItem}>
-              <summary className={styles.faqQuestion}>Does this page show Grabba or Backwoods?</summary>
+              <summary className={styles.faqQuestion}>What native cigarette listings can customers browse?</summary>
               <p className={styles.faqAnswer}>
-                No. This direct page is focused on native cigarette listings only. Grabba, Backwoods, and nicotine pouch products are intentionally kept out of this list.
+                Customers can browse Castle Heights menu listings such as Canadian Lights, Canadian Full, Canadian Goose, Canadian Classics, Nexus, Time, Putters, Rolled Gold, and premium mix cigarette options.
               </p>
             </details>
             <details className={styles.faqItem}>
-              <summary className={styles.faqQuestion}>Are these live shelf availability claims?</summary>
+              <summary className={styles.faqQuestion}>How do I check what is currently in stock?</summary>
               <p className={styles.faqAnswer}>
-                No. The products are catalog references from the site data. Adult customers should confirm current shelf details with staff before visiting for a specific item.
+                Use the Castle Heights cigarette menu link on this page to review the current menu section. Staff can also confirm the latest shelf details when you visit.
               </p>
             </details>
             <details className={styles.faqItem}>
