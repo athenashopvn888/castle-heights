@@ -109,7 +109,7 @@ export default function NativeCigarettesOttawaPage() {
             <details className={styles.faqItem}>
               <summary className={styles.faqQuestion}>Where is Castle Heights Cannabis?</summary>
               <p className={styles.faqAnswer}>
-                Castle Heights Cannabis is listed at 605 Center St in Ottawa. This page does not change the store name, address, phone number, or official hours.
+                Castle Heights Cannabis is at 605 Center St in Ottawa. Use this page with the menu, directions, and contact options when planning your visit.
               </p>
             </details>
           </div>
