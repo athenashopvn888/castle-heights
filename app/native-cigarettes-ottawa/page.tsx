@@ -6,11 +6,11 @@ import { getItemsByCategory } from "../lib/products";
 import styles from "./native-cigarettes.module.css";
 
 export const metadata: Metadata = {
-  title: "Native Cigarettes Ottawa | Castle Heights Cannabis",
+  title: "Native Cigarettes Ottawa | Castle Heights Cannabis on Center St",
   description:
-    "Review native cigarette catalog listings at Castle Heights Cannabis on Center St in Ottawa. Built for adult 19+ customers planning a local store visit.",
+    "Browse native cigarette carton listings, smoke essentials, and visit-planning links for Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
-    canonical: "https://www.castleheightscannabis.ca/native-cigarettes-ottawa",
+    canonical: "https://castleheightscannabis.ca/native-cigarettes-ottawa",
   },
 };
 
@@ -36,9 +36,9 @@ export default function NativeCigarettesOttawaPage() {
 
       <section className={styles.content}>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Native cigarette menu guide</h2>
+          <h2 className={styles.sectionTitle}>Native cigarette menu guide near Ottawa East</h2>
           <p className={styles.body}>
-            Castle Heights Cannabis carries native cigarette options for adult customers visiting Ottawa. This page keeps the cigarette section easy to scan, with product cards pulled from the Castle Heights menu so shoppers can quickly compare the main native cigarette listings.
+            Castle Heights Cannabis carries native cigarette options for adult customers visiting Ottawa. This page keeps the cigarette section easy to scan, with product cards pulled from the Castle Heights menu so shoppers can quickly compare the main native cigarette carton listings.
           </p>
           <p className={styles.body}>
             The full menu page is still the source for current stock details. Use this guide to find the right cigarette section faster, then open the cigarette menu or visit the store at 605 Center St for the latest shelf selection.
@@ -82,11 +82,20 @@ export default function NativeCigarettesOttawaPage() {
             <Link href="/items/cigarettes" className={styles.linkCard}>
               Browse cigarette catalog
             </Link>
-            <Link href="/info/native-cigarettes-ottawa" className={styles.linkCard}>
-              Read the native cigarettes info guide
+            <Link href="/grabba-leaf-shakers" className={styles.linkCard}>
+              Browse grabba and shakers
+            </Link>
+            <Link href="/backwoods-cigars-ottawa" className={styles.linkCard}>
+              Compare Backwoods
+            </Link>
+            <Link href="/nicotine-pouches-ottawa" className={styles.linkCard}>
+              View nicotine pouches
             </Link>
             <Link href="/weed-dispensary-ottawa" className={styles.linkCard}>
               Plan a Castle Heights visit
+            </Link>
+            <Link href="/cheap-weed-deals" className={styles.linkCard}>
+              Compare budget cannabis
             </Link>
           </div>
         </div>

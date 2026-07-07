@@ -6,27 +6,28 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.grid}>
-          {/* Column 1 — Store Description */}
           <div className={styles.col}>
-            <div className={styles.brand}>
-              CASTLE<span className={styles.fire}>🏰</span>HEIGHTS
-            </div>
+            <div className={styles.brand}>CASTLE HEIGHTS</div>
             <p className={styles.desc}>
-              Your Local Cannabis Dispensary At 605 Center St, Ottawa. Visit
-              Castle Heights Cannabis For Premium Flower, Edibles, Vapes &amp; More.
-              Open 24 Hours.
+              Your local cannabis dispensary at 605 Center St in Ottawa. Visit
+              Castle Heights Cannabis for premium flower, edibles, vapes, native
+              cigarettes, grabba, pouches, and smoke essentials. Open 24 hours.
             </p>
             <div className={styles.buttons}>
-              <a
-                href="tel:+13435734401"
-                className={styles.btnPrimary}
-              >
+              <a href="tel:+13435734401" className={styles.btnPrimary}>
                 Call Now
+              </a>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=605%20Center%20St%2C%20Ottawa%2C%20ON%20K1K%202N8"
+                className={styles.btnSecondary}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get Directions
               </a>
             </div>
           </div>
 
-          {/* Column 2 — Contact Info */}
           <div className={styles.col}>
             <h3 className={styles.colTitle}>Contact Info</h3>
             <div className={styles.infoBlock}>
@@ -37,7 +38,11 @@ export default function Footer() {
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Phone:</span>
-              <span><a href="tel:+13435734401" style={{color: "inherit"}}>(343) 573-4401</a></span>
+              <span>
+                <a href="tel:+13435734401" style={{ color: "inherit" }}>
+                  (343) 573-4401
+                </a>
+              </span>
             </div>
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Hours:</span>
@@ -45,37 +50,40 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3 — Quick Links */}
           <div className={styles.col}>
             <h3 className={styles.colTitle}>Quick Links</h3>
             <nav className={styles.links}>
               <Link href="/">Home</Link>
+              <Link href="/cheap-weed-deals">Cheap Weed Ottawa East</Link>
+              <Link href="/grabba-leaf-shakers">Grabba Leaf & Shakers</Link>
+              <Link href="/native-cigarettes-ottawa">Native Cigarettes Ottawa</Link>
+              <Link href="/backwoods-cigars-ottawa">Backwoods Cigars Ottawa</Link>
+              <Link href="/nicotine-pouches-ottawa">Nicotine Pouches Ottawa</Link>
               <Link href="/exotic">Exotic Flower</Link>
               <Link href="/premium">Premium Flower</Link>
               <Link href="/aaa">AAA+ Flower</Link>
-              <Link href="/aa">AA Flower</Link>
               <Link href="/budget">Budget Flower</Link>
               <Link href="/items/edibles">Edibles</Link>
               <Link href="/items/cigarettes">Cigarettes</Link>
               <Link href="/items/vapes">Vape Pens</Link>
               <Link href="/blog">Blog</Link>
               <Link href="/faq">FAQ</Link>
-              <Link href="/delivery">Delivery (Coming Soon)</Link>
-              <Link href="/games">Games Arcade</Link>
-              <Link href="/info/ottawa-weed-dispensary">Ottawa Dispensary</Link>
-              <Link href="/info/cheap-weed-ottawa">Cheap Weed Ottawa</Link>
-              <Link href="/info/native-cigarettes-ottawa">Native Cigarettes</Link>
-              <Link href="/info/weed-store-near-gatineau">Weed Store Near Gatineau</Link>
-              <Link href="/weed-dispensary-ottawa/">Castle Heights Cannabis Weed Dispensary in Ottawa</Link>
               <Link href="/contact">Contact Us</Link>
             </nav>
           </div>
         </div>
 
+        <div className={styles.trustStrip}>
+          <span>Interac Flash accepted</span>
+          <span>Credit cards accepted</span>
+          <span>Contactless tap</span>
+          <span>24/7 ATM on site</span>
+        </div>
+
         <div className={styles.bottom}>
           <p>
-            © {new Date().getFullYear()} Castle Heights Cannabis. Must be 19+ to
-            enter. Please consume responsibly.
+            © {new Date().getFullYear()} Castle Heights Cannabis. Adults 19+ only.
+            Please consume responsibly.
           </p>
         </div>
       </div>

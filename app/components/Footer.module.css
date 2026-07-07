@@ -123,6 +123,24 @@
 }
 
 /* ── Bottom ── */
+.trustStrip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.trustStrip span {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  background: rgba(52, 211, 153, 0.08);
+  color: #d1fae5;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
 .bottom {
   margin-top: 32px;
   padding-top: 20px;
@@ -143,5 +161,9 @@
   }
   .buttons {
     flex-direction: column;
+  }
+
+  .trustStrip {
+    grid-template-columns: 1fr;
   }
 }

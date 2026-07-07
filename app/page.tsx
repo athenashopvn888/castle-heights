@@ -125,6 +125,33 @@ function buildFeatured() {
 
 const FEATURED_STRAINS = buildFeatured();
 
+const FEATURED_HIGHLIGHTS = [
+  {
+    href: "/grabba-leaf-shakers",
+    title: "Grabba Leaf & Shakers",
+    text: "Browse grabba, shakers, Backwoods, and smoke essentials before visiting Castle Heights Cannabis on Center St.",
+    anchor: "Shop grabba essentials",
+  },
+  {
+    href: "/native-cigarettes-ottawa",
+    title: "Native Cigarettes Ottawa",
+    text: "Compare native cigarette carton listings, premium mix options, and cigarette menu items from the Castle Heights catalog.",
+    anchor: "Browse native cigarettes",
+  },
+  {
+    href: "/nicotine-pouches-ottawa",
+    title: "Nicotine Pouches & Vapes",
+    text: "Plan a quick pouch, vape, or smoke-accessory stop near Vanier, Overbrook, Gloucester, and Ottawa East.",
+    anchor: "View nicotine pouches",
+  },
+  {
+    href: "/cheap-weed-deals",
+    title: "Cheap Weed & Budget Ounces",
+    text: "Use the live menu to compare Budget, AA, AAA+, Premium, and Exotic tiers before your Castle Heights visit.",
+    anchor: "Compare budget options",
+  },
+];
+
 function getTypeLabel(type: string) {
   if (type.startsWith("IH")) return "Indica";
   if (type.startsWith("SH")) return "Sativa";
@@ -192,7 +219,7 @@ export default function HomePage() {
               </svg>
             </a>
             <a href="/games" className={styles.heroBtnGhost}>
-              🎮 Play Games
+              Play Games
             </a>
           </div>
 
@@ -222,6 +249,31 @@ export default function HomePage() {
       </section>
 
       {/* ── SHOP BY TIER BANNER ── */}
+      <section className={styles.highlightSection} aria-labelledby="featured-specialties">
+        <div className={styles.container}>
+          <div className={styles.highlightHeader}>
+            <span className={styles.highlightEyebrow}>Ottawa East shopping shortcuts</span>
+            <h2 id="featured-specialties" className={styles.highlightTitle}>
+              Featured Castle Heights specialties
+            </h2>
+            <p className={styles.highlightIntro}>
+              Fast links for adult 19+ shoppers comparing grabba, native cigarettes,
+              nicotine pouches, vapes, and budget cannabis options before visiting
+              605 Center St in Ottawa.
+            </p>
+          </div>
+          <div className={styles.highlightGrid}>
+            {FEATURED_HIGHLIGHTS.map((item) => (
+              <a key={item.href} href={item.href} className={styles.highlightCard}>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <span>{item.anchor}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className={styles.tierSection} id="menu">
         <div className={styles.container}>
           <div className={styles.sectionBanner}>
@@ -258,7 +310,7 @@ export default function HomePage() {
                     className={styles.tierCardName}
                     style={{ color: tier.color }}
                   >
-                    {tier.icon} {tier.name}
+                    {tier.name}
                   </h3>
                   <div className={styles.tierCardMeta}>
                     <span className={styles.tierCardThc}>
@@ -277,8 +329,8 @@ export default function HomePage() {
                   </div>
                   {tier.deal3g && (
                     <div className={styles.tierCardDeals}>
-                      <span className={styles.tierCardDeal}>🎁 {tier.deal3g}</span>
-                      {tier.deal6g && <span className={styles.tierCardDeal}>🎁 {tier.deal6g}</span>}
+                      <span className={styles.tierCardDeal}>{tier.deal3g}</span>
+                      {tier.deal6g && <span className={styles.tierCardDeal}>{tier.deal6g}</span>}
                     </div>
                   )}
                 </div>
@@ -343,7 +395,7 @@ export default function HomePage() {
                     </span>
                     <span className={styles.productPriceUnit}>/ 3g</span>
                   </div>
-                  <div className={styles.productCta}>View Strain →</div>
+                  <div className={styles.productCta}>View Strain</div>
                 </div>
               </a>
             ))}
@@ -394,7 +446,7 @@ export default function HomePage() {
           </div>
           <div className={styles.storeGrid}>
             <div className={styles.storeCard}>
-              <div className={styles.storeIcon}>📍</div>
+              <div className={styles.storeIcon}>Location</div>
               <h3 className={styles.storeCardTitle}>Location</h3>
               <p className={styles.storeCardText}>
                 605 Center St
@@ -404,7 +456,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className={styles.storeCard}>
-              <div className={styles.storeIcon}>🕒</div>
+              <div className={styles.storeIcon}>Hours</div>
               <h3 className={styles.storeCardTitle}>Hours</h3>
               <p className={styles.storeCardText}>
                 Open 7 Days a Week
@@ -413,7 +465,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className={styles.storeCard}>
-              <div className={styles.storeIcon}>🔥</div>
+              <div className={styles.storeIcon}>Walk In</div>
               <h3 className={styles.storeCardTitle}>Walk In</h3>
               <p className={styles.storeCardText}>
                 No appointment needed

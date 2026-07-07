@@ -439,6 +439,113 @@
 }
 
 /* ── TIER SECTION ── */
+.highlightSection {
+  padding: 56px 0 34px;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(248, 250, 249, 0.82) 100%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.highlightHeader {
+  max-width: 860px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.highlightEyebrow {
+  display: inline-flex;
+  margin-bottom: 10px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(45, 106, 79, 0.08);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.highlightTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.8vw, 44px);
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+
+.highlightIntro {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.highlightGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.highlightCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(45, 106, 79, 0.16);
+  background: #ffffff;
+  color: var(--text-primary);
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.highlightCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(45, 106, 79, 0.34);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
+}
+
+.highlightCard h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.highlightCard p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.highlightCard span {
+  margin-top: auto;
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 960px) {
+  .highlightGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .highlightSection {
+    padding: 42px 0 28px;
+  }
+
+  .highlightGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlightCard {
+    min-height: auto;
+  }
+}
+
 .tierSection {
   padding: 100px 0;
   position: relative;
@@ -801,7 +908,18 @@
 }
 
 .storeIcon {
-  font-size: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(45, 106, 79, 0.08);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   margin-bottom: 14px;
 }
 

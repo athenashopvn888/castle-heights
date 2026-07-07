@@ -17,6 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/delivery`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/games`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${BASE}/native-cigarettes-ottawa`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/grabba-leaf-shakers`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/backwoods-cigars-ottawa`, lastModified: now, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${BASE}/nicotine-pouches-ottawa`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/cheap-weed-deals`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
   ];
 
   /* Tier pages */

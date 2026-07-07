@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://castleheightscannabis.com"),
+  metadataBase: new URL("https://castleheightscannabis.ca"),
   title: {
     default: "Castle Heights Cannabis | Ottawa Cannabis Dispensary",
     template: "%s | Castle Heights Cannabis",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_CA",
-    url: "https://castleheightscannabis.com",
+    url: "https://castleheightscannabis.ca",
     siteName: "Castle Heights Cannabis",
     title: "Castle Heights Cannabis — Premium Ottawa Cannabis Dispensary",
     description:
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://castleheightscannabis.com",
+    canonical: "https://castleheightscannabis.ca",
   },
   verification: {
     // google: "your-google-verification-code",
@@ -72,12 +72,12 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Store",
   additionalType: "https://schema.org/Store",
-  "@id": "https://castleheightscannabis.com",
+  "@id": "https://castleheightscannabis.ca/#store",
   name: "Castle Heights Cannabis",
   description: "Cannabis dispensary at 605 Center St in Ottawa, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
-  url: "https://castleheightscannabis.com",
+  url: "https://castleheightscannabis.ca",
   telephone: "+13435734401",
-  image: "https://castleheightscannabis.com/banners/chc-storefront.webp",
+  image: "https://castleheightscannabis.ca/banners/chc-storefront.webp",
   priceRange: "$3 - $12/g",
   address: {
     "@type": "PostalAddress",
@@ -100,10 +100,30 @@ const jsonLd = {
       closes: "23:59",
     },
   ],
-  areaServed: {
-    "@type": "City",
-    name: "Ottawa",
+  paymentAccepted: "Cash, Credit Card, Interac, Contactless Tap",
+  amenityFeature: {
+    "@type": "LocationFeatureSpecification",
+    name: "24/7 ATM on site",
+    value: true,
   },
+  areaServed: [
+    { "@type": "AdministrativeArea", name: "Ottawa East" },
+    { "@type": "AdministrativeArea", name: "Vanier" },
+    { "@type": "AdministrativeArea", name: "Overbrook" },
+    { "@type": "AdministrativeArea", name: "Castle Heights" },
+    { "@type": "AdministrativeArea", name: "Cyrville" },
+    { "@type": "AdministrativeArea", name: "Gloucester" },
+    { "@type": "AdministrativeArea", name: "Orleans" },
+    { "@type": "AdministrativeArea", name: "Blackburn Hamlet" },
+    { "@type": "AdministrativeArea", name: "Navan" },
+    { "@type": "AdministrativeArea", name: "Rockcliffe Park" },
+    { "@type": "AdministrativeArea", name: "Manor Park" },
+    { "@type": "AdministrativeArea", name: "Beacon Hill" },
+    { "@type": "AdministrativeArea", name: "Pineview" },
+    { "@type": "AdministrativeArea", name: "Innes" },
+    { "@type": "AdministrativeArea", name: "Cumberland" },
+    { "@type": "AdministrativeArea", name: "Rockland" },
+  ],
 };
 
 export default function RootLayout({
