@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Browse nicotine pouches, disposable vapes, and smoke essentials at Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
-    canonical: "https://castleheightscannabis.ca/nicotine-pouches-ottawa",
+    canonical: "https://www.castleheightscannabis.ca/nicotine-pouches-ottawa",
   },
 };
 

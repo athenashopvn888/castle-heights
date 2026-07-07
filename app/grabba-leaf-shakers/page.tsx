@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Browse grabba leaf, grabba shakers, Backwoods, and smoke essentials at Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
-    canonical: "https://castleheightscannabis.ca/grabba-leaf-shakers",
+    canonical: "https://www.castleheightscannabis.ca/grabba-leaf-shakers",
   },
 };
 

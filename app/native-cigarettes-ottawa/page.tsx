@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Browse native cigarette carton listings, smoke essentials, and visit-planning links for Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
-    canonical: "https://castleheightscannabis.ca/native-cigarettes-ottawa",
+    canonical: "https://www.castleheightscannabis.ca/native-cigarettes-ottawa",
   },
 };
 

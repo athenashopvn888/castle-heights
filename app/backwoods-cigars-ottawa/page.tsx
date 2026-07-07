@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Browse Backwoods and smoke essentials at Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
-    canonical: "https://castleheightscannabis.ca/backwoods-cigars-ottawa",
+    canonical: "https://www.castleheightscannabis.ca/backwoods-cigars-ottawa",
   },
 };
 

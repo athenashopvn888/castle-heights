@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Compare Budget, AA, AAA+, Premium, and Exotic flower tiers at Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
-    canonical: "https://castleheightscannabis.ca/cheap-weed-deals",
+    canonical: "https://www.castleheightscannabis.ca/cheap-weed-deals",
   },
 };
 
