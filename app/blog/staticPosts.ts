@@ -39,7 +39,7 @@ export const STATIC_POSTS: StaticBlogPost[] = [
     meta_description: "Adult 19+ guide to Castle Heights Cannabis around Ottawa / Castle Heights, with local store-page checks, menu-category context, and safe visit planning.",
     h1: "Castle Heights Cannabis Store Information for Ottawa Adults 19+",
     excerpt: "Castle Heights Cannabis guide for adults 19+ reviewing store information around Ottawa / Castle Heights.",
-    author: "Athena SEO Team",
+    author: "The Castle Heights Cannabis Team",
     date: "2026-07-02",
     category: "Store Guide",
     readTime: "4 min",
