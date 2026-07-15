@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import Navbar from "./components/Navbar";
+import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
 import { allFlowers } from "./lib/products";
 
@@ -174,6 +175,7 @@ export default function HomePage() {
     <main className={styles.main}>
       {/* ── NAVBAR ── */}
       <Navbar />
+      <HiringCallout />
 
       {/* ── HERO BANNER ── */}
       <section className={styles.hero} id="hero">
