@@ -14,7 +14,7 @@ export default function Footer() {
               cigarettes, grabba, pouches, and smoke essentials. Open 24 hours.
             </p>
             <div className={styles.buttons}>
-              <a href="tel:+13435734401" className={styles.btnPrimary}>
+              <a href="tel:+13433089488" className={styles.btnPrimary}>
                 Call Now
               </a>
               <a
@@ -39,8 +39,8 @@ export default function Footer() {
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Phone:</span>
               <span>
-                <a href="tel:+13435734401" style={{ color: "inherit" }}>
-                  (343) 573-4401
+                <a href="tel:+13433089488" style={{ color: "inherit" }}>
+                  (343) 308-9488
                 </a>
               </span>
             </div>

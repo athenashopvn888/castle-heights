@@ -44,7 +44,7 @@ export const SEO_PAGES: SeoPageData[] = [
       },
       {
         heading: "Serving Ottawa & Gatineau",
-        body: "Castle Heights Cannabis proudly serves customers from across the National Capital Region. Whether you're coming from Vanier area, Sandy Hill, Lower Town, Centretown, the Glebe, Old Ottawa South, Vanier, Orleans, Kanata, Barrhaven, or across the bridge from Gatineau and Hull, we welcome you. We are open 24 hours. Call us at (343) 573-4401 or visit us at 605 Center St, Ottawa, ON K1K 2N8.",
+        body: "Castle Heights Cannabis proudly serves customers from across the National Capital Region. Whether you're coming from Vanier area, Sandy Hill, Lower Town, Centretown, the Glebe, Old Ottawa South, Vanier, Orleans, Kanata, Barrhaven, or across the bridge from Gatineau and Hull, we welcome you. We are open 24 hours. Call us at (343) 308-9488 or visit us at 605 Center St, Ottawa, ON K1K 2N8.",
       },
     ],
     faqs: [

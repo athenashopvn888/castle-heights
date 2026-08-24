@@ -102,7 +102,7 @@ export default function DeliveryContent() {
         <div className={styles.ctaSection}>
           <p className={styles.ctaText}>
             Can&apos;t wait? Visit us in-store at <strong>605 Center St, Ottawa</strong> —
-            open <strong>24 hours a day</strong>. Call <strong>(343) 573-4401</strong>.
+            open <strong>24 hours a day</strong>. Call <strong>(343) 308-9488</strong>.
           </p>
         </div>
       </div>

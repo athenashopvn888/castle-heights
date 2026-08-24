@@ -70,7 +70,7 @@ export default function Navbar() {
           />
         </Link>
         <div className={styles.topBarRight}>
-          <a href="tel:+13435734401" className={styles.actionBtn}>
+          <a href="tel:+13433089488" className={styles.actionBtn}>
             Call Now
           </a>
           <a

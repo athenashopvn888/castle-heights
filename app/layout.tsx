@@ -76,7 +76,7 @@ const jsonLd = {
   name: "Castle Heights Cannabis",
   description: "Cannabis dispensary at 605 Center St in Ottawa, ON. Shop exotic, premium, AAA+, AA, and budget flower tiers plus edibles, prerolls, and vapes. Open 24 Hours.",
   url: "https://www.castleheightscannabis.ca",
-  telephone: "+13435734401",
+  telephone: "+13433089488",
   image: "https://www.castleheightscannabis.ca/banners/chc-storefront.webp",
   priceRange: "$3 - $12/g",
   address: {
@@ -89,8 +89,8 @@ const jsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 45.4432,
-    longitude: -75.6616,
+    latitude: 45.4419717,
+    longitude: -75.6428139,
   },
   openingHoursSpecification: [
     {
