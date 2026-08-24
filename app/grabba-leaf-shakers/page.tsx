@@ -9,23 +9,33 @@ import styles from "../native-cigarettes-ottawa/native-cigarettes.module.css";
 const PAGE_URL = "https://www.castleheightscannabis.ca/grabba-leaf-shakers";
 const DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=605%20Center%20St%2C%20Ottawa%2C%20ON%20K1K%202N8";
+const SHAKER_SLUG = "grabba-shaker-redrose-red-herring";
+const grabbaItems = allItems.filter(
+  (item) => item.slug === "grabba" || item.slug === SHAKER_SLUG
+);
+const hasShaker = grabbaItems.some((item) => item.slug === SHAKER_SLUG);
+const menuDescription = hasShaker
+  ? "Grabba and Grabba Shaker menu options at Castle Heights Cannabis in Ottawa East."
+  : "Published Grabba menu information and a direct way to ask Castle Heights Cannabis about Grabba Shaker options in Ottawa East.";
 
 export const metadata: Metadata = {
   title: "Grabba Leaf & Grabba Shakers Ottawa East",
-  description:
-    "Compare Grabba and Grabba Shaker menu options at Castle Heights Cannabis, 605 Center St in Ottawa. Open 24 hours near Vanier and Overbrook.",
+  description: `${menuDescription} Visit 605 Center St, open 24 hours near Vanier and Overbrook.`,
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "Grabba Leaf & Grabba Shakers Ottawa East",
-    description:
-      "Grabba and Grabba Shaker menu options at Castle Heights Cannabis on Center St in Ottawa. Open 24 hours.",
+    description: `${menuDescription} Open 24 hours.`,
     url: PAGE_URL,
     images: [
       {
-        url: "https://www.castleheightscannabis.ca/products/GrabbaShaker.webp",
-        width: 800,
-        height: 800,
-        alt: "Grabba Shaker at Castle Heights Cannabis in Ottawa East",
+        url: hasShaker
+          ? "https://www.castleheightscannabis.ca/products/GrabbaShaker.webp"
+          : "https://www.castleheightscannabis.ca/products/GRABBA-2G.webp",
+        width: hasShaker ? 800 : 600,
+        height: hasShaker ? 800 : 600,
+        alt: hasShaker
+          ? "Grabba Shaker at Castle Heights Cannabis in Ottawa East"
+          : "Grabba leaf product at Castle Heights Cannabis in Ottawa East",
       },
     ],
   },
@@ -49,10 +59,6 @@ const imageDetails: Record<
   },
 };
 
-const grabbaItems = allItems
-  .filter((item) => /grabba/i.test(`${item.name} ${item.slug}`))
-  .filter((item) => imageDetails[item.slug]);
-
 function displayName(name: string) {
   return name.replace(/\*/g, "").replace(/\s+/g, " ").trim();
 }
@@ -63,8 +69,7 @@ const pageJsonLd = {
   "@id": `${PAGE_URL}#webpage`,
   url: PAGE_URL,
   name: "Grabba Leaf & Grabba Shakers Ottawa East",
-  description:
-    "Grabba and Grabba Shaker menu options at Castle Heights Cannabis in Ottawa.",
+  description: menuDescription,
   about: { "@id": "https://www.castleheightscannabis.ca/#store" },
 };
 
@@ -128,12 +133,24 @@ export default function GrabbaLeafShakersPage() {
 
         <section className={styles.content}>
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Choose Grabba or a Grabba Shaker</h2>
-            <p className={styles.body}>
-              The site menu lists a Grabba item and a Grabba Shaker with
-              RedRose and Red Herring variants. Listed prices appear below; selection
-              and pricing can change, so call ahead when a specific option matters.
-            </p>
+            <h2 className={styles.sectionTitle}>
+              {hasShaker
+                ? "Choose Grabba or a Grabba Shaker"
+                : "Review the Published Grabba Menu Listing"}
+            </h2>
+            {hasShaker ? (
+              <p className={styles.body}>
+                The site menu lists a Grabba item and a Grabba Shaker with
+                RedRose and Red Herring variants. Listed prices appear below; selection
+                and pricing can change, so call ahead when a specific option matters.
+              </p>
+            ) : (
+              <p className={styles.body}>
+                The published menu currently lists Grabba below. Shaker listings can
+                change, so call (343) 308-9488 to ask about Grabba Shaker options before
+                visiting. The listed price reflects the published menu snapshot.
+              </p>
+            )}
 
             <div className={styles.listingGrid}>
               {grabbaItems.map((item) => {
@@ -206,8 +223,9 @@ export default function GrabbaLeafShakersPage() {
               <details className={styles.faqItem}>
                 <summary className={styles.faqQuestion}>Which Grabba products are listed?</summary>
                 <p className={styles.faqAnswer}>
-                  The site menu lists Grabba and a Grabba Shaker with RedRose
-                  and Red Herring variants. Selection can change.
+                  {hasShaker
+                    ? "The site menu lists Grabba and a Grabba Shaker with RedRose and Red Herring variants. Selection can change."
+                    : "The published menu currently lists Grabba. Call (343) 308-9488 to ask about Grabba Shaker options before visiting; selection can change."}
                 </p>
               </details>
               <details className={styles.faqItem}>

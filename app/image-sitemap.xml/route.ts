@@ -1,6 +1,9 @@
 import { allFlowers, allItems } from "../lib/products";
 
 const BASE = "https://www.castleheightscannabis.ca";
+const hasShaker = allItems.some(
+  (item) => item.slug === "grabba-shaker-redrose-red-herring"
+);
 
 function escapeXml(value: string) {
   return value
@@ -25,7 +28,7 @@ const staticEntries = [
     page: `${BASE}/grabba-leaf-shakers`,
     images: [
       `${BASE}/products/GRABBA-2G.webp`,
-      `${BASE}/products/GrabbaShaker.webp`,
+      ...(hasShaker ? [`${BASE}/products/GrabbaShaker.webp`] : []),
     ],
   },
   {
