@@ -76,7 +76,7 @@ export default function RelatedScroll({
             >
               <div className={styles.relatedImg}>
                 {r.image ? (
-                  <img src={r.image} alt={r.name} loading="lazy" 
+                  <img src={r.image} alt={`${r.name} ${tierName} flower listing`} width={320} height={320} loading="lazy"
             onError={(e) => {
               const t = e.currentTarget;
               if (t.src.indexOf('r2.dev') !== -1 || t.src.indexOf('images.torontodispensaryhub.com') !== -1) {

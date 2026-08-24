@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { allItems, CATEGORY_CONFIG, type ItemProduct } from "../../lib/products";
+import { allItems, getCategoryForItem, type ItemProduct } from "../../lib/products";
 import { getItemData } from "../../lib/itemData";
 import Magnifier from "../../components/Magnifier";
 import styles from "../../flower/[slug]/flower.module.css";
@@ -24,16 +24,18 @@ export async function generateMetadata({
   if (!item) return {};
 
   const itemData = getItemData(item.category, item.name);
+  const pageUrl = `https://www.castleheightscannabis.ca/item/${item.slug}`;
 
   return {
     title: `${item.name} | ${item.category} | Castle Heights Cannabis Ottawa`,
     description: itemData.metaDescription,
     alternates: {
-      canonical: `https://castleheightscannabis.com/item/${slug}`,
+      canonical: pageUrl,
     },
     openGraph: {
       title: `${item.name} | Castle Heights Cannabis`,
       description: itemData.metaDescription,
+      url: pageUrl,
       images: item.image ? [{ url: item.image, width: 800, height: 800, alt: item.name }] : [],
     },
   };
@@ -52,31 +54,20 @@ function getJsonLd(item: ItemProduct) {
   const itemData = getItemData(item.category, item.name);
   const priceNum = item.price ? parseFloat(item.price.replace('$', '')) : 0;
 
-  const offers: any = {
+  const offers: Record<string, unknown> | undefined = priceNum ? {
     "@type": "Offer",
-    url: `https://castleheightscannabis.com/item/${item.slug}`,
+    url: `https://www.castleheightscannabis.ca/item/${item.slug}`,
     priceCurrency: "CAD",
-    availability: "https://schema.org/InStock",
-    itemCondition: "https://schema.org/NewCondition",
-    seller: { "@type": "Organization", name: "Castle Heights Cannabis" },
-    hasMerchantReturnPolicy: {
-      "@type": "MerchantReturnPolicy",
-      applicableCountry: "CA",
-      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
-    }
-  };
-
-  if (priceNum) {
-    offers.price = priceNum;
-  }
+    seller: { "@id": "https://www.castleheightscannabis.ca/#store" },
+    price: priceNum,
+  } : undefined;
 
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: item.name,
-    image: item.image ? [item.image.startsWith('http') ? item.image : `https://castleheightscannabis.com${item.image.startsWith('/') ? '' : '/'}${item.image}`] : undefined,
+    image: item.image ? [item.image.startsWith('http') ? item.image : `https://www.castleheightscannabis.ca${item.image.startsWith('/') ? '' : '/'}${item.image}`] : undefined,
     description: itemData.description,
-    brand: { "@type": "Brand", name: "Castle Heights Cannabis" },
     sku: cleanSku(item.sku || item.slug),
     offers,
   };
@@ -84,7 +75,11 @@ function getJsonLd(item: ItemProduct) {
 
 /* -- Breadcrumb JSON-LD -- */
 function getBreadcrumbJsonLd(item: ItemProduct) {
-  const catSlug = item.category.toLowerCase().replace(' ', '-');
+  const category = getCategoryForItem(item);
+  const catUrl = category
+    ? `https://www.castleheightscannabis.ca/items/${category.config.slug}`
+    : "https://www.castleheightscannabis.ca";
+  const catName = category?.config.name || item.category;
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -93,19 +88,19 @@ function getBreadcrumbJsonLd(item: ItemProduct) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://castleheightscannabis.com"
+        "item": "https://www.castleheightscannabis.ca"
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": item.category,
-        "item": `https://castleheightscannabis.com/items/${catSlug}`
+        "name": catName,
+        "item": catUrl
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": item.name,
-        "item": `https://castleheightscannabis.com/item/${item.slug}`
+        "item": `https://www.castleheightscannabis.ca/item/${item.slug}`
       }
     ]
   };
@@ -121,7 +116,8 @@ export default async function ItemPage({
   const item = allItems.find((i) => i.slug === slug);
   if (!item) notFound();
 
-  const catInfo = Object.values(CATEGORY_CONFIG).find(c => c.name.toUpperCase() === item.category.toUpperCase() || c.name === item.category);
+  const category = getCategoryForItem(item);
+  const catInfo = category?.config;
   const catColor = catInfo?.color || "#94a3b8";
   const catIcon = catInfo?.icon || "🏷️";
   
@@ -146,7 +142,9 @@ export default async function ItemPage({
           <nav className={styles.breadcrumb}>
             <Link href="/">Home</Link>
             <span>/</span>
-            <Link href={`/items/${catInfo?.slug || item.category.toLowerCase().replace(' ', '-')}`}>{item.category}</Link>
+            <Link href={catInfo ? `/items/${catInfo.slug}` : "/"}>
+              {catInfo?.name || item.category}
+            </Link>
             <span>/</span>
             <span className={styles.breadcrumbCurrent}>{item.name}</span>
           </nav>
@@ -216,7 +214,7 @@ export default async function ItemPage({
 
               {/* Effects */}
               <div className={styles.effectsRow}>
-                {itemData.effects.map((e) => (
+                {itemData.attributes.map((e) => (
                   <span key={e.label} className={styles.effectPill}>
                     {e.emoji} {e.label}
                   </span>
@@ -224,6 +222,7 @@ export default async function ItemPage({
               </div>
 
               {/* -- Pricing table (Single unit for items) -- */}
+              {item.price && (
               <div className={styles.pricingSection}>
                 <h2 className={styles.pricingTitle}>Pricing</h2>
                 <div className={styles.priceTable}>
@@ -235,11 +234,12 @@ export default async function ItemPage({
                   <div className={styles.priceTableRow}>
                     <span className={styles.priceWeight}>1 Item</span>
                     <span className={styles.priceRegular}>
-                      {item.price?.startsWith('$') ? item.price : `$${item.price}`}
+                      {item.price.startsWith('$') ? item.price : `$${item.price}`}
                     </span>
                   </div>
                 </div>
               </div>
+              )}
 
               {/* -- Description (SEO) -- */}
               <div className={styles.descSection}>
@@ -249,12 +249,12 @@ export default async function ItemPage({
 
               {/* -- How to consume -- */}
               <div className={styles.descSection} style={{ marginTop: '24px' }}>
-                <h2 className={styles.descTitle}>How to Consume</h2>
-                <p className={styles.descText}>{itemData.consume}</p>
+                <h2 className={styles.descTitle}>Before You Visit</h2>
+                <p className={styles.descText}>{itemData.productNote}</p>
               </div>
 
               <div className={styles.visitCta}>
-                <p>Available in-store &middot; Walk-in welcome &middot; No appointment needed</p>
+                <p>Open 24 hours for adult in-store shopping &middot; Call ahead for a particular listing</p>
               </div>
             </div>
           </div>

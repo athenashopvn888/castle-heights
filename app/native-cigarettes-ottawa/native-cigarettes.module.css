@@ -161,6 +161,7 @@
 }
 
 .imageWrap {
+  position: relative;
   width: 70px;
   aspect-ratio: 1;
   overflow: hidden;

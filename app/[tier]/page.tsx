@@ -27,13 +27,19 @@ export async function generateMetadata({
   if (!tierInfo) return {};
   const flowers = getFlowersByTier(tierInfo.key);
   const seo = TIER_SEO[tierInfo.key];
+  const pageUrl = `https://www.castleheightscannabis.ca/${tierInfo.config.slug}`;
+  const description = flowers.length > 0
+    ? seo?.seoIntro || `Compare listed ${tierInfo.config.name.toLowerCase()} flower options at Castle Heights Cannabis.`
+    : `Call Castle Heights Cannabis before visiting for current ${tierInfo.config.name.toLowerCase()} flower details.`;
 
   return {
-    title: seo?.seoTitle || `${tierInfo.config.name} Cannabis Flower — ${flowers.length} Strains`,
-    description: seo?.seoIntro || `Shop ${flowers.length} ${tierInfo.config.name.toLowerCase()} cannabis strains at Castle Heights Cannabis.`,
+    title: seo?.seoTitle || `${tierInfo.config.name} Cannabis Flower`,
+    description,
+    alternates: { canonical: pageUrl },
     openGraph: {
       title: `${tierInfo.config.name} Flower | Castle Heights Cannabis`,
-      description: `${flowers.length} curated ${tierInfo.config.name.toLowerCase()} strains in stock now. From $${tierInfo.config.unitPrice}/g.`,
+      description,
+      url: pageUrl,
     },
   };
 }
@@ -60,16 +66,7 @@ export default async function TierPage({
     <main className={styles.main}>
       <Navbar />
 
-      {/* ── Banner Image (standalone, no overlay text) ── */}
-      <section className={styles.bannerSection}>
-        <img
-          src={config.banner}
-          alt={`${config.name} Cannabis Flower — ${config.tagline}`}
-          className={styles.bannerImg}
-        />
-      </section>
-
-      {/* ── Hero Content BELOW banner ── */}
+      {/* ── Tier summary ── */}
       <section
         className={styles.heroInfo}
         style={{ "--tier-color": config.color } as React.CSSProperties}
@@ -82,11 +79,19 @@ export default async function TierPage({
                 <span style={{ color: config.color }}>{config.name}</span>
               </h1>
             </div>
-            <p className={styles.heroTagline}>{config.tagline}</p>
+            <p className={styles.heroTagline}>
+              {flowers.length > 0 ? config.tagline : `${config.name} flower information`}
+            </p>
             <div className={styles.heroStats}>
-              <span className={styles.stat}>
-                <strong>{flowers.length}</strong> strains
-              </span>
+              {flowers.length > 0 ? (
+                <span className={styles.stat}>
+                  <strong>{flowers.length}</strong> strains
+                </span>
+              ) : (
+                <span className={styles.stat}>
+                  <strong>Call ahead</strong> for current menu details
+                </span>
+              )}
               {saleFlowers.length > 0 && (
                 <span className={styles.statSale}>
                   🔥 {saleFlowers.length} on sale
@@ -101,31 +106,11 @@ export default async function TierPage({
           </div>
 
           <div className={styles.heroRight}>
-            <div className={styles.unitPriceBox}>
-              <span className={styles.unitPriceLabel}>Starting at</span>
-              <span className={styles.unitPriceValue}>${config.unitPrice}/g</span>
-            </div>
-
-            {(config.deal3g || config.deal6g) && (
-            <div className={styles.dealRow}>
-              {config.deal3g && (
-              <div className={styles.dealBox}>
-                <div className={styles.dealLabel}>🎁 {config.deal3g.label}</div>
-                <div className={styles.dealPrice}>
-                  = <strong>${config.deal3g.price}</strong> / {config.deal3g.total}
-                </div>
-              </div>
-              )}
-              {config.deal6g && (
-                <div className={styles.dealBox}>
-                  <div className={styles.dealLabel}>🎁 {config.deal6g.label}</div>
-                  <div className={styles.dealPrice}>
-                    = <strong>${config.deal6g.price}</strong> / {config.deal6g.total}
-                  </div>
-                </div>
-              )}
-            </div>
-            )}
+            <p className={styles.heroTagline}>
+              {flowers.length > 0
+                ? "Listed sizes and prices appear with each flower. Call ahead when a particular listing matters to your visit."
+                : `Call (343) 308-9488 to ask about current ${config.name.toLowerCase()} flower before visiting.`}
+            </p>
           </div>
         </div>
       </section>
@@ -150,25 +135,38 @@ export default async function TierPage({
             </>
           )}
 
-          <h2 className={styles.sectionTitle}>
-            All{" "}
-            <span style={{ color: config.color }}>{config.name}</span>{" "}
-            Strains
-          </h2>
-          <div className={styles.grid}>
-            {regularFlowers.map((f) => (
-              <FlowerCard
-                key={`${f.sku}-${f.slug}`}
-                flower={f}
-                tierKey={tierInfo.key}
-              />
-            ))}
-          </div>
+          {regularFlowers.length > 0 ? (
+            <>
+              <h2 className={styles.sectionTitle}>
+                All{" "}
+                <span style={{ color: config.color }}>{config.name}</span>{" "}
+                Strains
+              </h2>
+              <div className={styles.grid}>
+                {regularFlowers.map((f) => (
+                  <FlowerCard
+                    key={`${f.sku}-${f.slug}`}
+                    flower={f}
+                    tierKey={tierInfo.key}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className={styles.sectionTitle}>
+                <span style={{ color: config.color }}>{config.name}</span> Flower
+              </h2>
+              <p className={styles.seoIntro}>
+                Call (343) 308-9488 before visiting to ask about current {config.name.toLowerCase()} flower details.
+              </p>
+            </>
+          )}
         </div>
       </section>
 
       {/* ── SEO Content ── */}
-      {seo && (
+      {seo && flowers.length > 0 && (
         <section className={styles.seoSection}>
           <div className={styles.container}>
             <h2 className={styles.seoMainTitle}>{seo.seoTitle}</h2>

@@ -1,16 +1,18 @@
-import { allFlowers, allItems } from "../lib/products";
+import {
+  allFlowers,
+  allItems,
+  isGrabbaItem,
+  isGrabbaShakerItem,
+} from "../lib/products";
 
 const BASE = "https://www.castleheightscannabis.ca";
-const hasShaker = allItems.some(
-  (item) => item.slug === "grabba-shaker-redrose-red-herring"
-);
 
 function escapeXml(value: string) {
   return value
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
+    .replace(/\"/g, "&quot;")
     .replace(/'/g, "&apos;");
 }
 
@@ -19,46 +21,53 @@ function absoluteImageUrl(value: string) {
   return `${BASE}${value.startsWith("/") ? value : `/${value}`}`;
 }
 
-const staticEntries = [
-  {
-    page: BASE,
-    images: [`${BASE}/banners/chc-homepage.webp`],
-  },
-  {
-    page: `${BASE}/grabba-leaf-shakers`,
-    images: [
-      `${BASE}/products/GRABBA-2G.webp`,
-      ...(hasShaker ? [`${BASE}/products/GrabbaShaker.webp`] : []),
-    ],
-  },
-  {
-    page: `${BASE}/native-cigarettes-ottawa`,
-    images: [`${BASE}/products/999Cigs.webp`],
-  },
-];
-
-const productEntries = [
-  ...allFlowers
-    .filter((flower) => flower.image)
-    .map((flower) => ({
-      page: `${BASE}/flower/${flower.slug}`,
-      images: [absoluteImageUrl(flower.image)],
-    })),
-  ...allItems
-    .filter((item) => item.image)
-    .map((item) => ({
-      page: `${BASE}/item/${item.slug}`,
-      images: [absoluteImageUrl(item.image)],
-    })),
-];
+function addImage(
+  entries: Map<string, Set<string>>,
+  page: string,
+  image: string | undefined
+) {
+  if (!image) return;
+  const pageImages = entries.get(page) || new Set<string>();
+  pageImages.add(absoluteImageUrl(image));
+  entries.set(page, pageImages);
+}
 
 export const dynamic = "force-static";
 
 export function GET() {
-  const urls = [...staticEntries, ...productEntries]
+  const entries = new Map<string, Set<string>>();
+  addImage(entries, BASE, "/banners/chc-homepage.webp");
+
+  const grabbaItems = allItems.filter(isGrabbaItem);
+  grabbaItems.forEach((item) =>
+    addImage(entries, `${BASE}/grabba-leaf-shakers`, item.image)
+  );
+
+  const nativeCigarette = allItems.find((item) => {
+    const text = `${item.name} ${item.slug}`.toLowerCase();
+    return (
+      item.category.toUpperCase() === "CIGARETTES" &&
+      !isGrabbaItem(item) &&
+      !/(backwood|pouch|velo|pablo|killa|zyn)/.test(text)
+    );
+  });
+  addImage(
+    entries,
+    `${BASE}/native-cigarettes-ottawa`,
+    nativeCigarette?.image
+  );
+
+  allFlowers.forEach((flower) =>
+    addImage(entries, `${BASE}/flower/${flower.slug}`, flower.image)
+  );
+  allItems.forEach((item) =>
+    addImage(entries, `${BASE}/item/${item.slug}`, item.image)
+  );
+
+  const urls = [...entries.entries()]
     .map(
-      ({ page, images }) =>
-        `  <url>\n    <loc>${escapeXml(page)}</loc>\n${images
+      ([page, images]) =>
+        `  <url>\n    <loc>${escapeXml(page)}</loc>\n${[...images]
           .map(
             (image) =>
               `    <image:image>\n      <image:loc>${escapeXml(image)}</image:loc>\n    </image:image>`
@@ -72,8 +81,13 @@ export function GET() {
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+      "Cache-Control":
+        "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
       "X-Content-Type-Options": "nosniff",
     },
   });
 }
+
+export const imageSitemapDiagnostics = {
+  hasGrabbaShaker: allItems.some(isGrabbaShakerItem),
+};

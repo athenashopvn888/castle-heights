@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: RESOURCE_HOME.seoTitle,
   description: RESOURCE_HOME.description,
   alternates: { canonical: "https://www.castleheightscannabis.ca/resources" },
+  openGraph: {
+    title: RESOURCE_HOME.seoTitle,
+    description: RESOURCE_HOME.description,
+    url: "https://www.castleheightscannabis.ca/resources",
+  },
 };
 
 export default function ResourcesPage() {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -11,6 +12,12 @@ export const metadata: Metadata = {
     "Compare Budget, AA, AAA+, Premium, and Exotic flower tiers at Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
     canonical: "https://www.castleheightscannabis.ca/cheap-weed-deals",
+  },
+  openGraph: {
+    title: "Cheap Weed Ottawa East | Budget Cannabis at Castle Heights",
+    description:
+      "Compare Budget, AA, and AAA+ flower listings at Castle Heights Cannabis on Center St in Ottawa.",
+    url: "https://www.castleheightscannabis.ca/cheap-weed-deals",
   },
 };
 
@@ -45,13 +52,11 @@ export default function CheapWeedDealsPage() {
             and Exotic strains in Ottawa East.
           </p>
           <p className={styles.body}>
-            Use this page when planning a quick visit from Vanier, Overbrook, Castle
-            Heights, Cyrville, Gloucester, Pineview, Orleans, Blackburn Hamlet, Navan,
-            Rockcliffe Park, Manor Park, or Beacon Hill.
+            Supplied strain type, THC details, sizes, and prices are shown when provided
+            for each listing. Call ahead when a particular flower or package size matters.
           </p>
           <div className={styles.note}>
-            The live menu is the best place to compare current flower listings, sizes,
-            and tier pricing before you head to the store.
+            Castle Heights Cannabis is open 24 hours at 605 Center St, Ottawa.
           </div>
         </div>
 
@@ -60,16 +65,19 @@ export default function CheapWeedDealsPage() {
           <div className={styles.listingGrid}>
             {budgetFlowers.map((item) => (
               <article key={item.slug} className={styles.listingCard}>
-                <div className={styles.imageWrap}>
-                  <img
+                <Link href={`/flower/${item.slug}`} className={styles.imageWrap}>
+                  <Image
                     src={item.image}
                     alt={`${item.name} ${item.tier} flower listing at Castle Heights Cannabis Ottawa`}
                     className={styles.image}
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 640px) 88px, 96px"
                   />
-                </div>
+                </Link>
                 <div>
-                  <h3 className={styles.listingName}>{item.name}</h3>
+                  <h3 className={styles.listingName}>
+                    <Link href={`/flower/${item.slug}`}>{item.name}</Link>
+                  </h3>
                   <p className={styles.listingMeta}>{item.tier} flower listing</p>
                 </div>
               </article>
@@ -92,8 +100,8 @@ export default function CheapWeedDealsPage() {
             <details className={styles.faqItem}>
               <summary className={styles.faqQuestion}>How should I compare value flower before visiting?</summary>
               <p className={styles.faqAnswer}>
-                Start with Budget, AA, and AAA+ tiers, then compare the live flower menu
-                for current options and ask staff for help matching your visit plan.
+                Start with Budget, AA, and AAA+ tiers, compare the supplied package
+                details, and call ahead when a particular strain matters.
               </p>
             </details>
             <details className={styles.faqItem}>

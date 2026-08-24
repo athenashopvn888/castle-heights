@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./magnifier.module.css";
 
 interface MagnifierProps {
@@ -11,22 +11,22 @@ interface MagnifierProps {
 
 export default function Magnifier({ src, alt, className }: MagnifierProps) {
   const [show, setShow] = useState(false);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [pos, setPos] = useState({ x: 0, y: 0, width: 400, height: 400 });
   const imgRef = useRef<HTMLImageElement>(null);
 
   const LENS_SIZE = 160; // diameter of the lens
   const ZOOM = 2.5;      // zoom factor
 
-  const [currentSrc, setCurrentSrc] = useState(src);
-  
-  useEffect(() => {
-    setCurrentSrc(src);
-  }, [src]);
+  const [imageState, setImageState] = useState({ original: src, current: src });
+  const currentSrc = imageState.original === src ? imageState.current : src;
 
   const handleImageError = () => {
     if (currentSrc && (currentSrc.indexOf('r2.dev') !== -1 || currentSrc.indexOf('images.torontodispensaryhub.com') !== -1)) {
       const filename = currentSrc.split('/').pop();
-      setCurrentSrc(`https://athena-cannabis-images.vercel.app/products/${filename}`);
+      setImageState({
+        original: src,
+        current: `https://athena-cannabis-images.vercel.app/products/${filename}`,
+      });
     }
   };
 
@@ -35,7 +35,7 @@ export default function Magnifier({ src, alt, className }: MagnifierProps) {
     const rect = imgRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setPos({ x, y });
+    setPos({ x, y, width: rect.width, height: rect.height });
   }
 
   function handleMouseEnter() {
@@ -62,6 +62,8 @@ export default function Magnifier({ src, alt, className }: MagnifierProps) {
         src={currentSrc}
         onError={handleImageError}
         alt={alt}
+        width={800}
+        height={800}
         className={className}
       />
 
@@ -75,7 +77,7 @@ export default function Magnifier({ src, alt, className }: MagnifierProps) {
             left: pos.x - LENS_SIZE / 2,
             top: pos.y - LENS_SIZE / 2,
             backgroundImage: `url(${currentSrc})`,
-            backgroundSize: `${(imgRef.current?.offsetWidth || 400) * ZOOM}px ${(imgRef.current?.offsetHeight || 400) * ZOOM}px`,
+            backgroundSize: `${pos.width * ZOOM}px ${pos.height * ZOOM}px`,
             backgroundPosition: `-${bgX}px -${bgY}px`,
           }}
         />

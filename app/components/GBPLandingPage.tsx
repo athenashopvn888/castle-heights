@@ -1,282 +1,167 @@
-// Auto-generated Google Business Profile Local SEO Landing Page Component
 import Link from "next/link";
 import styles from "./GBPLandingPage.module.css";
 import { gbpLocation } from "../lib/gbp-location";
 
-// Dictionary mapping category names to their respective paths
-const categoryLinks: { [key: string]: string } = {
-  "Flower": "/",
+const categoryLinks: Record<string, string> = {
+  Flower: "/#menu",
   "Pre-rolls": "/items/prerolls",
-  "Edibles": "/items/edibles",
+  Edibles: "/items/edibles",
   "THC vapes": "/items/vape-disposables",
-  "Concentrates": "/items/concentrates",
-  "Shatter": "/items/concentrates",
-  "CBD oils": "/items/concentrates",
-  "Accessories": "/items/add-ons"
+  Concentrates: "/items/concentrates",
+  Accessories: "/items/add-ons",
 };
 
-type StoreSchemaMarkup = {
-  "@context": "https://schema.org";
-  "@type": "Store";
-  name: string;
-  url: string;
-  telephone: string;
-  address: {
-    "@type": "PostalAddress";
-    streetAddress: string;
-    addressLocality: string;
-    addressRegion: string;
-    postalCode: string;
-    addressCountry: string;
-  };
-  priceRange: string;
-  openingHours?: string[];
-  geo?: {
-    "@type": "GeoCoordinates";
-    latitude: number;
-    longitude: number;
-  };
-};
+const helpfulLinks = [
+  {
+    href: "/cheap-weed-deals",
+    label: "Ottawa East Flower Tiers",
+    description: "Compare listed Budget, AA, AAA+, Premium, and Exotic flower options.",
+  },
+  {
+    href: "/grabba-leaf-shakers",
+    label: "Grabba Leaf & Shakers",
+    description: "Compare listed Grabba leaf and shaker formats or call ahead.",
+  },
+  {
+    href: "/native-cigarettes-ottawa",
+    label: "Native Cigarettes Ottawa",
+    description: "Review listed cigarette cartons and related smoke products for adults.",
+  },
+  {
+    href: "/nicotine-pouches-ottawa",
+    label: "Nicotine Pouches Ottawa",
+    description: "Review listed nicotine pouch and vape formats before visiting.",
+  },
+  {
+    href: "/backwoods-cigars-ottawa",
+    label: "Backwoods Cigars Ottawa",
+    description: "Review the dedicated Backwoods and smoke-essential information.",
+  },
+  {
+    href: "/resources",
+    label: "Ottawa East Shopping Resources",
+    description: "Find store, category, and adult shopping information in one place.",
+  },
+];
+
+const PAGE_URL = "https://www.castleheightscannabis.ca/weed-dispensary-ottawa";
+const DIRECTIONS_URL =
+  "https://www.google.com/maps/dir/?api=1&destination=605%20Center%20St%2C%20Ottawa%2C%20ON%20K1K%202N8";
 
 export function GBPLandingPage() {
-  const landmarkList = gbpLocation.localLandmarks.join(", ");
-  const nearbyAreaList = gbpLocation.nearbyAreas.slice(0, 4).join(", ");
-  const categoryGuideLinks = gbpLocation.products.slice(0, 6).map((product) => ({
-    label: product,
-    href: categoryLinks[product] || "/"
-  }));
-
-  // Generate schema.org markup dynamically
-  const schemaMarkup: StoreSchemaMarkup = {
+  const pageSchema = {
     "@context": "https://schema.org",
-    "@type": "Store",
-    "name": gbpLocation.storeName,
-    "url": `https://${gbpLocation.domain}/${gbpLocation.slug}/`,
-    "telephone": gbpLocation.phone,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": gbpLocation.streetAddress,
-      "addressLocality": gbpLocation.city,
-      "addressRegion": gbpLocation.province,
-      "postalCode": gbpLocation.postalCode,
-      "addressCountry": gbpLocation.country
-    },
-    "priceRange": "$$"
+    "@type": "WebPage",
+    "@id": `${PAGE_URL}#webpage`,
+    url: PAGE_URL,
+    name: gbpLocation.seoTitle,
+    description: gbpLocation.metaDescription,
+    about: { "@id": "https://www.castleheightscannabis.ca/#store" },
   };
-
-  // Inject real opening hours and coordinates if they exist
-  if (gbpLocation.hours && gbpLocation.hours.length > 0) {
-    schemaMarkup.openingHours = gbpLocation.hours;
-  }
-
-  if (gbpLocation.latitude && gbpLocation.longitude) {
-    schemaMarkup.geo = {
-      "@type": "GeoCoordinates",
-      "latitude": Number(gbpLocation.latitude),
-      "longitude": Number(gbpLocation.longitude)
-    };
-  }
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Castle Heights Cannabis", item: "https://www.castleheightscannabis.ca" },
+      { "@type": "ListItem", position: 2, name: "Ottawa Dispensary", item: PAGE_URL },
+    ],
+  };
 
   return (
     <div className={styles.container}>
-      {/* Schema Injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero Header */}
       <header className={styles.hero}>
-        <h1 className={styles.h1}>{gbpLocation.storeName} — Weed Dispensary in {gbpLocation.city}</h1>
-        <p className={styles.heroTagline}>Serving {gbpLocation.city} & Nearby Neighborhoods</p>
+        <h1 className={styles.h1}>Castle Heights Cannabis — Weed Dispensary in Ottawa</h1>
+        <p className={styles.heroTagline}>605 Center St · Open 24 Hours · Adults 19+</p>
       </header>
 
-      {/* Call to Actions */}
       <div className={styles.btnRow}>
-        <a href={gbpLocation.menuUrl} className={`${styles.btn} ${styles.btnPrimary}`}>
+        <Link href="/#menu" className={`${styles.btn} ${styles.btnPrimary}`}>
           View Menu
-        </a>
+        </Link>
         <a href={`tel:${gbpLocation.phoneIntl}`} className={`${styles.btn} ${styles.btnSecondary}`}>
           Call Store
         </a>
+        <a href={DIRECTIONS_URL} className={`${styles.btn} ${styles.btnSecondary}`} target="_blank" rel="noopener noreferrer">
+          Directions
+        </a>
       </div>
 
-      {/* Intro Section */}
       <section className={styles.section}>
-        <h2 className={styles.h2}>Your Trusted Local Weed Dispensary</h2>
-        <p className={styles.introText}>{gbpLocation.introVariant}</p>
+        <h2 className={styles.h2}>Local Weed Dispensary at 605 Center St</h2>
+        <p className={styles.introText}>
+          Castle Heights Cannabis is at 605 Center St in Ottawa. The store is
+          open 24 hours for adults 19+ who want to compare flower and other
+          listed menu categories before visiting.
+        </p>
       </section>
 
-      {/* Product Section */}
       <section className={styles.section}>
-        <h2 className={styles.h2}>Weed and Cannabis Products Available</h2>
+        <h2 className={styles.h2}>Weed and Cannabis Menu Categories</h2>
         <p className={styles.infoText}>
-          At {gbpLocation.storeName}, we offer a curated selection of weed and cannabis products for adults 19+ in {gbpLocation.city}. Enjoy some of Ontario&apos;s finest quality and value in the following categories:
+          Compare five flower tiers plus listed pre-rolls, edibles, vape
+          products, concentrates, and accessories. Listings and prices can
+          change, so call ahead when a particular product matters.
         </p>
         <div className={styles.productGrid}>
-          {gbpLocation.products.map((p) => {
-            const href = categoryLinks[p] || "/";
-            return (
-              <Link key={p} href={href} className={styles.productCard}>
-                {p}
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Visit Planning Section */}
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Plan a Visit Near {gbpLocation.neighborhood}</h2>
-        <p className={styles.infoText}>
-          Planning a visit to {gbpLocation.storeName} is easier when the local details are in one place. This page brings together the store address, hours, phone number, nearby areas like {nearbyAreaList}, and helpful category links for adults 19+ comparing general menu sections before visiting.
-        </p>
-        <p className={styles.infoText}>
-          If you are coming from {landmarkList}, use the visit details below to confirm the location and review the main site categories without relying on live inventory, pricing, or promotional claims.
-        </p>
-        <p className={styles.infoText}>
-          For a fuller local overview, read the{" "}
-          <Link href="/">Home</Link>.
-        </p>
-        <div className={styles.btnRow}>
-          <Link href={gbpLocation.menuUrl} className={`${styles.btn} ${styles.btnPrimary}`}>
-            Start With Menu Categories
-          </Link>
-          <Link href="#faq" className={`${styles.btn} ${styles.btnSecondary}`}>
-            Read Visit FAQs
-          </Link>
-        </div>
-      </section>
-
-      {/* Location & NAP Section */}
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Visit {gbpLocation.storeName} in {gbpLocation.city}</h2>
-        <div className={styles.napGrid}>
-          <div className={styles.napDetails}>
-            <div className={styles.napItem}>
-              <span className={styles.napLabel}>Store Name</span>
-              <strong>{gbpLocation.storeName}</strong>
-            </div>
-            <div className={styles.napItem}>
-              <span className={styles.napLabel}>Address</span>
-              <span>{gbpLocation.address}</span>
-            </div>
-            <div className={styles.napItem}>
-              <span className={styles.napLabel}>Phone</span>
-              <span><a href={`tel:${gbpLocation.phoneIntl}`} style={{ color: "inherit" }}>{gbpLocation.phone}</a></span>
-            </div>
-            <div className={styles.napItem}>
-              <span className={styles.napLabel}>Website</span>
-              <span><a href={`https://${gbpLocation.domain}/`} style={{ color: "inherit" }}>https://{gbpLocation.domain}/</a></span>
-            </div>
-            {gbpLocation.hours && gbpLocation.hours.length > 0 && (
-              <div className={styles.napItem}>
-                <span className={styles.napLabel}>Store Hours</span>
-                {gbpLocation.hours.map((line) => (
-                  <span key={line} style={{ fontSize: "0.95rem" }}>{line}</span>
-                ))}
-              </div>
-            )}
-            <div className={styles.napItem} style={{ marginTop: "10px" }}>
-              <p className={styles.infoBlock} style={{ fontSize: "0.9rem", fontStyle: "italic", margin: 0 }}>
-                * {gbpLocation.parkingNote}.
-              </p>
-            </div>
-          </div>
-          <div className={styles.mapWrapper}>
-            {gbpLocation.mapEmbedUrl ? (
-              <iframe
-                title={`Map of ${gbpLocation.storeName}`}
-                src={gbpLocation.mapEmbedUrl}
-                className={styles.mapIframe}
-                allowFullScreen={true}
-                loading="lazy"
-              />
-            ) : (
-              <div style={{ padding: "40px", textAlign: "center", color: "var(--text-muted)" }}>
-                Map preview not available.
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Nearby Areas Section */}
-      <section className={styles.section}>
-        <h2 className={styles.h2}>{gbpLocation.sectionTitle}</h2>
-        <p className={styles.infoText}>
-          {gbpLocation.neighborhoodDescription} {gbpLocation.transitNote}. We proudly welcome customers from:
-        </p>
-        <div className={styles.areaList}>
-          {gbpLocation.nearbyAreas.map((area) => (
-            <span key={area} className={styles.areaTag}>
-              {area}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* Category Link Context Section */}
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Helpful Category Links Before You Visit</h2>
-        <p className={styles.infoText}>
-          These internal links are provided as planning shortcuts for adults 19+ who want to understand the main menu sections before visiting {gbpLocation.storeName}. They do not confirm live product availability, pricing, or checkout details.
-        </p>
-        <div className={styles.productGrid}>
-          {categoryGuideLinks.map((item) => (
-            <Link key={`${item.label}-${item.href}`} href={item.href} className={styles.productCard} aria-label={`Review ${item.label} category information at ${gbpLocation.storeName}`}>
-              {item.label}
+          {gbpLocation.products.map((product) => (
+            <Link key={product} href={categoryLinks[product] || "/#menu"} className={styles.productCard}>
+              {product}
             </Link>
           ))}
         </div>
       </section>
 
-      {/* FAQ Section */}
+      <section className={styles.section}>
+        <h2 className={styles.h2}>Plan a Visit Near Castle Heights</h2>
+        <p className={styles.infoText}>
+          The address is 605 Center St in Ottawa, near Castle Heights,
+          Overbrook, and Vanier. Use the directions link for a route from your
+          actual starting point, or call the store if you need help locating it.
+        </p>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.h2}>Compare Flower, Edibles, Vapes and More</h2>
+        <div className={styles.seoLinkGrid}>
+          {helpfulLinks.map((link) => (
+            <Link key={link.href} href={link.href} className={styles.seoLinkCard}>
+              <span className={styles.seoLinkTitle}>{link.label}</span>
+              <span className={styles.seoLinkDescription}>{link.description}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.h2}>Visit Castle Heights Cannabis in Ottawa</h2>
+        <div className={styles.napGrid}>
+          <div className={styles.napDetails}>
+            <div className={styles.napItem}><span className={styles.napLabel}>Store Name</span><strong>{gbpLocation.storeName}</strong></div>
+            <div className={styles.napItem}><span className={styles.napLabel}>Address</span><span>{gbpLocation.address}</span></div>
+            <div className={styles.napItem}><span className={styles.napLabel}>Phone</span><a href={`tel:${gbpLocation.phoneIntl}`}>{gbpLocation.phone}</a></div>
+            <div className={styles.napItem}><span className={styles.napLabel}>Store Hours</span><span>Open 24 Hours</span></div>
+          </div>
+        </div>
+      </section>
+
       <section id="faq" className={styles.section}>
         <h2 className={styles.h2}>Frequently Asked Questions</h2>
         <div className={styles.faqList}>
           <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>How should I plan a visit to {gbpLocation.storeName}?</h3>
-            <p className={styles.faqAnswer}>
-              Start by confirming the address, store hours, and nearby area details on this page. Then use the category links for general browsing context before visiting the store in person.
-            </p>
+            <h3 className={styles.faqQuestion}>Where is Castle Heights Cannabis?</h3>
+            <p className={styles.faqAnswer}>Castle Heights Cannabis is at {gbpLocation.address}.</p>
           </div>
           <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Can I use this page to compare menu categories?</h3>
-            <p className={styles.faqAnswer}>
-              Yes. The category links point to existing pages for flower, pre-rolls, edibles, THC vapes, concentrates, shatter, CBD oils, and accessories. They are informational links for planning a visit and browsing the main site sections.
-            </p>
+            <h3 className={styles.faqQuestion}>When is the store open?</h3>
+            <p className={styles.faqAnswer}>The Ottawa store is open 24 hours a day, seven days a week for adults 19+.</p>
           </div>
           <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Where is {gbpLocation.storeName} located?</h3>
-            <p className={styles.faqAnswer}>{gbpLocation.storeName} is located at {gbpLocation.address}.</p>
+            <h3 className={styles.faqQuestion}>Can product listings change?</h3>
+            <p className={styles.faqAnswer}>Yes. Call {gbpLocation.phone} before travelling when a particular product or listed price matters.</p>
           </div>
-          <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Is {gbpLocation.storeName} a weed dispensary in {gbpLocation.city}?</h3>
-            <p className={styles.faqAnswer}>
-              Yes, {gbpLocation.storeName} is a fully licensed local weed dispensary in {gbpLocation.city} serving cannabis customers aged 19 and older with valid identification.
-            </p>
-          </div>
-          <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>What products does {gbpLocation.storeName} carry?</h3>
-            <p className={styles.faqAnswer}>
-              We carry a complete line of weed products including premium flower, pre-rolls, THC edibles, concentrates, shatter, THC vape cartridges, CBD oils, and accessories.
-            </p>
-          </div>
-          <div className={styles.faqItem}>
-            <h3 className={styles.faqQuestion}>Do I need to be 19+ to shop at {gbpLocation.storeName}?</h3>
-            <p className={styles.faqAnswer}>
-              Yes, to visit our cannabis store or order from our menu, you must be at least 19 years of age. Valid government-issued photo ID is required for verification.
-            </p>
-          </div>
-          {gbpLocation.neighborhood && (
-            <div className={styles.faqItem}>
-              <h3 className={styles.faqQuestion}>Is {gbpLocation.storeName} near {gbpLocation.neighborhood}?</h3>
-              <p className={styles.faqAnswer}>
-                Yes, {gbpLocation.storeName} is located near {gbpLocation.neighborhood} and serves customers from nearby landmarks like {gbpLocation.localLandmarks.join(", ")}.
-              </p>
-            </div>
-          )}
         </div>
       </section>
     </div>

@@ -38,8 +38,8 @@ export default function NotFound() {
             lineHeight: 1.6,
           }}
         >
-          This page doesn&apos;t exist — but our shelves are fully stocked.
-          Browse 200+ strains at Ottawa&apos;s most fire dispensary.
+          That address does not match a current Castle Heights page. Return to the
+          menu or use the contact information to plan a visit.
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
           <Link

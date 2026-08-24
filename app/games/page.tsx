@@ -3,9 +3,14 @@ import GamesContent from "./GamesContent";
 
 export const metadata: Metadata = {
   title: "Cannabis Arcade Games — Castle Heights Cannabis | Ottawa",
-  description: "Play free online cannabis-themed games like Flappy Bud and Snake Munchies while you wait at Castle Heights Cannabis.",
+  description: "Play Castle Heights Cannabis arcade games including Flappy Bud, Snake Munchies, Brick Breaker, Memory Match, and 2048 Strains.",
   alternates: {
-    canonical: "https://castleheightscannabis.com/games",
+    canonical: "https://www.castleheightscannabis.ca/games",
+  },
+  openGraph: {
+    title: "Cannabis Arcade Games — Castle Heights Cannabis | Ottawa",
+    description: "Play five Castle Heights Cannabis browser games.",
+    url: "https://www.castleheightscannabis.ca/games",
   },
 };
 

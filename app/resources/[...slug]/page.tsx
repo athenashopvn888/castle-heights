@@ -19,10 +19,16 @@ export async function generateMetadata({ params }: ResourceRouteProps): Promise<
   const { slug } = await params;
   const page = getResourcePage(routeSlug(slug));
   if (!page) return {};
+  const pageUrl = "https://www.castleheightscannabis.ca/resources/" + page.slug;
   return {
     title: page.seoTitle,
     description: page.description,
-    alternates: { canonical: "https://www.castleheightscannabis.ca/resources/" + page.slug },
+    alternates: { canonical: pageUrl },
+    openGraph: {
+      title: page.seoTitle,
+      description: page.description,
+      url: pageUrl,
+    },
   };
 }
 

@@ -153,6 +153,19 @@
   color: white;
 }
 
+@media (min-width: 769px) {
+  .hero,
+  .heroBanner,
+  .heroBannerImg {
+    min-height: 580px;
+  }
+
+  .heroBannerImg {
+    height: 580px;
+    object-fit: cover;
+  }
+}
+
 /* Mobile: stacked layout — banner full-fit on top, text BELOW */
 @media (max-width: 768px) {
   .hero {

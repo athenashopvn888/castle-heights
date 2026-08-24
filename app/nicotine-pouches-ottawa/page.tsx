@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -12,13 +13,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.castleheightscannabis.ca/nicotine-pouches-ottawa",
   },
+  openGraph: {
+    title: "Nicotine Pouches Ottawa East | Castle Heights Cannabis",
+    description:
+      "Check published nicotine pouch information and compare related vape listings at Castle Heights Cannabis on Center St in Ottawa.",
+    url: "https://www.castleheightscannabis.ca/nicotine-pouches-ottawa",
+  },
 };
 
+const pouchItems = allItems.filter((item) =>
+  `${item.name} ${item.slug}`.toLowerCase().includes("pouch")
+);
 const pouchAndVapeItems = [
-  ...allItems.filter((item) => `${item.name} ${item.slug}`.toLowerCase().includes("pouch")),
+  ...pouchItems,
   ...getItemsByCategory("VAPE PENS").slice(0, 4),
   ...getItemsByCategory("VAPE DISPOSABLE").slice(0, 4),
 ].filter((item, index, items) => items.findIndex((candidate) => candidate.slug === item.slug) === index);
+const hasPouches = pouchItems.length > 0;
 
 export default function NicotinePouchesOttawaPage() {
   return (
@@ -30,24 +41,26 @@ export default function NicotinePouchesOttawaPage() {
           <span className={styles.eyebrow}>Castle Heights Cannabis</span>
           <h1 className={styles.title}>Nicotine Pouches Ottawa East</h1>
           <p className={styles.subtitle}>
-            Compare nicotine pouch, disposable vape, and smoke-accessory options before
-            visiting Castle Heights Cannabis near Vanier, Overbrook, and Gloucester.
+            {hasPouches
+              ? "Compare listed nicotine pouch and related vape options before visiting Castle Heights Cannabis in Ottawa."
+              : "Call Castle Heights Cannabis about nicotine pouch options and compare related vape listings before visiting Center Street."}
           </p>
         </div>
       </section>
 
       <section className={styles.content}>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Pouches, vapes, and quick visit planning</h2>
+          <h2 className={styles.sectionTitle}>
+            {hasPouches ? "Nicotine Pouches and Vape Options" : "Ask About Nicotine Pouch Options"}
+          </h2>
           <p className={styles.body}>
-            Castle Heights Cannabis helps adult 19+ customers plan a quick pouch or vape
-            stop at 605 Center St. This page brings the key pouch and vape listings into
-            one easy-to-scan shopper guide.
+            {hasPouches
+              ? "The published menu includes nicotine pouch listings alongside disposable and vape-pen options for adult shoppers."
+              : "The published menu snapshot does not currently include a nicotine pouch listing. Call (343) 308-9488 to ask about pouch options before travelling."}
           </p>
           <p className={styles.body}>
-            Use it when comparing options from Vanier, Overbrook, Cyrville, Gloucester,
-            Beacon Hill, Pineview, Orleans, Blackburn Hamlet, Navan, or other Ottawa East
-            routes.
+            Castle Heights Cannabis is at 605 Center St in Ottawa and is open 24 hours.
+            Listings can change, so call ahead when a particular product matters.
           </p>
         </div>
 
@@ -58,11 +71,12 @@ export default function NicotinePouchesOttawaPage() {
               <article key={item.slug} className={styles.listingCard}>
                 <div className={styles.imageWrap}>
                   {item.image ? (
-                    <img
+                    <Image
                       src={item.image}
                       alt={`${item.name} listing at Castle Heights Cannabis in Ottawa`}
                       className={styles.image}
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 640px) 88px, 96px"
                     />
                   ) : null}
                 </div>
@@ -90,15 +104,15 @@ export default function NicotinePouchesOttawaPage() {
             <details className={styles.faqItem}>
               <summary className={styles.faqQuestion}>Can I browse pouches and vapes before visiting?</summary>
               <p className={styles.faqAnswer}>
-                Yes. This page highlights pouch and vape-related listings from the Castle
-                Heights catalog, with links into the full menu categories.
+                {hasPouches
+                  ? "The published menu includes the pouch listings shown above. Listings can change, so call ahead about a particular option."
+                  : "Call (343) 308-9488 to ask about nicotine pouch options before visiting. Related vape listings are shown when present in the published menu."}
               </p>
             </details>
             <details className={styles.faqItem}>
               <summary className={styles.faqQuestion}>What is the fastest way to plan a visit?</summary>
               <p className={styles.faqAnswer}>
-                Use the top Call Now or Directions buttons, then open the relevant menu
-                category to compare current choices before visiting 605 Center St.
+                Call (343) 308-9488 or get directions to 605 Center St before leaving.
               </p>
             </details>
           </div>

@@ -25,6 +25,8 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  min-width: 44px;
+  min-height: 44px;
 }
 .logoImg {
   width: 52px;
@@ -146,15 +148,24 @@
 
   .actionBtn,
   .actionBtnGhost,
-  .gamesBtn,
   .open {
     font-size: 10px;
     padding: 5px 9px;
   }
 
+  .actionBtn,
+  .actionBtnGhost,
+  .gamesBtn {
+    min-height: 44px;
+  }
+
+  .pill {
+    min-height: 44px;
+  }
+
   .logoImg {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 }
 .gamesBtn:hover {

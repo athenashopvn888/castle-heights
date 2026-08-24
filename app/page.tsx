@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,6 +6,14 @@ import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
 import { allFlowers } from "./lib/products";
+
+export const metadata: Metadata = {
+  title: "Castle Heights Cannabis | Ottawa Cannabis Dispensary",
+  description:
+    "Castle Heights Cannabis is an Ottawa cannabis dispensary on Center St with menu categories, local store details, and adult 19+ shopping info. Open 24 Hours.",
+  alternates: { canonical: "https://www.castleheightscannabis.ca" },
+  openGraph: { url: "https://www.castleheightscannabis.ca" },
+};
 
 function flowerTierCount(tier: string) {
   return allFlowers.filter((flower) => flower.tier.toUpperCase() === tier).length;
@@ -15,11 +24,7 @@ const TIERS = [
   {
     name: "EXOTIC",
     slug: "exotic",
-    tagline: "Ultra-rare, top-shelf genetics",
-    thc: "35-39%",
-    unitPrice: 20,
-    deal3g: "3g bundle for $40",
-    deal6g: "6g bundle for $60",
+    tagline: "Exotic flower listings",
     color: "#f59e0b",
     glow: "rgba(245, 158, 11, 0.2)",
     icon: "🔥",
@@ -28,11 +33,7 @@ const TIERS = [
   {
     name: "PREMIUM",
     slug: "premium",
-    tagline: "Hand-picked connoisseur grade",
-    thc: "32-34%",
-    unitPrice: 15,
-    deal3g: "3g bundle for $30",
-    deal6g: "6g bundle for $45",
+    tagline: "Premium flower listings",
     color: "#a78bfa",
     glow: "rgba(167, 139, 250, 0.2)",
     icon: "💎",
@@ -41,11 +42,7 @@ const TIERS = [
   {
     name: "AAA+",
     slug: "aaa",
-    tagline: "Heavy hitters, proven strains",
-    thc: "30-32%",
-    unitPrice: 10,
-    deal3g: "3g bundle for $20",
-    deal6g: "6g bundle for $30",
+    tagline: "AAA+ flower listings",
     color: "#22d3ee",
     glow: "rgba(34, 211, 238, 0.2)",
     icon: "⚡",
@@ -54,11 +51,7 @@ const TIERS = [
   {
     name: "AA",
     slug: "aa",
-    tagline: "Quality daily drivers",
-    thc: "27-29%",
-    unitPrice: 4,
-    deal3g: null,
-    deal6g: null,
+    tagline: "AA flower listings",
     color: "#34d399",
     glow: "rgba(52, 211, 153, 0.2)",
     icon: "✦",
@@ -67,11 +60,7 @@ const TIERS = [
   {
     name: "BUDGET",
     slug: "budget",
-    tagline: "Shreds & value OZs",
-    thc: "24-27%",
-    unitPrice: 3,
-    deal3g: "3g bundle for $10",
-    deal6g: null,
+    tagline: "Budget flower listings",
     color: "#94a3b8",
     glow: "rgba(148, 163, 184, 0.15)",
     icon: "💰",
@@ -81,10 +70,6 @@ const TIERS = [
     name: "EDIBLES & MORE",
     slug: "items/edibles",
     tagline: "Gummies, vapes, pre-rolls, hash",
-    thc: "Up to 98%",
-    unitPrice: null,
-    deal3g: null,
-    deal6g: null,
     color: "#fb923c",
     glow: "rgba(251, 146, 60, 0.2)",
     icon: "🍬",
@@ -123,7 +108,7 @@ function buildFeatured() {
     tier: f.tier.toUpperCase(),
     thc: f.thc,
     type: f.type === "indica" ? "IH" : f.type === "sativa" ? "SH" : "H",
-    price3g: f.price3g ? `$${f.price3g.sale ?? f.price3g.regular}` : "—",
+    price3g: f.price3g ? `$${f.price3g.sale ?? f.price3g.regular}` : null,
     image: f.image,
   }));
 }
@@ -146,12 +131,12 @@ const FEATURED_HIGHLIGHTS = [
   {
     href: "/nicotine-pouches-ottawa",
     title: "Nicotine Pouches & Vapes",
-    text: "Compare nicotine pouch and vape information for an adult shopping stop near Vanier, Overbrook, and Gloucester.",
+    text: "Compare the listed nicotine pouch and vape information before visiting the Center Street store.",
     anchor: "Compare pouches and vapes",
   },
   {
     href: "/cheap-weed-deals",
-    title: "Cheap Weed & Budget Ounces",
+    title: "Cheap Weed & Budget Flower",
     text: "Compare Budget, AA, AAA+, Premium, and Exotic flower tiers before visiting Castle Heights Cannabis.",
     anchor: "Compare budget options",
   },
@@ -207,7 +192,7 @@ export default function HomePage() {
             <span className={styles.heroLit}>Castle Heights.</span>
           </h1>
           <p className={styles.heroSubtitle}>
-            {allFlowers.length} listed flower options · Exotic to Budget · THC up to 39% ·
+            {allFlowers.length} listed flower options · Five flower tiers ·
             605 Center St, Ottawa
           </p>
           <div className={styles.heroButtons}>
@@ -241,18 +226,18 @@ export default function HomePage() {
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>39%</span>
-              <span className={styles.heroStatLabel}>Max THC</span>
+              <span className={styles.heroStatNum}>5</span>
+              <span className={styles.heroStatLabel}>Flower Tiers</span>
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>$3</span>
-              <span className={styles.heroStatLabel}>From /g</span>
+              <span className={styles.heroStatNum}>24</span>
+              <span className={styles.heroStatLabel}>Hours</span>
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>Late</span>
-              <span className={styles.heroStatLabel}>Open</span>
+              <span className={styles.heroStatNum}>605</span>
+              <span className={styles.heroStatLabel}>Center St</span>
             </div>
           </div>
         </div>
@@ -308,28 +293,18 @@ export default function HomePage() {
                     {tier.name}
                   </h3>
                   <div className={styles.tierCardMeta}>
-                    <span className={styles.tierCardThc}>
-                      THC {tier.thc}
-                    </span>
-                    {tier.count !== null && (
+                    {tier.count !== null && tier.count > 0 && (
                       <span className={styles.tierCardCount}>
                         {tier.count} flower options
                       </span>
                     )}
-                  </div>
-                  <div className={styles.tierCardPrice}>
-                    {tier.unitPrice !== null && (
-                      <span className={styles.tierCardUnitPrice}>
-                        ${tier.unitPrice}/g
+                    {tier.count === 0 && (
+                      <span className={styles.tierCardCount}>
+                        Call about current {tier.name.toLowerCase()} flower
                       </span>
                     )}
                   </div>
-                  {tier.deal3g && (
-                    <div className={styles.tierCardDeals}>
-                      <span className={styles.tierCardDeal}>{tier.deal3g}</span>
-                      {tier.deal6g && <span className={styles.tierCardDeal}>{tier.deal6g}</span>}
-                    </div>
-                  )}
+                  <p className={styles.tierCardTagline}>{tier.tagline}</p>
                 </div>
                 <div className={styles.tierCardArrow}>→</div>
               </a>
@@ -350,10 +325,11 @@ export default function HomePage() {
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <div className={styles.productMedia}>
-                  <img
+                  <Image
                     src={strain.image}
-                    alt={strain.name}
-                    loading="lazy"
+                    alt={`${strain.name} ${strain.tier} flower listing at Castle Heights Cannabis`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className={styles.productImg}
                   />
                   <div className={styles.productBadges}>
@@ -378,12 +354,14 @@ export default function HomePage() {
                     {getTypeLabel(strain.type)}
                   </span>
                   <h3 className={styles.productName}>{strain.name}</h3>
-                  <div className={styles.productPricing}>
-                    <span className={styles.productPrice}>
-                      {strain.price3g}
-                    </span>
-                    <span className={styles.productPriceUnit}>/ 3g</span>
-                  </div>
+                  {strain.price3g && (
+                    <div className={styles.productPricing}>
+                      <span className={styles.productPrice}>
+                        {strain.price3g}
+                      </span>
+                      <span className={styles.productPriceUnit}>/ 3g</span>
+                    </div>
+                  )}
                   <div className={styles.productCta}>View Strain</div>
                 </div>
               </Link>

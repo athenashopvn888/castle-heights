@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -11,6 +12,12 @@ export const metadata: Metadata = {
     "Browse native cigarette carton listings, smoke essentials, and visit-planning links for Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
     canonical: "https://www.castleheightscannabis.ca/native-cigarettes-ottawa",
+  },
+  openGraph: {
+    title: "Native Cigarettes Ottawa | Castle Heights Cannabis on Center St",
+    description:
+      "Compare listed native cigarette and smoke-product options before visiting Castle Heights Cannabis in Ottawa.",
+    url: "https://www.castleheightscannabis.ca/native-cigarettes-ottawa",
   },
 };
 
@@ -36,32 +43,33 @@ export default function NativeCigarettesOttawaPage() {
 
       <section className={styles.content}>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Native cigarette menu guide near Ottawa East</h2>
+          <h2 className={styles.sectionTitle}>Native Cigarette Options in Ottawa</h2>
           <p className={styles.body}>
-            Castle Heights Cannabis carries native cigarette options for adult customers visiting Ottawa. This page keeps the cigarette section easy to scan, with product cards pulled from the Castle Heights menu so shoppers can quickly compare the main native cigarette carton listings.
+            Adult shoppers can compare supplied cigarette names and package details
+            before visiting Castle Heights Cannabis at 605 Center St in Ottawa.
           </p>
           <p className={styles.body}>
-            The full menu page is still the source for current stock details. Use this guide to find the right cigarette section faster, then open the cigarette menu or visit the store at 605 Center St for the latest shelf selection.
+            Listings can change. Call (343) 308-9488 before travelling when a
+            particular brand or variety matters to your visit.
           </p>
           <div className={styles.note}>
-            Looking for related smoke products? Use the cigarette menu for the complete section, while this page stays focused on native cigarette listings.
+            The store is open 24 hours and also lists Grabba, Backwoods, and other
+            smoke essentials when present in the published menu.
           </div>
         </div>
 
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Native cigarette listings</h2>
-          <p className={styles.listingIntro}>
-            These cigarette listings are pulled from the Castle Heights menu data and presented in a smaller card layout so more products are visible without heavy scrolling.
-          </p>
           <div className={styles.listingGrid}>
             {nativeCigaretteListings.map((item) => (
               <article key={item.slug} className={styles.listingCard}>
                 <div className={styles.imageWrap}>
-                  <img
+                  <Image
                     src={item.image}
-                    alt={`${item.name} native cigarette catalog listing at Castle Heights Cannabis`}
+                    alt={`${item.name} cigarette listing at Castle Heights Cannabis in Ottawa`}
                     className={styles.image}
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 640px) 88px, 96px"
                   />
                 </div>
                 <div>
@@ -76,7 +84,8 @@ export default function NativeCigarettesOttawaPage() {
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Helpful next steps</h2>
           <p className={styles.body}>
-            Use these Castle Heights links to move from the guide into the live menu, store information, and visit-planning pages.
+            Compare related smoke products or get store information before visiting
+            Center Street.
           </p>
           <div className={styles.linkGrid}>
             <Link href="/items/cigarettes" className={styles.linkCard}>
@@ -110,15 +119,17 @@ export default function NativeCigarettesOttawaPage() {
               </p>
             </details>
             <details className={styles.faqItem}>
-              <summary className={styles.faqQuestion}>How do I check what is currently in stock?</summary>
+              <summary className={styles.faqQuestion}>Can cigarette listings change?</summary>
               <p className={styles.faqAnswer}>
-                Use the Castle Heights cigarette menu link on this page to review the current menu section. Staff can also confirm the latest shelf details when you visit.
+                Yes. Call (343) 308-9488 before travelling when a particular cigarette
+                brand or variety matters.
               </p>
             </details>
             <details className={styles.faqItem}>
               <summary className={styles.faqQuestion}>Where is Castle Heights Cannabis?</summary>
               <p className={styles.faqAnswer}>
-                Castle Heights Cannabis is at 605 Center St in Ottawa. Use this page with the menu, directions, and contact options when planning your visit.
+                Castle Heights Cannabis is at 605 Center St, Ottawa, ON K1K 2N8 and
+                is open 24 hours.
               </p>
             </details>
           </div>

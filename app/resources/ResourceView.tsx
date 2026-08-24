@@ -17,9 +17,6 @@ export default function ResourceView({ page }: ResourceViewProps) {
           <p className={styles.eyebrow}>{page.eyebrow}</p>
           <h1>{page.title}</h1>
           <p className={styles.intro}>{page.intro}</p>
-          <div className={styles.bannerFrame}>
-            <img src={page.banner} alt={`${page.title} resource banner`} className={styles.bannerImg} />
-          </div>
         </div>
       </section>
 

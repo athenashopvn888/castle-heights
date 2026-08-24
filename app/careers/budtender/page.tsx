@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.castleheightscannabis.ca/careers/budtender",
   },
+  openGraph: {
+    title: "Budtender Or Manager Application | Castle Heights Cannabis",
+    description:
+      "Apply online for budtender or manager opportunities at Castle Heights Cannabis in Ottawa.",
+    url: "https://www.castleheightscannabis.ca/careers/budtender",
+  },
 };
 
 const applicantFaqs = [
@@ -90,7 +96,8 @@ export default function BudtenderCareersPage() {
               <span className={styles.eyebrow}>Apply Now</span>
               <h2>Tell Us About You</h2>
               <p>
-                This form sends your response to the shared hiring intake for Castle Heights Cannabis.
+                Share your availability, experience, motivation, and customer-service
+                background with the Castle Heights hiring team.
               </p>
               <p className={styles.onlineOnlyInline}>
                 Online applications only. Please do not call the store about hiring.

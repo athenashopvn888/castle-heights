@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -56,21 +57,15 @@ export default function GamesContent() {
         }}
       >
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <div
+          <h1
             style={{
-              maxWidth: 1000,
-              margin: "0 auto 24px",
-              borderRadius: "var(--radius-xl)",
-              overflow: "hidden",
-              border: "1px solid var(--border-subtle)",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 7vw, 56px)",
+              marginBottom: 16,
             }}
           >
-            <img
-              src="/banners/neon_arcade_gaming_promotion_banner.webp"
-              alt="Games Arcade — Flappy Bud, Snake Munchies, Brick Breaker 420"
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-          </div>
+            Castle Heights Arcade
+          </h1>
           <p
             style={{
               fontSize: 16,
@@ -79,8 +74,7 @@ export default function GamesContent() {
               margin: "0 auto",
             }}
           >
-            Kill time while your order&apos;s ready. Beat the high score. No
-            dispensary in Ottawa has this.
+            Pick one of five cannabis-themed browser games and chase your next high score.
           </p>
         </div>
 
@@ -92,7 +86,7 @@ export default function GamesContent() {
           }}
         >
           {GAMES.map((game) => (
-            <a
+            <Link
               key={game.id}
               href={`/games/${game.id}`}
               style={{
@@ -151,7 +145,7 @@ export default function GamesContent() {
               >
                 Play Now →
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import {TIER_CONFIG, CATEGORY_CONFIG, allFlowers, allItems} from "./lib/products";
+import { TIER_CONFIG, CATEGORY_CONFIG, allFlowers, allItems } from "./lib/products";
 import { SEO_PAGES } from "./lib/seoPages";
 import { RESOURCE_PAGES } from "./resources/resourceData";
 
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: now, changeFrequency: "daily", priority: 1 },
-    { url: `${BASE}/weed-dispensary-ottawa/`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/weed-dispensary-ottawa`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/careers/budtender`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
@@ -70,6 +70,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.slug ? 0.6 : 0.7,
   }));
 
+  const pages = [
+    ...staticPages,
+    ...tierPages,
+    ...itemPages,
+    ...flowerPages,
+    ...itemDetailPages,
+    ...resourcePages,
+    ...seoPages,
+  ];
 
-  return [...staticPages, ...tierPages, ...itemPages, ...flowerPages, ...itemDetailPages, ...resourcePages, ...seoPages];
+  return [...new Map(pages.map((page) => [page.url, page])).values()];
 }

@@ -64,25 +64,16 @@ function TypeTag({ type }: { type: string }) {
   return <span className={`${styles.tag} ${cls}`}>{label}</span>;
 }
 
-/* -- Vibe card -- */
-const VIBE_MAP: Record<string, [string,string][]> = {
-  indica: [["🛋️","Couch Lock"],["😌","Relax"],["🌙","Sleepy"]],
-  sativa: [["⚡","Energy"],["🧠","Cerebral"],["🚀","Uplift"]],
-  hybrid: [["🧘","Balance"],["🌿","Calm"],["✨","Creative"]],
-};
 function VibeCard({ type }: { type: string }) {
-  const t = type?.toLowerCase();
-  const vibes = VIBE_MAP[t] || VIBE_MAP.hybrid;
+  const label = type?.trim();
+  if (!label) return null;
   return (
     <div className={styles.vibeSection}>
-      <div className={styles.vibeHead}>EFFECTS</div>
+      <div className={styles.vibeHead}>SUPPLIED TYPE</div>
       <div className={styles.vibePills}>
-        {vibes.map(([emoji, label]) => (
-          <span key={label} className={styles.vibePill}>
-            <span className={styles.vibeEmoji}>{emoji}</span>
-            <span className={styles.vibeLabel}>{label}</span>
-          </span>
-        ))}
+        <span className={styles.vibePill}>
+          <span className={styles.vibeLabel}>{label}</span>
+        </span>
       </div>
     </div>
   );
@@ -672,7 +663,7 @@ function AddOnsCard({ items, hiIdx }: { items: Item[]; hiIdx: number }) {
    ============================================================ */
 const TICKER_SLIDES = [
   "🔥 Castle Heights Cannabis — 605 Center St, Ottawa",
-  "200+ Strains In Stock",
+  "Five Flower Tiers",
   "Open 24 Hours",
   "ALL SALES ARE FINAL",
   "🎮 Play Games at castleheightscannabis.com/games",

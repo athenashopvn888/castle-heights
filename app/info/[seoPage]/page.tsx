@@ -22,11 +22,16 @@ export async function generateMetadata({
   const page = getSeoPageBySlug(slug);
   if (!page) return {};
 
+  const pageUrl = `https://www.castleheightscannabis.ca/info/${slug}`;
+
   return {
     title: page.title,
     description: page.metaDescription,
-    alternates: {
-      canonical: `https://castleheightscannabis.com/info/${slug}`,
+    alternates: { canonical: pageUrl },
+    openGraph: {
+      title: page.title,
+      description: page.metaDescription,
+      url: pageUrl,
     },
   };
 }
@@ -42,21 +47,41 @@ export default async function SeoLandingPage({
   if (!page) notFound();
 
   const tiers = Object.values(TIER_CONFIG);
+  const pageUrl = `https://www.castleheightscannabis.ca/info/${slug}`;
+  const pageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: page.title,
+    description: page.metaDescription,
+    about: { "@id": "https://www.castleheightscannabis.ca/#store" },
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Castle Heights Cannabis",
+        item: "https://www.castleheightscannabis.ca/",
+      },
+      { "@type": "ListItem", position: 2, name: page.h1, item: pageUrl },
+    ],
+  };
 
   return (
     <main className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Navbar />
-
-      {/* Banner Image */}
-      {page.banner && (
-        <section className={styles.bannerSection}>
-          <img
-            src={page.banner}
-            alt={page.h1}
-            className={styles.bannerImg}
-          />
-        </section>
-      )}
 
       {/* Hero */}
       <section className={styles.hero}>
@@ -79,7 +104,7 @@ export default async function SeoLandingPage({
 
           {/* Tier Grid */}
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Our Cannabis Menu — Five Tiers of Quality</h2>
+            <h2 className={styles.sectionTitle}>Compare Five Flower Tiers</h2>
             <div className={styles.tierGrid}>
               {tiers.map((tier) => (
                 <Link
@@ -91,7 +116,6 @@ export default async function SeoLandingPage({
                   <div className={styles.tierLabel} style={{ color: tier.color }}>
                     {tier.icon} {tier.name}
                   </div>
-                  <div className={styles.tierPrice}>${tier.unitPrice}/g</div>
                   <p className={styles.tierDesc}>{tier.tagline}</p>
                   <span className={styles.tierLink}>Browse {tier.name} →</span>
                 </Link>
@@ -103,8 +127,17 @@ export default async function SeoLandingPage({
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Find Us</h2>
             <div className={styles.mapWrap}>
+              Castle Heights Cannabis is at 605 Center St, Ottawa, ON K1K 2N8.
             </div>
             <div className={styles.visitBtns}>
+              <a href="tel:+13433089488">Call (343) 308-9488</a>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=605%20Center%20St%2C%20Ottawa%2C%20ON%20K1K%202N8"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get Directions
+              </a>
             </div>
           </div>
 

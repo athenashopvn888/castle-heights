@@ -1,75 +1,92 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "./faq.module.css";
 
+const PAGE_URL = "https://www.castleheightscannabis.ca/faq";
+
 export const metadata: Metadata = {
-  title: "FAQ — Castle Heights Cannabis | Ottawa Dispensary Questions",
+  title: "Castle Heights Cannabis FAQ | Ottawa Store Information",
   description:
-    "Frequently asked questions about Castle Heights Cannabis in Ottawa. Hours, location, products, pricing, bundle offers, and everything you need to know before visiting.",
-  alternates: {
-    canonical: "https://castleheightscannabis.com/faq",
+    "Answers about Castle Heights Cannabis hours, Ottawa address, listed product formats, call-ahead information, and directions to 605 Center St.",
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: "Castle Heights Cannabis FAQ | Ottawa Store Information",
+    description:
+      "Hours, address, product formats, call-ahead information, and directions for Castle Heights Cannabis in Ottawa.",
+    url: PAGE_URL,
   },
 };
 
 const FAQ_CATEGORIES = [
   {
-    title: "📍 Location & Hours",
+    title: "Location and Hours",
     faqs: [
-      { q: "Where is Castle Heights Cannabis located?", a: "We are located at 605 Center St, Ottawa, ON K1K 2N8 — in the heart of Vanier area. We're near the Rideau Centre, Parliament Hill, and major OC Transpo bus routes." },
-      { q: "What are your hours?", a: "We are open 24 hours a day. Walk in anytime during our open hours." },
-      { q: "Is there parking nearby?", a: "Yes. Free street parking is available on Center St and surrounding streets in the evenings. Paid parking lots are available nearby during the day. We're also accessible by OC Transpo and STO buses." },
-      { q: "How far are you from Gatineau?", a: "We're just 5 minutes from the Portage Bridge and 7 minutes from the Macdonald-Cartier Bridge. We're one of the closest dispensaries to the Quebec border." },
-      { q: "What's the best way to get to Castle Heights?", a: "We're easily accessible by car, bus, or foot. From Rideau Centre, walk north on Center St — we're a 5-minute walk. By bus, several OC Transpo routes stop within walking distance. Free evening parking is available on surrounding streets." },
+      {
+        q: "Where is Castle Heights Cannabis?",
+        a: "Castle Heights Cannabis is at 605 Center St, Ottawa, ON K1K 2N8.",
+      },
+      {
+        q: "What are the store hours?",
+        a: "The Ottawa store is open 24 hours.",
+      },
+      {
+        q: "How should I plan a visit from Gatineau?",
+        a: "Use current directions from your actual starting point. Travel time depends on the route, traffic, and construction, so allow enough time before crossing into Ottawa.",
+      },
     ],
   },
   {
-    title: "🌿 Products & Menu",
+    title: "Products and Menu",
     faqs: [
-      { q: "What products do you carry?", a: "We carry over 200 strains of cannabis flower across 5 quality tiers (Exotic, Premium, AAA+, AA, Budget), plus edibles (gummies, chocolates, baked goods), vape pens, disposable vapes, concentrates (shatter, wax, hash, diamonds, live resin), pre-rolled joints, native cigarettes, and accessories." },
-      { q: "Do you have a live menu?", a: "Yes! Our online menu at castleheightscannabis.com updates in real time with current stock, prices, THC levels, and availability. You can check what's in stock before you visit." },
-      { q: "What are your flower tiers?", a: "Exotic ($10-$12/g, THC 35-39%) — ultra-rare top-shelf genetics. Premium ($7-$10/g, THC 32-34%) — connoisseur-grade. AAA+ ($5-$6/g, THC 30-32%) — heavy hitters, our most popular tier. AA ($4/g, THC 27-29%) — quality daily drivers. Budget ($3/g, THC 24-27%) — reliable value flower." },
-      { q: "Do you sell edibles?", a: "Yes! We carry a variety of edibles including gummies, chocolates, baked goods, and more. THC content varies. Check our live menu for current availability." },
-      { q: "Do you sell vapes?", a: "Yes — both disposable vapes and refillable vape pens. We carry both nicotine vapes and THC vapes from top brands." },
-      { q: "Do you sell native cigarettes?", a: "Yes! We carry one of the widest selections of native cigarettes in downtown Ottawa, including premium and value brands in multiple varieties." },
+      {
+        q: "What product formats are listed?",
+        a: "The published menu includes flower, edibles, vape pens, disposable vapes, concentrates, pre-rolls, cigarettes, and accessories.",
+      },
+      {
+        q: "How is flower organized?",
+        a: "Flower is grouped into Exotic, Premium, AAA+, AA, and Budget collections. Supplied strain type, THC details, sizes, and prices appear when provided.",
+      },
+      {
+        q: "Can product listings change?",
+        a: "Yes. Call (343) 308-9488 before travelling when a particular product, size, or price matters to your visit.",
+      },
+      {
+        q: "Are cigarette and Grabba products listed?",
+        a: "The published menu includes cigarette and smoke-product listings, including Grabba items when present in the current menu snapshot. Call ahead about a particular option.",
+      },
     ],
   },
   {
-    title: "💰 Pricing & Bundle Offers",
+    title: "Planning Your Visit",
     faqs: [
-      { q: "What is the cheapest weed you sell?", a: "Our Budget tier starts at $3/g with value ounces from $40. Our AA tier is $4/g. These are the most competitive prices you'll find in Ottawa." },
-      { q: "What bundle pricing do you offer?", a: "Flower bundle pricing includes a 3g total option — the 3g total is shown clearly before purchase. Our Exotic, Premium, and AAA+ tiers also offer 6g bundle pricing, with 6g total pricing." },
-      { q: "Do you have ounce deals?", a: "Yes! Budget ounces from $40, AA ounces from $90, AAA+ ounces from $100. All with freshness and quality guaranteed." },
-      { q: "How does bundle pricing work?", a: "The 3g bundle pricing applies to every tier automatically. The 6g bundle pricing applies to Exotic, Premium, and AAA+ tiers. These are our standard everyday bundle offers." },
-      { q: "How does the tier pricing work?", a: "Each flower strain is graded into one of five quality tiers. The tier determines the per-gram price. This transparent system means you always know exactly what you're paying — no confusing markups or inconsistent pricing." },
-    ],
-  },
-  {
-    title: "🛒 Shopping & Experience",
-    faqs: [
-      { q: "Do I need an appointment?", a: "No! Castle Heights Cannabis is walk-in only. Just show up anytime during open hours." },
-      { q: "Can I order online?", a: "Currently, Castle Heights is an in-store shopping experience only. You can browse our live menu online to see what's in stock before visiting." },
-      { q: "Do you offer delivery?", a: "Delivery is coming soon! Visit our delivery page to sign up for email notifications when we launch our delivery service." },
-      { q: "What payment methods do you accept?", a: "We accept cash and debit. No credit cards at this time." },
-      { q: "Can your staff help me choose a strain?", a: "Absolutely! Our knowledgeable budtenders are here to help. Whether you're a first-time buyer or a seasoned connoisseur, we can recommend strains based on your preferences, desired effects, and budget." },
-      { q: "Is there a minimum purchase?", a: "No minimum purchase required. You can buy as little as 1 gram." },
+      {
+        q: "Do I need an appointment?",
+        a: "Adults can visit during the store's open hours. Call (343) 308-9488 if you need help before travelling.",
+      },
+      {
+        q: "Can I call about a particular listing?",
+        a: "Yes. Call (343) 308-9488 before visiting when a particular product matters.",
+      },
+      {
+        q: "Where can I get directions?",
+        a: "Use the directions link for a current route to 605 Center St, Ottawa, ON K1K 2N8.",
+      },
     ],
   },
 ];
 
 export default function FAQPage() {
-  // JSON-LD for FAQ page
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: FAQ_CATEGORIES.flatMap((cat) =>
-      cat.faqs.map((faq) => ({
+    "@id": `${PAGE_URL}#faq`,
+    mainEntity: FAQ_CATEGORIES.flatMap((category) =>
+      category.faqs.map((faq) => ({
         "@type": "Question",
         name: faq.q,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.a,
-        },
+        acceptedAnswer: { "@type": "Answer", text: faq.a },
       }))
     ),
   };
@@ -82,39 +99,32 @@ export default function FAQPage() {
       />
       <main className={styles.main}>
         <Navbar />
-
-        {/* FAQ Banner */}
-        <div className={styles.bannerWrap}>
-          <img
-            src="/banners/chc-faq.webp"
-            alt="Castle Heights Cannabis FAQ — Your Questions Answered"
-            className={styles.bannerImg}
-          />
-        </div>
-
         <div className={styles.content}>
           <h1 className={styles.pageTitle}>Frequently Asked Questions</h1>
           <p className={styles.pageSubtitle}>
-            Everything you need to know about Castle Heights Cannabis — Ottawa's late-night dispensary at 605 Center St in Vanier area.
+            Store hours, address, product formats, and visit information for Castle
+            Heights Cannabis at 605 Center St in Ottawa.
           </p>
 
-          {FAQ_CATEGORIES.map((cat) => (
-            <div key={cat.title} className={styles.category}>
-              <h2 className={styles.categoryTitle}>{cat.title}</h2>
-              {cat.faqs.map((faq) => (
+          {FAQ_CATEGORIES.map((category) => (
+            <section key={category.title} className={styles.category}>
+              <h2 className={styles.categoryTitle}>{category.title}</h2>
+              {category.faqs.map((faq) => (
                 <details key={faq.q} className={styles.faqItem}>
                   <summary className={styles.faqQuestion}>{faq.q}</summary>
                   <p className={styles.faqAnswer}>{faq.a}</p>
                 </details>
               ))}
-            </div>
+            </section>
           ))}
 
           <div className={styles.ctaSection}>
-            <h2 className={styles.ctaTitle}>Still have questions?</h2>
+            <h2 className={styles.ctaTitle}>Need a quick answer before visiting?</h2>
             <p className={styles.ctaText}>
-              Call us at <strong>(343) 308-9488</strong> or visit us at 605 Center St, Ottawa.
+              Call <a href="tel:+13433089488">(343) 308-9488</a> or get directions to
+              605 Center St, Ottawa.
             </p>
+            <Link href="/contact">View contact and store hours</Link>
           </div>
         </div>
         <Footer />

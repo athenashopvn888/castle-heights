@@ -26,13 +26,16 @@ export async function generateMetadata({
 
   const tierName = TIER_CONFIG[flower.tier]?.name || flower.tier;
   const strainData = getStrainData(flower.name, flower.type, flower.tier, flower.thc);
+  const pageUrl = `https://www.castleheightscannabis.ca/flower/${flower.slug}`;
 
   return {
     title: `${flower.name} | ${tierName} ${flower.type === "indica" ? "Indica" : flower.type === "sativa" ? "Sativa" : "Hybrid"} | THC ${flower.thc} | Castle Heights Cannabis Ottawa`,
     description: strainData.metaDescription,
+    alternates: { canonical: pageUrl },
     openGraph: {
       title: `${flower.name} | Castle Heights Cannabis`,
       description: strainData.metaDescription,
+      url: pageUrl,
       images: flower.image ? [{ url: flower.image, width: 800, height: 800, alt: flower.name }] : [],
     },
   };
@@ -55,18 +58,11 @@ function getJsonLd(flower: FlowerProduct) {
 
   const strainData = getStrainData(flower.name, flower.type, flower.tier, flower.thc);
 
-  const offers: any = {
+  const offers: Record<string, unknown> = {
     "@type": "Offer",
-    url: `https://castleheightscannabis.com/flower/${flower.slug}`,
+    url: `https://www.castleheightscannabis.ca/flower/${flower.slug}`,
     priceCurrency: "CAD",
-    availability: "https://schema.org/InStock",
-    itemCondition: "https://schema.org/NewCondition",
-    seller: { "@type": "Organization", name: "Castle Heights Cannabis" },
-    hasMerchantReturnPolicy: {
-      "@type": "MerchantReturnPolicy",
-      applicableCountry: "CA",
-      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
-    }
+    seller: { "@id": "https://www.castleheightscannabis.ca/#store" },
   };
 
   if (lowestPrice !== undefined && lowestPrice !== null) {
@@ -77,9 +73,8 @@ function getJsonLd(flower: FlowerProduct) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: flower.name,
-    image: flower.image ? [flower.image.startsWith('http') ? flower.image : `https://castleheightscannabis.com${flower.image.startsWith('/') ? '' : '/'}${flower.image}`] : undefined,
+    image: flower.image ? [flower.image.startsWith('http') ? flower.image : `https://www.castleheightscannabis.ca${flower.image.startsWith('/') ? '' : '/'}${flower.image}`] : undefined,
     description: strainData.description,
-    brand: { "@type": "Brand", name: "Castle Heights Cannabis" },
     sku: cleanSku(flower.sku || flower.slug),
     offers,
   };
@@ -98,26 +93,23 @@ function getBreadcrumbJsonLd(flower: FlowerProduct) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://castleheightscannabis.com"
+        "item": "https://www.castleheightscannabis.ca"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": tierName,
-        "item": `https://castleheightscannabis.com/${tierSlug}`
+        "item": `https://www.castleheightscannabis.ca/${tierSlug}`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": flower.name,
-        "item": `https://castleheightscannabis.com/flower/${flower.slug}`
+        "item": `https://www.castleheightscannabis.ca/flower/${flower.slug}`
       }
     ]
   };
 }
-
-/* Top 3 tiers get "6g" label (6g bundle pricing), AA stays "5g" */
-const TOP_TIERS = ["EXOTIC", "PREMIUM", "AAA+"];
 
 /* -- Page -- */
 export default async function FlowerPage({
@@ -134,17 +126,11 @@ export default async function FlowerPage({
   const tierName = tierConfig?.name || flower.tier;
   const typeName = flower.type === "indica" ? "Indica" : flower.type === "sativa" ? "Sativa" : "Hybrid";
   const strainData = getStrainData(flower.name, flower.type, flower.tier, flower.thc);
-  const isTopTier = TOP_TIERS.includes(flower.tier);
-
-  // Weight label for 5g column depends on tier
-  const fiveGLabel = isTopTier ? "6g" : "5g";
-  const fiveGGrams = isTopTier ? 6 : 5;
-
   const prices = [
-    { label: "3g", grams: 3, p: flower.price3g, promo: "3g bundle pricing" },
-    { label: fiveGLabel, grams: fiveGGrams, p: flower.price5g, promo: isTopTier ? "6g bundle pricing" : null },
-    { label: "14g", grams: 14, p: flower.price14g, promo: null },
-    { label: "28g", grams: 28, p: flower.price28g, promo: null },
+    { label: "3g", grams: 3, p: flower.price3g },
+    { label: "5g", grams: 5, p: flower.price5g },
+    { label: "14g", grams: 14, p: flower.price14g },
+    { label: "28g", grams: 28, p: flower.price28g },
   ].filter((x) => x.p !== null);
 
   // Cheapest per-gram for value display
@@ -235,7 +221,7 @@ export default async function FlowerPage({
 
               {/* Effects */}
               <div className={styles.effectsRow}>
-                {strainData.effects.map((e) => (
+                {strainData.attributes.map((e) => (
                   <span key={e.label} className={styles.effectPill}>
                     {e.emoji} {e.label}
                   </span>
@@ -251,16 +237,11 @@ export default async function FlowerPage({
                     <span>PRICE</span>
                     <span>$/G</span>
                   </div>
-                  {prices.map(({ label, grams, p, promo }) => {
+                  {prices.map(({ label, grams, p }) => {
                     const effectivePrice = p ? (p.sale ?? p.regular) : 0;
                     const perG = effectivePrice > 0 ? (effectivePrice / grams).toFixed(2) : "—";
                     return (
-                      <div key={label} className={promo ? styles.dealGroup : ""}>
-                        {promo && (
-                          <div className={styles.dealBanner}>
-                            🎁 {promo} = <strong>${effectivePrice} / {label.toUpperCase()}</strong>
-                          </div>
-                        )}
+                      <div key={label}>
                         <div className={`${styles.priceTableRow} ${p && p.sale !== null ? styles.priceTableRowSale : ""}`}>
                           <span className={styles.priceWeight}>{label}</span>
                           {p && p.sale !== null ? (
@@ -294,7 +275,7 @@ export default async function FlowerPage({
               </div>
 
               <div className={styles.visitCta}>
-                <p>Available in-store &middot; Walk-in welcome &middot; No appointment needed</p>
+                <p>Open 24 hours for adult in-store shopping &middot; Call ahead for a particular listing</p>
               </div>
             </div>
           </div>

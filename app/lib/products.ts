@@ -37,8 +37,52 @@ export interface ItemProduct {
 import flowersJson from "./flowers.json";
 import itemsJson from "./items.json";
 
-export const allFlowers: FlowerProduct[] = flowersJson as FlowerProduct[];
-export const allItems: ItemProduct[] = itemsJson as ItemProduct[];
+const FLOWER_DISPLAY_NAME_OVERRIDES: Record<string, string> = {
+  "mike-tyson-ko-super-exotics": "MIKE TYSON KO SUPER EXOTICS",
+};
+
+const ITEM_SLUG_ALIASES: Record<string, string> = {
+  "grabba-redrose-redherring": "grabba",
+  "grabba-shaker-redrose-red-herring-x2-available":
+    "grabba-shaker-redrose-red-herring",
+};
+
+function normalizeFlowerDisplayName(flower: FlowerProduct): FlowerProduct {
+  const name = FLOWER_DISPLAY_NAME_OVERRIDES[flower.slug];
+  return name ? { ...flower, name } : flower;
+}
+
+function cleanDisplayName(name: string): string {
+  return name.replace(/\*/g, "").replace(/\s+/g, " ").trim();
+}
+
+function normalizeItemDisplayName(item: ItemProduct): ItemProduct {
+  const cleanedName = cleanDisplayName(item.name).replace(
+    /\s+x?2\s+available\s*$/i,
+    ""
+  );
+  const cleanedSlug = ITEM_SLUG_ALIASES[item.slug] || item.slug;
+  return cleanedName === item.name && cleanedSlug === item.slug
+    ? item
+    : { ...item, name: cleanedName, slug: cleanedSlug };
+}
+
+function dedupeBySlug<T extends { slug: string }>(products: T[]): T[] {
+  const seen = new Set<string>();
+  return products.filter((product) => {
+    const slug = product.slug.trim().toLowerCase();
+    if (!slug || seen.has(slug)) return false;
+    seen.add(slug);
+    return true;
+  });
+}
+
+export const allFlowers: FlowerProduct[] = dedupeBySlug(
+  (flowersJson as FlowerProduct[]).map(normalizeFlowerDisplayName)
+);
+export const allItems: ItemProduct[] = dedupeBySlug(
+  (itemsJson as ItemProduct[]).map(normalizeItemDisplayName)
+);
 
 /* ── Live stock fetch from Apps Script ── */
 const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || "";
@@ -72,8 +116,12 @@ export async function fetchLiveProducts(): Promise<{
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data: LiveStockResponse = await res.json();
     return {
-      flowers: data.flowers || allFlowers,
-      items: data.items || allItems,
+      flowers: dedupeBySlug(
+        (data.flowers || allFlowers).map(normalizeFlowerDisplayName)
+      ),
+      items: dedupeBySlug(
+        (data.items || allItems).map(normalizeItemDisplayName)
+      ),
       isLive: true,
       stockDate: data.stockDate || null,
     };
@@ -86,10 +134,7 @@ export async function fetchLiveProducts(): Promise<{
 export const TIER_CONFIG: Record<
   string,
   {
-    name: string; slug: string; color: string; icon: string; tagline: string; banner: string;
-    unitPrice: number; /* $/g */
-    deal3g: { label: string; total: string; price: number } | null; /* 3g bundle pricing */
-    deal6g: { label: string; total: string; price: number } | null; /* 6g bundle pricing (top 3 only) */
+    name: string; slug: string; color: string; icon: string; tagline: string;
   }
 > = {
   EXOTIC: {
@@ -97,55 +142,35 @@ export const TIER_CONFIG: Record<
     slug: "exotic",
     color: "#f59e0b",
     icon: "\uD83D\uDD25",
-    tagline: "Ultra-rare, top-shelf genetics \u00B7 THC 35-39%",
-    banner: "/banners/chc-exotic.webp",
-    unitPrice: 20,
-    deal3g: { label: "3g bundle", total: "3G", price: 40 },
-    deal6g: { label: "6g bundle", total: "6G", price: 60 },
+    tagline: "The Exotic flower listings shown in the current menu snapshot",
   },
   PREMIUM: {
     name: "Premium",
     slug: "premium",
     color: "#a78bfa",
     icon: "\uD83D\uDC8E",
-    tagline: "Hand-picked connoisseur grade \u00B7 THC 32-34%",
-    banner: "/banners/chc-premium.webp",
-    unitPrice: 15,
-    deal3g: { label: "3g bundle", total: "3G", price: 30 },
-    deal6g: { label: "6g bundle", total: "6G", price: 45 },
+    tagline: "The Premium flower listings shown in the current menu snapshot",
   },
   "AAA+": {
     name: "AAA+",
     slug: "aaa",
     color: "#22d3ee",
     icon: "\u26A1",
-    tagline: "Heavy hitters, proven strains \u00B7 THC 30-32%",
-    banner: "/banners/chc-aaa.webp",
-    unitPrice: 10,
-    deal3g: { label: "3g bundle", total: "3G", price: 20 },
-    deal6g: { label: "6g bundle", total: "6G", price: 30 },
+    tagline: "The AAA+ flower listings shown in the current menu snapshot",
   },
   AA: {
     name: "AA",
     slug: "aa",
     color: "#34d399",
     icon: "\u2726",
-    tagline: "Quality daily drivers \u00B7 THC 27-29%",
-    banner: "/banners/chc-aa.webp",
-    unitPrice: 4,
-    deal3g: null,
-    deal6g: null,
+    tagline: "The AA flower listings shown in the current menu snapshot",
   },
   BUDGET: {
     name: "Budget",
     slug: "budget",
     color: "#94a3b8",
     icon: "\uD83D\uDCB0",
-    tagline: "Shreds & value OZs \u00B7 From $40/oz",
-    banner: "/banners/chc-budget.webp",
-    unitPrice: 3,
-    deal3g: { label: "$10 / 3g Special", total: "3G", price: 10 },
-    deal6g: null,
+    tagline: "The Budget flower listings shown in the current menu snapshot",
   },
 };
 
@@ -160,85 +185,81 @@ export interface CategoryInfo {
 export const CATEGORY_CONFIG: Record<string, CategoryInfo> = {
   EDIBLES: {
     name: "Edibles", slug: "edibles", color: "#f97316", icon: "🍬",
-    seoTitle: "Cannabis Edibles Ottawa — Gummies, Chocolates & Drinks",
-    seoIntro: "Browse the full cannabis edibles menu at Castle Heights Cannabis on Center St, Ottawa. We carry THC gummies, chocolates, drinks, and more from top Canadian brands.",
-    seoDescription: "Looking for cannabis edibles in Ottawa? Castle Heights Cannabis stocks a wide range of THC-infused gummies, chocolates, beverages, and baked goods. Our edibles range from micro-dose options for beginners to high-potency products for experienced consumers. All products are lab-tested and sourced from licensed Canadian producers. Visit us at 605 Center St — open 24 hours.",
-    banner: "/banners/chc-edibles-gummies.webp",
+    seoTitle: "Cannabis Edibles Ottawa — Gummies, Chocolates & Drinks | Castle Heights Cannabis",
+    seoIntro: "Compare listed cannabis edible names, package details, and prices at Castle Heights Cannabis on Center St in Ottawa.",
+    seoDescription: "Adults can compare edible listings using the product name, supplied THC or MG details, package information, and listed price. Castle Heights Cannabis is at 605 Center St and is open 24 hours. Listings and prices can change, so call ahead when a particular edible matters to your visit.",
     faqs: [
-      { q: "What cannabis edibles do you carry?", a: "We stock THC gummies, chocolates, beverages, capsules, and baked goods from top Canadian brands. Potencies range from 10mg to 1000mg+ THC." },
-      { q: "How long do edibles take to kick in?", a: "Cannabis edibles typically take 30-90 minutes to take effect. Start with a low dose (5-10mg) and wait at least 2 hours before consuming more." },
-      { q: "Can I buy edibles at Castle Heights Cannabis?", a: "Yes! Visit us at 605 Center St, Ottawa. We're open 24 hours with a full edibles selection in store." },
+      { q: "What details can I compare for edibles?", a: "Listings show the product name, supplied THC or MG details, package information, and listed price when provided." },
+      { q: "Can edible listings change?", a: "Yes. Call (343) 308-9488 before travelling when a particular edible matters to your visit." },
     ],
   },
   "VAPE PENS": {
     name: "Vape Pens", slug: "vapes", color: "#8b5cf6", icon: "💨",
-    seoTitle: "Vape Pens Ottawa — THC & Nicotine Cartridges",
-    seoIntro: "Shop THC and nicotine vape pens at Castle Heights Cannabis, Ottawa. Cartridges, 510-thread batteries, and premium vape brands — all in stock.",
-    seoDescription: "Castle Heights Cannabis carries a curated selection of vape pens and cartridges in Ottawa. From 510-thread THC cartridges to nicotine vape pods, we stock the most popular brands and flavours. Our knowledgeable budtenders can help you choose the right cartridge and battery setup. Visit us at 605 Center St for the best vape selection in Vanier area.",
-    banner: "/banners/chc-deals-vapes.webp",
+    seoTitle: "Vape Pens Ottawa — THC & Nicotine Cartridges | Castle Heights Cannabis",
+    seoIntro: "Compare listed vape pen names, supplied product details, and prices at Castle Heights Cannabis in Ottawa.",
+    seoDescription: "Adults can compare vape pen listings by product name, supplied THC or MG details, package information, and listed price. Visit 605 Center St, open 24 hours, or call ahead about a particular listing.",
     faqs: [
-      { q: "What vape pens do you sell?", a: "We carry 510-thread THC cartridges, nicotine vape pods, disposable vapes, and compatible batteries from top Canadian brands." },
-      { q: "Do you sell vape batteries?", a: "Yes! We stock 510-thread batteries and pod systems that pair with our cartridge selection." },
+      { q: "What details can I compare for vape pens?", a: "Listings show the product name, supplied product details, and listed price when provided." },
+      { q: "Can I ask about a particular vape product?", a: "Yes. Call (343) 308-9488 before visiting when a particular listing matters." },
     ],
   },
   "VAPE DISPOSABLE": {
     name: "Vape Disposables", slug: "vape-disposables", color: "#a78bfa", icon: "💨",
-    seoTitle: "Disposable Vapes Ottawa — THC Disposable Pens",
-    seoIntro: "THC disposable vapes available at Castle Heights Cannabis, Ottawa. No charging, no refilling — just open and enjoy.",
-    seoDescription: "Disposable THC vapes are the easiest way to enjoy cannabis on the go. Castle Heights Cannabis stocks a wide selection of pre-charged, pre-filled disposable vape pens with various strain profiles and potencies. Perfect for beginners and experienced users alike. Visit us at 605 Center St, Ottawa.",
+    seoTitle: "Disposable Vapes Ottawa — THC Disposable Pens | Castle Heights Cannabis",
+    seoIntro: "Compare listed disposable vape names, supplied product details, and prices at Castle Heights Cannabis in Ottawa.",
+    seoDescription: "Adults can compare disposable vape listings by product name, supplied THC or MG details, package information, and listed price. Visit 605 Center St, open 24 hours, or call ahead about a particular listing.",
     faqs: [
-      { q: "How long does a disposable vape last?", a: "Most disposable THC vapes contain 0.5g-1g of distillate and last between 100-300 puffs depending on usage." },
-      { q: "Are disposable vapes rechargeable?", a: "Most are designed for single use, but some models include a USB-C charging port to ensure you can use the full cartridge." },
+      { q: "What disposable vape details are shown?", a: "Listings show the product name, supplied product details, and listed price when provided." },
+      { q: "Can disposable vape listings change?", a: "Yes. Call (343) 308-9488 before travelling when a particular product matters." },
     ],
   },
   CONCENTRATES: {
     name: "Concentrates", slug: "concentrates", color: "#f59e0b", icon: "💎",
-    seoTitle: "Cannabis Concentrates Ottawa — Shatter, Wax, Hash & Live Resin",
-    seoIntro: "Premium cannabis concentrates at Castle Heights Cannabis, Ottawa. Shatter, wax, hash, live resin, and diamonds — all in stock.",
-    seoDescription: "Castle Heights Cannabis offers a premium selection of cannabis concentrates in Ottawa. From traditional hash and kief to modern extracts like shatter, wax, live resin, and THC diamonds, we carry products for every preference and potency level. Our concentrates are sourced from trusted extractors and tested for purity. Visit us at 605 Center St.",
+    seoTitle: "Cannabis Concentrates Ottawa — Shatter, Wax, Hash & Live Resin | Castle Heights Cannabis",
+    seoIntro: "Compare listed cannabis concentrate names, supplied product details, and prices at Castle Heights Cannabis in Ottawa.",
+    seoDescription: "Adults can compare concentrate listings by product name, supplied THC or MG details, package information, and listed price. Visit 605 Center St, open 24 hours, or call ahead about a particular listing.",
     faqs: [
-      { q: "What types of concentrates do you carry?", a: "We stock shatter, wax, budder, live resin, rosin, hash, kief, and THC diamonds from top Canadian extractors." },
-      { q: "How do I consume concentrates?", a: "Concentrates can be dabbed with a rig, vaped with a concentrate pen, or added to flower in a joint or bowl for extra potency." },
+      { q: "What concentrate details can I compare?", a: "Listings show the product name, supplied product details, and listed price when provided." },
+      { q: "Can concentrate listings change?", a: "Yes. Call (343) 308-9488 before travelling when a particular concentrate matters." },
     ],
   },
   PREROLLS: {
     name: "Pre-Rolls", slug: "prerolls", color: "#22c55e", icon: "🚬",
-    seoTitle: "Pre-Rolls Ottawa — Ready-to-Smoke Cannabis Joints",
-    seoIntro: "Pre-rolled cannabis joints at Castle Heights Cannabis, Ottawa. Singles, multi-packs, and infused pre-rolls — ready to light up.",
-    seoDescription: "Skip the rolling and grab a pre-roll from Castle Heights Cannabis in Ottawa. We carry singles, multi-packs, and infused pre-rolls from premium flower. Whether you want a quick smoke or a party pack, our pre-roll selection has something for everyone. Visit us at 605 Center St — open 24 hours.",
+    seoTitle: "Pre-Rolls Ottawa — Cannabis Joint Listings | Castle Heights Cannabis",
+    seoIntro: "Compare listed pre-roll names, supplied package details, and prices at Castle Heights Cannabis in Ottawa.",
+    seoDescription: "Adults can compare pre-roll listings by product name, supplied THC or MG details, package information, and listed price. Castle Heights Cannabis is at 605 Center St and is open 24 hours. Call ahead about a particular listing.",
     faqs: [
-      { q: "What pre-rolls do you carry?", a: "We stock singles, 3-packs, and multi-packs in various strains and potencies, including infused pre-rolls with concentrates." },
-      { q: "Are your pre-rolls made with quality flower?", a: "Yes! Our pre-rolls are filled with ground flower from our regular menu tiers — not shake or trim." },
+      { q: "What pre-roll details can I compare?", a: "Listings show the product name, supplied product details, and listed price when provided." },
+      { q: "Can pre-roll listings change?", a: "Yes. Call (343) 308-9488 before travelling when a particular pre-roll matters." },
     ],
   },
   "ADD ONS": {
     name: "Accessories", slug: "add-ons", color: "#34d399", icon: "➕",
-    seoTitle: "Cannabis Accessories Ottawa — Grinders, Papers, Lighters & More",
-    seoIntro: "Essential cannabis accessories at Castle Heights Cannabis, Ottawa. Grinders, rolling papers, lighters, trays, and more.",
-    seoDescription: "Castle Heights Cannabis carries all the accessories you need for the perfect smoke session. From premium grinders and rolling papers to lighters, trays, and storage containers, we have everything in stock. Visit us at 605 Center St, Ottawa.",
+    seoTitle: "Cannabis Accessories Ottawa — Papers, Lighters & More | Castle Heights Cannabis",
+    seoIntro: "Compare listed smoke accessory names and prices at Castle Heights Cannabis in Ottawa.",
+    seoDescription: "Adults can compare accessory listings by product name, supplied package details, and listed price. Visit 605 Center St, open 24 hours, or call ahead when a particular accessory matters.",
     faqs: [
-      { q: "What accessories do you sell?", a: "We carry grinders, rolling papers, filter tips, lighters, rolling trays, storage jars, and more." },
+      { q: "What accessory details can I compare?", a: "Listings show the product name, supplied package details, and listed price when provided." },
     ],
   },
   "MAGIC & OTHERS": {
     name: "Magic Stuff", slug: "magic", color: "#64748b", icon: "*",
-    seoTitle: "Magic Stuff - Specialty Items",
-    seoIntro: "Browse current menu for available specialty products. Availability may vary by store.",
-    seoDescription: "Current specialty items are listed when they are carried on the menu. Product availability may vary by store and by day. Check the live menu for current selection.",
+    seoTitle: "Magic Stuff — Specialty Item Listings | Castle Heights Cannabis",
+    seoIntro: "Compare listed specialty item names, supplied product details, and prices at Castle Heights Cannabis in Ottawa.",
+    seoDescription: "Adults can compare specialty listings by product name, supplied package details, and listed price. Listings can change, so call (343) 308-9488 when a particular specialty item matters to your visit.",
     faqs: [
-      { q: "What specialty items are available?", a: "Selection varies by store and by day. Check the current menu for available specialty products." },
-      { q: "Does availability vary by location?", a: "Yes. Specialty item availability may vary by store, so please check the current menu for this location." },
+      { q: "What specialty item details can I compare?", a: "Listings show the product name, supplied package details, and listed price when provided." },
+      { q: "Can specialty listings change?", a: "Yes. Call (343) 308-9488 before travelling when a particular specialty item matters." },
     ],
   },
   CIGARETTES: {
     name: "Cigarettes", slug: "cigarettes", color: "#78716c", icon: "🏷️",
-    seoTitle: "Native Cigarettes Ottawa — Discount Tobacco at Castle Heights",
-    seoIntro: "Discount native cigarettes at Castle Heights Cannabis, Ottawa. Premium and value brands at the best prices on Center St.",
-    seoDescription: "Castle Heights Cannabis is your go-to source for affordable native cigarettes in Ottawa. We carry a wide selection of premium and value tobacco brands at competitive prices. Located at 605 Center St in the heart of Vanier area, we're open 24 hours. Stop by for the best cigarette prices in the neighbourhood.",
+    seoTitle: "Native Cigarettes Ottawa — Tobacco Listings | Castle Heights Cannabis",
+    seoIntro: "Compare listed Native cigarette and smoke-product names and prices at Castle Heights Cannabis on Center St in Ottawa.",
+    seoDescription: "Adults can compare cigarette and smoke-product listings by name, supplied package details, and listed price. Castle Heights Cannabis is at 605 Center St and is open 24 hours. Call ahead about a particular listing.",
     faqs: [
-      { q: "Do you sell cigarettes at Castle Heights?", a: "Yes! We carry a wide selection of native cigarette brands at competitive prices." },
-      { q: "What cigarette brands do you carry?", a: "We stock a variety of premium and value native cigarette brands. Visit us to see our full in-store selection." },
-      { q: "Are your cigarette prices competitive?", a: "Absolutely. We offer some of the best cigarette prices in the Vanier area area of Ottawa." },
+      { q: "What cigarette details can I compare?", a: "Listings show the product name, supplied package details, and listed price when provided." },
+      { q: "Can cigarette listings change?", a: "Yes. Call (343) 308-9488 before travelling when a particular cigarette or smoke product matters." },
     ],
   },
 };
@@ -258,6 +279,36 @@ export function getItemsByCategory(category: string): ItemProduct[] {
   return allItems.filter(
     (i) => i.category.toUpperCase() === category.toUpperCase()
   );
+}
+
+function normalizeProductText(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+export function isGrabbaItem(item: ItemProduct): boolean {
+  return normalizeProductText(`${item.slug} ${item.name}`)
+    .split(" ")
+    .includes("grabba");
+}
+
+export function isGrabbaShakerItem(item: ItemProduct): boolean {
+  const normalized = normalizeProductText(`${item.slug} ${item.name}`);
+  return normalized.includes("grabba") && normalized.includes("shaker");
+}
+
+export function getCategoryForItem(
+  item: Pick<ItemProduct, "category">
+): { key: string; config: (typeof CATEGORY_CONFIG)[string] } | undefined {
+  const normalizedCategory = normalizeProductText(item.category);
+  const entry = Object.entries(CATEGORY_CONFIG).find(([key, config]) => {
+    return (
+      normalizeProductText(key) === normalizedCategory ||
+      normalizeProductText(config.name) === normalizedCategory ||
+      normalizeProductText(config.slug) === normalizedCategory
+    );
+  });
+  if (!entry) return undefined;
+  return { key: entry[0], config: entry[1] };
 }
 
 export function getTierFromSlug(

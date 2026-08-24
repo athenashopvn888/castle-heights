@@ -1,16 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "../../components/Navbar";
-import SafeImage from "../../components/SafeImage";
 import Footer from "../../components/Footer";
 import {
   getItemsByCategory,
   getCategoryFromSlug,
   CATEGORY_CONFIG,
-  type ItemProduct,
 } from "../../lib/products";
 import styles from "./items.module.css";
+import ItemCard from "./ItemCard";
 
 /* ── Generate all category pages ── */
 export function generateStaticParams() {
@@ -27,12 +25,18 @@ export async function generateMetadata({
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) return {};
   const items = getItemsByCategory(catInfo.key);
+  const pageUrl = `https://www.castleheightscannabis.ca/items/${catInfo.config.slug}`;
 
   return {
     title: catInfo.config.seoTitle || `${catInfo.config.name} — ${items.length} Products`,
-    description: catInfo.config.seoIntro || `Shop ${items.length} ${catInfo.config.name.toLowerCase()} at Castle Heights Cannabis.`,
+    description: catInfo.config.seoIntro || `Compare ${items.length} listed ${catInfo.config.name.toLowerCase()} items at Castle Heights Cannabis.`,
     alternates: {
-      canonical: `https://castleheightscannabis.com/items/${catSlug}`,
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: catInfo.config.seoTitle,
+      description: catInfo.config.seoIntro,
+      url: pageUrl,
     },
   };
 }
@@ -60,23 +64,16 @@ export default async function ItemsCategoryPage({
     <main className={styles.main}>
       <Navbar />
 
-      {/* Hero Banner */}
-      <section style={{ width: "100%", overflow: "hidden", marginTop: "92px", marginBottom: "24px" }}>
-        {config.banner ? (
-          <img
-            src={config.banner}
-            alt={config.name}
-            style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
-          />
-        ) : (
-          <div className={styles.heroContent} style={{ background: config.color, padding: "60px 24px", textAlign: "center" }}>
-            <span className={styles.heroIcon}>{config.icon}</span>
-            <h1 className={styles.heroTitle}>
-              <span style={{ color: "#fff" }}>{config.name}</span>
-            </h1>
-            <p className={styles.heroSub} style={{ color: "rgba(255,255,255,0.8)" }}>{items.length} products available</p>
-          </div>
-        )}
+      <section style={{ width: "100%", overflow: "hidden", marginTop: 0, marginBottom: "24px" }}>
+        <div className={styles.heroContent} style={{ background: config.color, padding: "60px 24px", textAlign: "center" }}>
+          <span className={styles.heroIcon}>{config.icon}</span>
+          <h1 className={styles.heroTitle}>
+            <span style={{ color: "#fff" }}>{config.name}</span>
+          </h1>
+          <p className={styles.heroSub} style={{ color: "rgba(255,255,255,0.8)" }}>
+            {items.length} listed {items.length === 1 ? "item" : "items"}
+          </p>
+        </div>
       </section>
 
       {/* Product Grid */}
@@ -91,8 +88,8 @@ export default async function ItemsCategoryPage({
           ) : (
             <div className={styles.emptyState}>
               <span className={styles.emptyIcon}>🌱</span>
-              <h3>Coming Soon</h3>
-              <p>We&apos;re stocking this category. Check back soon!</p>
+              <h2>No Current Listings</h2>
+              <p>Call (343) 308-9488 to ask about this category before visiting.</p>
             </div>
           )}
         </div>
@@ -129,41 +126,5 @@ export default async function ItemsCategoryPage({
 
       <Footer />
     </main>
-  );
-}
-
-function ItemCard({ item, catColor }: { item: ItemProduct; catColor: string }) {
-  return (
-    <Link href={`/item/${item.slug}`} className={styles.card} style={{ "--cat-color": catColor } as React.CSSProperties}>
-      <div className={styles.cardMedia}>
-        {item.image ? (
-          <SafeImage 
-            src={item.image} 
-            alt={item.name} 
-            loading="lazy" 
-            className={styles.cardImg} 
-          />
-        ) : (
-          <div className={styles.cardPlaceholder}>
-            {item.name[0]}
-          </div>
-        )}
-        <div className={styles.cardBadges}>
-          {item.thc && <span className={styles.badgeThc}>{item.thc}</span>}
-          {item.mg && <span className={styles.badgeMg}>{item.mg}</span>}
-        </div>
-      </div>
-      <div className={styles.cardBody}>
-        <span className={styles.cardCategory}>{item.category}</span>
-        <h3 className={styles.cardName}>{item.name}</h3>
-        {item.price && (
-          <div className={styles.cardPrice}>
-            <span className={styles.priceVal}>{item.price.startsWith('$') ? item.price : `$${item.price}`}</span>
-            <span className={styles.priceUnit}>each</span>
-          </div>
-        )}
-        <span className={styles.skuTag}>SKU {item.sku}</span>
-      </div>
-    </Link>
   );
 }

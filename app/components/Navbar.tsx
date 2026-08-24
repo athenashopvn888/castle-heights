@@ -66,6 +66,10 @@ export default function Navbar() {
           <img
             src="/banners/logo.jpg"
             alt="Castle Heights Cannabis Ottawa dispensary logo"
+            width={1352}
+            height={383}
+            loading="eager"
+            fetchPriority="high"
             className={styles.logoImg}
           />
         </Link>

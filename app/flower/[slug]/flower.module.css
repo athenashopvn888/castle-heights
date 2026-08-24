@@ -517,6 +517,7 @@
 }
 
 .relatedImg {
+  position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--bg-secondary);

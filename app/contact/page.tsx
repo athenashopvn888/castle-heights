@@ -8,12 +8,13 @@ export const metadata: Metadata = {
   description:
     "Visit Castle Heights Cannabis at 605 Center St, Ottawa, ON K1K 2N8. Open 24 Hours. Walk-ins welcome.",
   alternates: {
-    canonical: "https://castleheightscannabis.com/contact",
+    canonical: "https://www.castleheightscannabis.ca/contact",
   },
   openGraph: {
     title: "Contact Castle Heights Cannabis — Ottawa Dispensary",
     description:
-      "605 Center St, Ottawa. Open 24 Hours. Premium cannabis, always fire.",
+      "Visit 605 Center St in Ottawa. Castle Heights Cannabis is open 24 hours.",
+    url: "https://www.castleheightscannabis.ca/contact",
   },
 };
 
@@ -47,7 +48,7 @@ export default function ContactPage() {
                 <br />
                 Ottawa, ON K1K 2N8
                 <br />
-                <span className={styles.infoMuted}>Vanier area &amp; Bathurst</span>
+                <span className={styles.infoMuted}>Ottawa, Ontario</span>
               </p>
             </div>
 
@@ -100,24 +101,24 @@ export default function ContactPage() {
                 <br />
                 Just walk in and our staff will
                 <br />
-                help you find the perfect strain.
+                help with the listed menu options.
               </p>
               <div className={styles.featureList}>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>✓</span>
-                  200+ strains in stock
+                  Five flower collections
                 </div>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>✓</span>
-                  Lab-tested &amp; safe
+                  Listed flower and item details
                 </div>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>✓</span>
-                  Knowledgeable budtenders
+                  Call-ahead product questions
                 </div>
                 <div className={styles.featureItem}>
                   <span className={styles.featureCheck}>✓</span>
-                  Debit &amp; cash accepted
+                  Open 24 hours
                 </div>
               </div>
             </div>

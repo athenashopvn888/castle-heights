@@ -10,7 +10,7 @@ export default function Footer() {
             <div className={styles.brand}>CASTLE HEIGHTS</div>
             <p className={styles.desc}>
               Your local cannabis dispensary at 605 Center St in Ottawa. Visit
-              Castle Heights Cannabis for premium flower, edibles, vapes, native
+              Castle Heights Cannabis for flower, edibles, vapes, native
               cigarettes, grabba, pouches, and smoke essentials. Open 24 hours.
             </p>
             <div className={styles.buttons}>
@@ -70,13 +70,6 @@ export default function Footer() {
               <Link href="/contact">Contact Us</Link>
             </nav>
           </div>
-        </div>
-
-        <div className={styles.trustStrip}>
-          <span>Interac Flash accepted</span>
-          <span>Credit cards accepted</span>
-          <span>Contactless tap</span>
-          <span>24/7 ATM on site</span>
         </div>
 
         <div className={styles.bottom}>

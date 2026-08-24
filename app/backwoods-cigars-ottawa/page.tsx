@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -11,6 +12,12 @@ export const metadata: Metadata = {
     "Browse Backwoods and smoke essentials at Castle Heights Cannabis on Center St in Ottawa.",
   alternates: {
     canonical: "https://www.castleheightscannabis.ca/backwoods-cigars-ottawa",
+  },
+  openGraph: {
+    title: "Backwoods Cigars Ottawa East | Castle Heights Cannabis",
+    description:
+      "Compare listed Backwoods and related smoke essentials before visiting Castle Heights Cannabis on Center St in Ottawa.",
+    url: "https://www.castleheightscannabis.ca/backwoods-cigars-ottawa",
   },
 };
 
@@ -37,16 +44,14 @@ export default function BackwoodsCigarsOttawaPage() {
 
       <section className={styles.content}>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Backwoods and smoke accessories near Ottawa East</h2>
+          <h2 className={styles.sectionTitle}>Backwoods and Smoke Essentials in Ottawa</h2>
           <p className={styles.body}>
-            Castle Heights Cannabis keeps Backwoods, grabba, cigarette, and accessory
-            listings close to the main cannabis menu so adult shoppers can compare
-            everything in one visit-planning flow.
+            Adult shoppers can compare listed Backwoods names and supplied package
+            details before visiting Castle Heights Cannabis at 605 Center St.
           </p>
           <p className={styles.body}>
-            Use this page for a faster route into the smoke-essential section if you are
-            visiting from Vanier, Overbrook, Cyrville, Gloucester, Rockcliffe Park,
-            Beacon Hill, Pineview, Orleans, or Blackburn Hamlet.
+            Grabba, cigarette, and accessory options are also listed when present in the
+            published menu. Call (343) 308-9488 when a particular item matters.
           </p>
         </div>
 
@@ -55,17 +60,20 @@ export default function BackwoodsCigarsOttawaPage() {
           <div className={styles.listingGrid}>
             {backwoodsItems.map((item) => (
               <article key={item.slug} className={styles.listingCard}>
-                <div className={styles.imageWrap}>
-                  <img
+                <Link href={`/item/${item.slug}`} className={styles.imageWrap}>
+                  <Image
                     src={item.image}
-                    alt={`${item.name} Backwoods listing at Castle Heights Cannabis Ottawa East`}
+                    alt={`${item.name} Backwoods listing at Castle Heights Cannabis in Ottawa`}
                     className={styles.image}
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 640px) 88px, 96px"
                   />
-                </div>
+                </Link>
                 <div>
-                  <h3 className={styles.listingName}>{item.name}</h3>
-                  <p className={styles.listingMeta}>{item.price} menu listing</p>
+                  <h3 className={styles.listingName}>
+                    <Link href={`/item/${item.slug}`}>{item.name}</Link>
+                  </h3>
+                  {item.price && <p className={styles.listingMeta}>Listed price: {item.price}</p>}
                 </div>
               </article>
             ))}

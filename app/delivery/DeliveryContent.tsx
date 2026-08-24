@@ -1,109 +1,52 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "./delivery.module.css";
 
 export default function DeliveryContent() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) return;
-
-    setStatus("loading");
-
-    try {
-      // Save to Google Sheets via Apps Script
-      const res = await fetch(
-        `https://script.google.com/macros/s/AKfycbx09_sDal1eMVF1r-hUck4e7oq_XBHEWhGvA79JuhZNQ6P4CdhCas0xE3FfexWQ3hq4/exec?action=delivery_email&email=${encodeURIComponent(email)}&store=CHC01`,
-        { method: "GET", mode: "no-cors" }
-      );
-      setStatus("success");
-      setEmail("");
-    } catch {
-      setStatus("success"); // no-cors always succeeds visually
-    }
-  }
-
   return (
     <main className={styles.main}>
       <Navbar />
       <div className={styles.content}>
-        <span className={styles.icon}>🚗</span>
-        <h1 className={styles.pageTitle}>
-          Delivery <span className={styles.highlight}>Coming Soon</span>
-        </h1>
+        <span className={styles.icon}>📍</span>
+        <h1 className={styles.pageTitle}>Ordering and Delivery Information</h1>
         <p className={styles.pageSubtitle}>
-          Castle Heights Cannabis is launching delivery across Ottawa &amp; Gatineau.
-          Sign up below to be the first to know when we go live — and get an exclusive launch-day deal.
+          Call Castle Heights Cannabis to confirm the current ordering options before
+          making plans. The Ottawa storefront is open 24 hours at 605 Center St.
         </p>
 
-        {/* Email signup */}
         <div className={styles.formSection}>
-          <h2 className={styles.formTitle}>🔔 Get Notified When We Launch</h2>
+          <h2 className={styles.formTitle}>Confirm the Current Options</h2>
           <p className={styles.formDesc}>
-            Enter your email to join our delivery waitlist. We&apos;ll send you one email when delivery goes live.
+            Ordering and delivery details can change. Call (343) 308-9488 for current
+            information or get directions to the Ottawa store.
           </p>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.inputRow}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className={styles.emailInput}
-                required
-                disabled={status === "loading"}
-              />
-              <button
-                type="submit"
-                className={styles.submitBtn}
-                disabled={status === "loading"}
-              >
-                {status === "loading" ? "Sending..." : "Notify Me"}
-              </button>
-            </div>
-          </form>
-          {status === "success" && (
-            <p className={styles.successMsg}>
-              ✅ You&apos;re on the list! We&apos;ll notify you when delivery launches.
-            </p>
-          )}
-          {status === "error" && (
-            <p className={styles.errorMsg}>
-              Something went wrong. Please try again.
-            </p>
-          )}
+          <div className={styles.inputRow}>
+            <a className={styles.submitBtn} href="tel:+13433089488">
+              Call (343) 308-9488
+            </a>
+            <Link className={styles.submitBtn} href="/contact">
+              Store Hours and Address
+            </Link>
+          </div>
         </div>
 
-        {/* Info cards */}
         <div className={styles.infoGrid}>
           <div className={styles.infoCard}>
-            <span className={styles.infoIcon}>📦</span>
-            <h3 className={styles.infoTitle}>Same-Day Delivery</h3>
-            <p className={styles.infoDesc}>Order before 6 PM, delivered same day across Ottawa.</p>
+            <span className={styles.infoIcon}>🕒</span>
+            <h2 className={styles.infoTitle}>Open 24 Hours</h2>
+            <p className={styles.infoDesc}>Visit the storefront any time at 605 Center St.</p>
           </div>
           <div className={styles.infoCard}>
-            <span className={styles.infoIcon}>🌉</span>
-            <h3 className={styles.infoTitle}>Ottawa & Gatineau</h3>
-            <p className={styles.infoDesc}>Serving the entire National Capital Region.</p>
+            <span className={styles.infoIcon}>📞</span>
+            <h2 className={styles.infoTitle}>Call Ahead</h2>
+            <p className={styles.infoDesc}>Ask about a particular listing before travelling.</p>
           </div>
           <div className={styles.infoCard}>
-            <span className={styles.infoIcon}>💰</span>
-            <h3 className={styles.infoTitle}>Same Great Prices</h3>
-            <p className={styles.infoDesc}>All in-store promotions apply to delivery orders too.</p>
+            <span className={styles.infoIcon}>🗺️</span>
+            <h2 className={styles.infoTitle}>Ottawa Store</h2>
+            <p className={styles.infoDesc}>605 Center St, Ottawa, ON K1K 2N8.</p>
           </div>
-        </div>
-
-        {/* CTA */}
-        <div className={styles.ctaSection}>
-          <p className={styles.ctaText}>
-            Can&apos;t wait? Visit us in-store at <strong>605 Center St, Ottawa</strong> —
-            open <strong>24 hours a day</strong>. Call <strong>(343) 308-9488</strong>.
-          </p>
         </div>
       </div>
       <Footer />

@@ -10,12 +10,12 @@ interface Item {
 
 /* -- CATEGORY CONFIG -- */
 const CARD_CONFIG = [
-  { id:"PREROLLS_ADDONS", title:"🔥 PREROLLS & ADD ONS", accent:"#dc2626", filter:(it:Item)=>it.category==="PREROLLS"||it.category==="ADD ONS", preset:"🔥 START SLOW · 2–3 PUFFS · WAIT 5 MIN" },
-  { id:"VAPES",           title:"💨 VAPES",              accent:"#0284c7", filter:(it:Item)=>["VAPE PENS","VAPE DISPOSABLE"].includes(it.category), preset:"💨 1–2 PUFFS · WAIT 2–3 MIN · REPEAT" },
-  { id:"EDIBLES",         title:"🍬 EDIBLES",            accent:"#7c3aed", filter:(it:Item)=>it.category==="EDIBLES", preset:"🍬 START SMALL · WAIT 45 MIN · THEN MORE" },
-  { id:"CONCENTRATES",    title:"⚗️ CONCENTRATES",       accent:"#b45309", filter:(it:Item)=>it.category==="CONCENTRATES", preset:"⚠️ VERY STRONG · TINY AMOUNT · WAIT 10–15 MIN" },
+  { id:"PREROLLS_ADDONS", title:"🔥 PREROLLS & ADD ONS", accent:"#dc2626", filter:(it:Item)=>it.category==="PREROLLS"||it.category==="ADD ONS", preset:"" },
+  { id:"VAPES",           title:"💨 VAPES",              accent:"#0284c7", filter:(it:Item)=>["VAPE PENS","VAPE DISPOSABLE"].includes(it.category), preset:"" },
+  { id:"EDIBLES",         title:"🍬 EDIBLES",            accent:"#7c3aed", filter:(it:Item)=>it.category==="EDIBLES", preset:"" },
+  { id:"CONCENTRATES",    title:"⚗️ CONCENTRATES",       accent:"#b45309", filter:(it:Item)=>it.category==="CONCENTRATES", preset:"" },
   { id:"CIGARETTES",      title:"🚬 CIGARETTES",         accent:"#78350f", filter:(it:Item)=>it.category==="CIGARETTES", preset:"" },
-  { id:"MAGIC",           title:"🍄 MAGIC & OTHERS",     accent:"#9333ea", filter:(it:Item)=>it.category==="MAGIC & OTHERS", preset:"🍫 START SMALL · WAIT 45 MIN · THEN MORE" },
+  { id:"MAGIC",           title:"🍄 MAGIC & OTHERS",     accent:"#9333ea", filter:(it:Item)=>it.category==="MAGIC & OTHERS", preset:"" },
 ];
 
 function isDaytime() { const h = new Date().getHours(); return h >= 10 && h < 17; }
@@ -135,7 +135,7 @@ function ItemCard({ title, accent, items, hiIdx, preset }: {
 /* -- TICKER -- */
 const TICKER_SLIDES = [
   "🔥 Castle Heights Cannabis — 605 Center St, Ottawa",
-  "200+ Strains In Stock",
+  "Flower and Item Menu",
   "Open 24 Hours",
   "Pre-Rolls · Edibles · Vapes · Concentrates",
   "ALL SALES ARE FINAL",

@@ -1,7 +1,6 @@
-// Auto-generated Google Business Profile Local SEO Location Configuration
 export const gbpLocation = {
   storeName: "Castle Heights Cannabis",
-  domain: "castleheightscannabis.com",
+  domain: "www.castleheightscannabis.ca",
   city: "Ottawa",
   province: "ON",
   country: "CA",
@@ -11,30 +10,15 @@ export const gbpLocation = {
   postalCode: "K1K 2N8",
   phone: "(343) 308-9488",
   phoneIntl: "+13433089488",
-  neighborhood: "Ottawa / Castle Heights",
-  nearbyAreas: ["Castle Heights", "Overbrook", "Vanier", "St. Laurent", "Donald Street", "Ottawa", "OC Transpo", "East Ottawa"],
   products: [
     "Flower",
     "Pre-rolls",
     "Edibles",
     "THC vapes",
     "Concentrates",
-    "Shatter",
-    "CBD oils",
-    "Accessories"
+    "Accessories",
   ],
-  menuUrl: "/",
-  directionsUrl: "",
-  mapEmbedUrl: "",
-  latitude: "45.4419717",
-  longitude: "-75.6428139",
   hours: ["Open 24 Hours"],
   seoTitle: "Castle Heights Cannabis | Weed Dispensary in Ottawa",
   metaDescription: "Castle Heights Cannabis is a local weed dispensary in Ottawa offering flower, pre-rolls, edibles, vapes, concentrates, CBD, and service for adults 19+.",
-  localLandmarks: ["Castle Heights", "Overbrook", "Vanier"],
-  introVariant: "If you are searching for a reliable weed dispensary in Ottawa, Castle Heights Cannabis at 605 Center St is your go-to destination. We serve adults 19+ with a vast selection of weed products including cannabis flower, pre-rolls, edibles, THC vapes, shatter, and CBD oils. Serving customers near Ottawa / Castle Heights and surrounding communities like Overbrook, our cannabis store and weed shop is focused on quality and convenience.",
-  neighborhoodDescription: "Located in the vibrant Ottawa / Castle Heights district, our cannabis store fits right into this active and historic community, surrounded by local retail shops and convenient transit links.",
-  parkingNote: "On-site lot parking is available for visitors",
-  transitNote: "Accessible by OC Transpo routes serving nearby Ottawa neighborhoods.",
-  sectionTitle: "Serving Customers Near Castle Heights and East Ottawa"
-};
+} as const;
