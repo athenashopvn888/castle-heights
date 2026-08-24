@@ -9,8 +9,8 @@ export const gbpLocation = {
   address: "605 Center St, Ottawa, ON K1K 2N8",
   streetAddress: "605 Center St",
   postalCode: "K1K 2N8",
-  phone: "(343) 573-4401",
-  phoneIntl: "+13435734401",
+  phone: "(343) 308-9488",
+  phoneIntl: "+13433089488",
   neighborhood: "Ottawa / Castle Heights",
   nearbyAreas: ["Castle Heights", "Overbrook", "Vanier", "St. Laurent", "Donald Street", "Ottawa", "OC Transpo", "East Ottawa"],
   products: [
