@@ -252,4 +252,14 @@
 
 @media (max-width: 480px) {
   .scrollInner { padding: 7px 64px 7px 12px; }
+
+  .gamesBtn,
+  .open {
+    display: none;
+  }
+
+  .actionBtn,
+  .actionBtnGhost {
+    min-height: 44px;
+  }
 }

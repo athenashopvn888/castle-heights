@@ -124,7 +124,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: 92px;
+  margin-top: 0;
 }
 
 .heroBanner {
@@ -186,13 +186,9 @@
 .heroBannerOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.6) 40%,
-    rgba(0, 0, 0, 0.8) 80%,
-    rgba(0, 0, 0, 0.92) 100%
-  );
+  background:
+    linear-gradient(90deg, rgba(1, 8, 5, 0.82) 0%, rgba(1, 8, 5, 0.68) 50%, rgba(1, 8, 5, 0.82) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.82) 72%, rgba(0, 0, 0, 0.95) 100%);
 }
 
 .heroGlow {
@@ -218,8 +214,8 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--hot-orange);
-  background: rgba(45, 106, 79, 0.08);
-  border: 1px solid rgba(45, 106, 79, 0.2);
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   padding: 8px 20px;
   border-radius: var(--radius-pill);
   margin-bottom: 32px;
@@ -241,6 +237,7 @@
   letter-spacing: -0.03em;
   margin-bottom: 20px;
   color: white;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.98);
 }
 
 .heroFire {
@@ -257,14 +254,20 @@
   background-clip: text;
 }
 
+.heroFire,
+.heroLit {
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.95));
+}
+
 
 
 .heroSubtitle {
   font-size: clamp(16px, 2.2vw, 20px);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.94);
   max-width: 650px;
   margin: 0 auto 40px;
   line-height: 1.7;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98);
 }
 
 .heroButtons {
@@ -288,7 +291,7 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 25px rgba(45, 106, 79, 0.35);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.2);
   transition: all var(--transition-med);
   text-decoration: none;
 }
@@ -303,13 +306,13 @@
   align-items: center;
   gap: 8px;
   padding: 16px 36px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.68);
   color: white;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.03em;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.62);
   border-radius: var(--radius-md);
   transition: all var(--transition-med);
   text-decoration: none;
@@ -326,9 +329,15 @@
 @media (max-width: 768px) {
   .heroTitle {
     color: var(--text-primary);
+    text-shadow: none;
   }
   .heroSubtitle {
     color: var(--text-secondary) !important;
+    text-shadow: none;
+  }
+  .heroFire,
+  .heroLit {
+    filter: none;
   }
   .heroBadge {
     color: var(--hot-orange);
@@ -593,23 +602,6 @@
 }
 
 .tierCard:hover::after { opacity: 1; }
-
-.tierCardBanner {
-  width: 100%;
-  aspect-ratio: 16/7;
-  overflow: hidden;
-}
-
-.tierCardBannerImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.tierCard:hover .tierCardBannerImg {
-  transform: scale(1.05);
-}
 
 .tierCardBody {
   flex: 1;

@@ -1,8 +1,14 @@
 import styles from "./page.module.css";
+import Image from "next/image";
+import Link from "next/link";
 import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
 import { allFlowers } from "./lib/products";
+
+function flowerTierCount(tier: string) {
+  return allFlowers.filter((flower) => flower.tier.toUpperCase() === tier).length;
+}
 
 /* ── Tier data (will come from Supabase later) ── */
 const TIERS = [
@@ -17,8 +23,7 @@ const TIERS = [
     color: "#f59e0b",
     glow: "rgba(245, 158, 11, 0.2)",
     icon: "🔥",
-    count: 42,
-    banner: "/banners/chc-exotic.webp",
+    count: flowerTierCount("EXOTIC"),
   },
   {
     name: "PREMIUM",
@@ -31,8 +36,7 @@ const TIERS = [
     color: "#a78bfa",
     glow: "rgba(167, 139, 250, 0.2)",
     icon: "💎",
-    count: 38,
-    banner: "/banners/chc-premium.webp",
+    count: flowerTierCount("PREMIUM"),
   },
   {
     name: "AAA+",
@@ -45,8 +49,7 @@ const TIERS = [
     color: "#22d3ee",
     glow: "rgba(34, 211, 238, 0.2)",
     icon: "⚡",
-    count: 55,
-    banner: "/banners/chc-aaa.webp",
+    count: flowerTierCount("AAA+"),
   },
   {
     name: "AA",
@@ -59,8 +62,7 @@ const TIERS = [
     color: "#34d399",
     glow: "rgba(52, 211, 153, 0.2)",
     icon: "✦",
-    count: 35,
-    banner: "/banners/chc-aa.webp",
+    count: flowerTierCount("AA"),
   },
   {
     name: "BUDGET",
@@ -73,8 +75,7 @@ const TIERS = [
     color: "#94a3b8",
     glow: "rgba(148, 163, 184, 0.15)",
     icon: "💰",
-    count: 18,
-    banner: "/banners/chc-budget.webp",
+    count: flowerTierCount("BUDGET"),
   },
   {
     name: "EDIBLES & MORE",
@@ -87,8 +88,7 @@ const TIERS = [
     color: "#fb923c",
     glow: "rgba(251, 146, 60, 0.2)",
     icon: "🍬",
-    count: 80,
-    banner: "/banners/chc-edibles-more.webp",
+    count: null,
   },
 ];
 
@@ -105,16 +105,20 @@ function buildFeatured() {
   // Pick up to 8, ensuring variety across tiers
   const picked: typeof pool = [];
   const tierCounts: Record<string, number> = {};
+  const seenSlugs = new Set<string>();
   for (const f of pool) {
     if (picked.length >= 8) break;
+    if (seenSlugs.has(f.slug)) continue;
     const tc = tierCounts[f.tier] || 0;
     if (tc >= 3) continue; // max 3 per tier
     if (!f.image) continue; // skip strains without images
     picked.push(f);
+    seenSlugs.add(f.slug);
     tierCounts[f.tier] = tc + 1;
   }
   return picked.map((f) => ({
     name: f.name,
+    slug: f.slug,
     sku: f.sku,
     tier: f.tier.toUpperCase(),
     thc: f.thc,
@@ -130,25 +134,25 @@ const FEATURED_HIGHLIGHTS = [
   {
     href: "/grabba-leaf-shakers",
     title: "Grabba Leaf & Shakers",
-    text: "Browse grabba, shakers, Backwoods, and smoke essentials before visiting Castle Heights Cannabis on Center St.",
-    anchor: "Shop grabba essentials",
+    text: "Compare the Grabba and Grabba Shaker options listed for adult shoppers at Castle Heights Cannabis on Center St.",
+    anchor: "Compare grabba options",
   },
   {
     href: "/native-cigarettes-ottawa",
     title: "Native Cigarettes Ottawa",
-    text: "Compare native cigarette carton listings, premium mix options, and cigarette menu items from the Castle Heights catalog.",
-    anchor: "Browse native cigarettes",
+    text: "Review Native cigarette carton information and cigarette menu options before a trip to 605 Center St.",
+    anchor: "Review native cigarettes",
   },
   {
     href: "/nicotine-pouches-ottawa",
     title: "Nicotine Pouches & Vapes",
-    text: "Plan a quick pouch, vape, or smoke-accessory stop near Vanier, Overbrook, Gloucester, and Ottawa East.",
-    anchor: "View nicotine pouches",
+    text: "Compare nicotine pouch and vape information for an adult shopping stop near Vanier, Overbrook, and Gloucester.",
+    anchor: "Compare pouches and vapes",
   },
   {
     href: "/cheap-weed-deals",
     title: "Cheap Weed & Budget Ounces",
-    text: "Use the live menu to compare Budget, AA, AAA+, Premium, and Exotic tiers before your Castle Heights visit.",
+    text: "Compare Budget, AA, AAA+, Premium, and Exotic flower tiers before visiting Castle Heights Cannabis.",
     anchor: "Compare budget options",
   },
 ];
@@ -180,9 +184,13 @@ export default function HomePage() {
       {/* ── HERO BANNER ── */}
       <section className={styles.hero} id="hero">
         <div className={styles.heroBanner}>
-          <img
-            src="/banners/chc-storefront.webp"
-            alt="Castle Heights Cannabis — Premium Ottawa Cannabis Dispensary"
+          <Image
+            src="/banners/chc-homepage.webp"
+            alt="Castle Heights Cannabis branded welcome graphic"
+            width={2172}
+            height={724}
+            sizes="100vw"
+            preload
             className={styles.heroBannerImg}
           />
           <div className={styles.heroBannerOverlay}></div>
@@ -190,7 +198,7 @@ export default function HomePage() {
         <div className={styles.heroContent}>
           <div className={styles.heroBadge}>
             <span className={styles.heroBadgeDot}></span>
-            OTTAWA'S FORTRESS OF CANNABIS
+            OTTAWA&apos;S FORTRESS OF CANNABIS
           </div>
           <h1 className={styles.heroTitle}>
             Premium Cannabis.
@@ -199,8 +207,8 @@ export default function HomePage() {
             <span className={styles.heroLit}>Castle Heights.</span>
           </h1>
           <p className={styles.heroSubtitle}>
-            200+ hand-picked strains · Exotic to Budget · THC up to 39% ·
-            Real-time inventory · 605 Center St, Ottawa
+            {allFlowers.length} listed flower options · Exotic to Budget · THC up to 39% ·
+            605 Center St, Ottawa
           </p>
           <div className={styles.heroButtons}>
             <a href="#menu" className={styles.heroBtn}>
@@ -220,16 +228,16 @@ export default function HomePage() {
                 />
               </svg>
             </a>
-            <a href="/games" className={styles.heroBtnGhost}>
+            <Link href="/games" className={styles.heroBtnGhost}>
               Play Games
-            </a>
+            </Link>
           </div>
 
           {/* Stats bar */}
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>200+</span>
-              <span className={styles.heroStatLabel}>Strains</span>
+              <span className={styles.heroStatNum}>{allFlowers.length}</span>
+              <span className={styles.heroStatLabel}>Flower Options</span>
             </div>
             <div className={styles.heroStatDivider}></div>
             <div className={styles.heroStat}>
@@ -254,23 +262,23 @@ export default function HomePage() {
       <section className={styles.highlightSection} aria-labelledby="featured-specialties">
         <div className={styles.container}>
           <div className={styles.highlightHeader}>
-            <span className={styles.highlightEyebrow}>Ottawa East shopping shortcuts</span>
+            <span className={styles.highlightEyebrow}>Castle Heights Cannabis</span>
             <h2 id="featured-specialties" className={styles.highlightTitle}>
-              Featured Castle Heights specialties
+              Featured Products &amp; Ottawa East Specialties
             </h2>
             <p className={styles.highlightIntro}>
-              Fast links for adult 19+ shoppers comparing grabba, native cigarettes,
-              nicotine pouches, vapes, and budget cannabis options before visiting
-              605 Center St in Ottawa.
+              Adult 19+ shoppers can compare grabba, Native cigarettes, nicotine
+              pouches, vapes, and value-focused flower tiers before visiting 605
+              Center St in Ottawa.
             </p>
           </div>
           <div className={styles.highlightGrid}>
             {FEATURED_HIGHLIGHTS.map((item) => (
-              <a key={item.href} href={item.href} className={styles.highlightCard}>
+              <Link key={item.href} href={item.href} className={styles.highlightCard}>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
                 <span>{item.anchor}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -278,14 +286,6 @@ export default function HomePage() {
 
       <section className={styles.tierSection} id="menu">
         <div className={styles.container}>
-          <div className={styles.sectionBanner}>
-            <img
-              src="/banners/chc-tier-pricing.webp"
-              alt="Shop by Tier — From exotic craft flower to value budget OZs"
-              className={styles.sectionBannerImg}
-            />
-          </div>
-
           <div className={styles.tierGrid}>
             {TIERS.map((tier, i) => (
               <a
@@ -300,13 +300,6 @@ export default function HomePage() {
                   } as React.CSSProperties
                 }
               >
-                <div className={styles.tierCardBanner}>
-                  <img
-                    src={tier.banner}
-                    alt={`${tier.name} cannabis flower`}
-                    className={styles.tierCardBannerImg}
-                  />
-                </div>
                 <div className={styles.tierCardBody}>
                   <h3
                     className={styles.tierCardName}
@@ -318,9 +311,11 @@ export default function HomePage() {
                     <span className={styles.tierCardThc}>
                       THC {tier.thc}
                     </span>
-                    <span className={styles.tierCardCount}>
-                      {tier.count} strains
-                    </span>
+                    {tier.count !== null && (
+                      <span className={styles.tierCardCount}>
+                        {tier.count} flower options
+                      </span>
+                    )}
                   </div>
                   <div className={styles.tierCardPrice}>
                     {tier.unitPrice !== null && (
@@ -346,19 +341,11 @@ export default function HomePage() {
       {/* ── HOT RIGHT NOW ── */}
       <section className={styles.featuredSection}>
         <div className={styles.container}>
-          <div className={styles.sectionBanner}>
-            <img
-              src="/banners/hot_right_now_in_neon_glow.webp"
-              alt="Hot Right Now — Staff picks and top sellers"
-              className={styles.sectionBannerImg}
-            />
-          </div>
-
           <div className={styles.featuredGrid}>
             {FEATURED_STRAINS.map((strain, i) => (
-              <a
-                key={strain.sku}
-                href={`/flower/${strain.name.toLowerCase().replace(/\s+/g, "-")}`}
+              <Link
+                key={strain.slug}
+                href={`/flower/${strain.slug}`}
                 className={styles.productCard}
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
@@ -399,43 +386,10 @@ export default function HomePage() {
                   </div>
                   <div className={styles.productCta}>View Strain</div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* ── GAMES ARCADE BANNER ── */}
-      <section className={styles.promoSection}>
-        <a href="/games" className={styles.promoBannerLink}>
-          <img
-            src="/banners/neon_arcade_gaming_promotion_banner.webp"
-            alt="Games Arcade — Flappy Bud, Snake Munchies, Brick Breaker 420"
-            className={styles.promoBannerImg}
-          />
-        </a>
-      </section>
-
-      {/* ── DEALS & PROMOS BANNER ── */}
-      <section className={styles.promoSection}>
-        <a href="/items/edibles" className={styles.promoBannerLink}>
-          <img
-            src="/banners/chc-edibles-gummies.webp"
-            alt="High THC Gummies & Edibles — Castle Heights Cannabis"
-            className={styles.promoBannerImg}
-          />
-        </a>
-      </section>
-
-      {/* ── VAPES & PREROLL DEALS BANNER ── */}
-      <section className={styles.promoSection}>
-        <a href="/items/vapes" className={styles.promoBannerLink}>
-          <img
-            src="/banners/chc-deals-vapes.webp"
-            alt="Late Night Cannabis Deals — Vapes, Pre-Rolls & More"
-            className={styles.promoBannerImg}
-          />
-        </a>
       </section>
 
       {/* ── STORE INFO ── */}
