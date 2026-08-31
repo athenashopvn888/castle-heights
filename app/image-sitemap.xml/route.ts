@@ -2,7 +2,6 @@ import {
   allFlowers,
   allItems,
   isGrabbaItem,
-  isGrabbaShakerItem,
 } from "../lib/products";
 
 const BASE = "https://www.castleheightscannabis.ca";
@@ -88,6 +87,3 @@ export function GET() {
   });
 }
 
-export const imageSitemapDiagnostics = {
-  hasGrabbaShaker: allItems.some(isGrabbaShakerItem),
-};
