@@ -7,16 +7,16 @@ import { allItems, getItemsByCategory } from "../lib/products";
 import styles from "../native-cigarettes-ottawa/native-cigarettes.module.css";
 
 export const metadata: Metadata = {
-  title: "Nicotine Pouches Ottawa East | Castle Heights Cannabis",
+  title: "Castle Heights Cannabis | Nicotine Pouches Ottawa East | $10 Sale Tins",
   description:
-    "Browse nicotine pouches, disposable vapes, and smoke essentials at Castle Heights Cannabis on Center St in Ottawa.",
+    "Nicotine pouch tins are currently listed on sale for $10 at Castle Heights Cannabis in Ottawa East. Check the live menu before visiting because pricing and selection can change.",
   alternates: {
     canonical: "https://www.castleheightscannabis.ca/nicotine-pouches-ottawa",
   },
   openGraph: {
-    title: "Nicotine Pouches Ottawa East | Castle Heights Cannabis",
+    title: "Castle Heights Cannabis | Nicotine Pouches Ottawa East | $10 Sale Tins",
     description:
-      "Check published nicotine pouch information and compare related vape listings at Castle Heights Cannabis on Center St in Ottawa.",
+      "Nicotine pouch tins are currently listed on sale for $10 at Castle Heights Cannabis in Ottawa East. Check the live menu before visiting because pricing and selection can change.",
     url: "https://www.castleheightscannabis.ca/nicotine-pouches-ottawa",
   },
 };
@@ -29,8 +29,6 @@ const pouchAndVapeItems = [
   ...getItemsByCategory("VAPE PENS").slice(0, 4),
   ...getItemsByCategory("VAPE DISPOSABLE").slice(0, 4),
 ].filter((item, index, items) => items.findIndex((candidate) => candidate.slug === item.slug) === index);
-const hasPouches = pouchItems.length > 0;
-
 export default function NicotinePouchesOttawaPage() {
   return (
     <main className={styles.page}>
@@ -39,11 +37,10 @@ export default function NicotinePouchesOttawaPage() {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <span className={styles.eyebrow}>Castle Heights Cannabis</span>
-          <h1 className={styles.title}>Nicotine Pouches Ottawa East</h1>
+          <h1 className={styles.title}>Nicotine Pouches in Ottawa East — $10 Sale Tins</h1>
           <p className={styles.subtitle}>
-            {hasPouches
-              ? "Compare listed nicotine pouch and related vape options before visiting Castle Heights Cannabis in Ottawa."
-              : "Call Castle Heights Cannabis about nicotine pouch options and compare related vape listings before visiting Center Street."}
+            Nicotine pouch tins are currently listed on sale for $10 each at Castle Heights Cannabis in Ottawa East.
+            Check the <Link href="/items/cigarettes">live Cigarettes menu</Link> before visiting because pricing and selection can change.
           </p>
         </div>
       </section>
@@ -51,12 +48,11 @@ export default function NicotinePouchesOttawaPage() {
       <section className={styles.content}>
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>
-            {hasPouches ? "Nicotine Pouches and Vape Options" : "Ask About Nicotine Pouch Options"}
+            $10 Nicotine Pouch Tins in Ottawa East
           </h2>
           <p className={styles.body}>
-            {hasPouches
-              ? "The published menu includes nicotine pouch listings alongside disposable and vape-pen options for adult shoppers."
-              : "The published menu snapshot does not currently include a nicotine pouch listing. Call (343) 308-9488 to ask about pouch options before travelling."}
+            Check the <Link href="/items/cigarettes">live Cigarettes menu</Link> for the current nicotine pouch selection and pricing,
+            as sale prices and availability can change.
           </p>
           <p className={styles.body}>
             Castle Heights Cannabis is at 605 Center St in Ottawa and is open 24 hours.
@@ -82,7 +78,11 @@ export default function NicotinePouchesOttawaPage() {
                 </div>
                 <div>
                   <h3 className={styles.listingName}>{item.name}</h3>
-                  <p className={styles.listingMeta}>{item.price} menu listing</p>
+                  <p className={styles.listingMeta}>
+                    {pouchItems.some((pouch) => pouch.slug === item.slug)
+                      ? "See the live Cigarettes menu for the current sale price"
+                      : `${item.price} menu listing`}
+                  </p>
                 </div>
               </article>
             ))}
@@ -102,11 +102,10 @@ export default function NicotinePouchesOttawaPage() {
           <h2 className={styles.sectionTitle}>FAQ</h2>
           <div className={styles.faqList}>
             <details className={styles.faqItem}>
-              <summary className={styles.faqQuestion}>Can I browse pouches and vapes before visiting?</summary>
+              <summary className={styles.faqQuestion}>Are nicotine pouch tins $10 at Castle Heights Cannabis?</summary>
               <p className={styles.faqAnswer}>
-                {hasPouches
-                  ? "The published menu includes the pouch listings shown above. Listings can change, so call ahead about a particular option."
-                  : "Call (343) 308-9488 to ask about nicotine pouch options before visiting. Related vape listings are shown when present in the published menu."}
+                The live Castle Heights Cannabis menu currently lists nicotine pouch tins at $10 each. This is sale pricing and may change,
+                so check the <Link href="/items/cigarettes">live Cigarettes menu</Link> for the latest price and selection.
               </p>
             </details>
             <details className={styles.faqItem}>
@@ -123,3 +122,4 @@ export default function NicotinePouchesOttawaPage() {
     </main>
   );
 }
+
