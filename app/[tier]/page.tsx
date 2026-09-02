@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FlowerCard from "../components/FlowerCard";
@@ -8,7 +9,7 @@ import {
   getTierFromSlug,
   TIER_CONFIG,
 } from "../lib/products";
-import { TIER_SEO } from "../lib/tierSeoContent";
+import { TIER_COMPARE, TIER_LINKS, TIER_SEO } from "../lib/tierSeoContent";
 import styles from "./tier.module.css";
 
 /* -- Generate all tier pages at build -- */
@@ -29,7 +30,7 @@ export async function generateMetadata({
   const seo = TIER_SEO[tierInfo.key];
   const pageUrl = `https://www.castleheightscannabis.ca/${tierInfo.config.slug}`;
   const description = flowers.length > 0
-    ? seo?.seoIntro || `Compare listed ${tierInfo.config.name.toLowerCase()} flower options at Castle Heights Cannabis.`
+    ? seo?.metaDescription || `Browse the ${tierInfo.config.name.toLowerCase()} flower category at Castle Heights Cannabis.`
     : `Call Castle Heights Cannabis before visiting for current ${tierInfo.config.name.toLowerCase()} flower details.`;
 
   return {
@@ -37,8 +38,8 @@ export async function generateMetadata({
     description,
     alternates: { canonical: pageUrl },
     openGraph: {
-      title: `${tierInfo.config.name} Flower | Castle Heights Cannabis`,
-      description,
+      title: seo?.socialTitle || `${tierInfo.config.name} Flower | Castle Heights Cannabis`,
+      description: seo?.socialDescription || description,
       url: pageUrl,
     },
   };
@@ -76,7 +77,7 @@ export default async function TierPage({
             <div className={styles.heroTitleRow}>
               <span className={styles.heroIcon}>{config.icon}</span>
               <h1 className={styles.heroTitle}>
-                <span style={{ color: config.color }}>{config.name}</span>
+                <span style={{ color: config.color }}>{seo?.h1 || config.name}</span>
               </h1>
             </div>
             <p className={styles.heroTagline}>
@@ -137,11 +138,7 @@ export default async function TierPage({
 
           {regularFlowers.length > 0 ? (
             <>
-              <h2 className={styles.sectionTitle}>
-                All{" "}
-                <span style={{ color: config.color }}>{config.name}</span>{" "}
-                Strains
-              </h2>
+              <h2 className={styles.sectionTitle}>{seo?.strainHeading || `All ${config.name} Strains`}</h2>
               <div className={styles.grid}>
                 {regularFlowers.map((f) => (
                   <FlowerCard
@@ -178,6 +175,20 @@ export default async function TierPage({
                 <p className={styles.seoBody}>{s.body}</p>
               </div>
             ))}
+
+            <div className={styles.compareBlock}>
+              <h3 className={styles.seoHeading}>{TIER_COMPARE.heading}</h3>
+              <p className={styles.seoBody}>{TIER_COMPARE.body}</p>
+              <nav className={styles.tierLinks} aria-label="Castle Heights Cannabis flower tiers">
+                {TIER_LINKS.map((link) => (
+                  <Link key={link.href} href={link.href}>{link.label}</Link>
+                ))}
+              </nav>
+              <p className={styles.ownerLink}>
+                {TIER_COMPARE.ownerSentence}{" "}
+                <Link href={TIER_COMPARE.ownerHref}>{TIER_COMPARE.ownerLabel}</Link>.
+              </p>
+            </div>
 
             {/* FAQ Accordion */}
             {seo.faqs.length > 0 && (
