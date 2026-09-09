@@ -195,13 +195,12 @@ function buildProductJSON_(catalog, stockData) {
     var name = String(it['Name'] || '').trim();
     if (!name) continue;
     
-    var priceStr = '', priceRaw = it['Price_EACH'];
-    if (priceRaw !== null && priceRaw !== undefined && String(priceRaw).trim()) {
-      var p = parsePriceCell_(priceRaw);
-      if (p && typeof p === 'object') priceStr = p.sale !== null ? '$' + p.sale : '$' + p.regular;
-      else if (p) priceStr = '$' + p;
-      else priceStr = String(priceRaw).trim();
-    }
+    var priceRaw = it['Price_EACH'];
+    // Preserve the complete FMD Price_EACH value. Slash-separated values
+    // are distinct customer price options, not a number to truncate.
+    var priceStr = priceRaw !== null && priceRaw !== undefined
+      ? String(priceRaw).trim()
+      : '';
     
     items.push({ sku: sku.replace(/\.0/g, '').trim(), name: name, slug: slugify_(name), category: String(it['Category'] || 'ADD ONS').trim().toUpperCase(), type: String(it['Type'] || '').trim(), thc: String(it['THC'] || '').trim(), mg: String(it['MG'] || '').trim(), price: priceStr, image: String(it['ImageURL'] || '').trim(), promoImage: String(it['PPromoimageurl'] || it['PPromo'] || '').trim() || null });
   }
