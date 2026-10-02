@@ -77,6 +77,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly" as const,
     priority: 0.65,
   }));
+  const guideIndex: MetadataRoute.Sitemap = [
+    { url: "https://castleheightscannabis.com/guides", lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+  ];
 
   const pages = [
     ...staticPages,
@@ -86,6 +89,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...itemDetailPages,
     ...resourcePages,
     ...seoPages,
+    ...guideIndex,
     ...guidePages,
   ];
 
