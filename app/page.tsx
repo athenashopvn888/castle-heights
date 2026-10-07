@@ -1,6 +1,3 @@
-import { HOME_TITLE } from "./lib/homeDelivery";
-import CohortDeliveryActions from "./components/CohortDeliveryActions";
-import HomeDeliverySection from "./components/HomeDeliverySection";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import FleetAnnouncementBanner from "./components/FleetAnnouncementBanner";
@@ -12,13 +9,13 @@ import Footer from "./components/Footer";
 import { allFlowers } from "./lib/products";
 
 export const metadata: Metadata = {
-  title: { absolute: HOME_TITLE },
+  title: "Castle Heights Cannabis | Ottawa Cannabis Dispensary",
   description:
     "Castle Heights Cannabis is an Ottawa cannabis dispensary on Center St with menu categories, local store details, and adult 19+ shopping info. Open 24 Hours.",
   alternates: { canonical: "https://www.castleheightscannabis.ca" },
   openGraph: { url: "https://www.castleheightscannabis.ca" },
 
-  twitter: { card: "summary_large_image", title: HOME_TITLE },
+  twitter: { card: "summary_large_image", title: "Castle Heights Cannabis | Ottawa Cannabis Dispensary" },
 };
 
 function flowerTierCount(tier: string) {
@@ -193,8 +190,12 @@ export default function HomePage() {
             <span className={styles.heroBadgeDot}></span>
             OTTAWA&apos;S FORTRESS OF CANNABIS
           </div>
-          <h1 className={styles.heroTitle}>{HOME_TITLE}</h1>
-            <CohortDeliveryActions variant="hero" />
+          <h1 className={styles.heroTitle}>
+            Premium Cannabis.
+            <br />
+            <span className={styles.heroFire}>Ascend to New Heights.</span>{" "}
+            <span className={styles.heroLit}>Castle Heights.</span>
+          </h1>
           <p className={styles.heroSubtitle}>
             {allFlowers.length} listed flower options · Five flower tiers ·
             605 Center St, Ottawa
@@ -246,8 +247,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <HomeDeliverySection />
 
       {/* ── SHOP BY TIER BANNER ── */}
       <section className={styles.highlightSection} aria-labelledby="featured-specialties">
