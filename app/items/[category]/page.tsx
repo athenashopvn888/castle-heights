@@ -12,6 +12,9 @@ import ItemCard from "./ItemCard";
 import Link from "next/link";
 import { getCategoryGuideGroups } from "../../lib/guideRegistry";
 import guideStyles from "../../guides/[slug]/guide.module.css";
+import { getResolvedProducts } from "../../lib/resolvedProducts";
+
+export const revalidate = 300;
 
 /* ── Generate all category pages ── */
 export function generateStaticParams() {
@@ -27,7 +30,8 @@ export async function generateMetadata({
   const { category: catSlug } = await params;
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) return {};
-  const items = getItemsByCategory(catInfo.key);
+  const { items: resolvedItems } = await getResolvedProducts();
+  const items = getItemsByCategory(catInfo.key, resolvedItems);
   const pageUrl = `https://www.castleheightscannabis.ca/items/${catInfo.config.slug}`;
 
   return {
@@ -54,9 +58,10 @@ export default async function ItemsCategoryPage({
   if (!catInfo) notFound();
 
   /* Pre-Rolls also shows accessories (ADD ONS) */
-  let items = getItemsByCategory(catInfo.key);
+  const { items: resolvedItems } = await getResolvedProducts();
+  let items = getItemsByCategory(catInfo.key, resolvedItems);
   if (catInfo.key === "PREROLLS") {
-    const accessories = getItemsByCategory("ADD ONS");
+    const accessories = getItemsByCategory("ADD ONS", resolvedItems);
     const existingIds = new Set(items.map(i => i.sku));
     const uniqueAccessories = accessories.filter(a => !existingIds.has(a.sku));
     items = [...items, ...uniqueAccessories];
