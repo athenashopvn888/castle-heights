@@ -1,6 +1,4 @@
 "use client";
-import CohortDeliveryActions from "./CohortDeliveryActions";
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -23,7 +21,6 @@ const ALL_LINKS = [
   { href: "/items/add-ons", label: "Accessories" },
   { href: "/resources", label: "Resources" },
   { href: "/guides", label: "Guides" },
-  { href: "/delivery", label: "Delivery" },
   { href: "/faq", label: "FAQ" },
   { href: "/games", label: "Games" },
 ];
@@ -120,7 +117,6 @@ export default function Navbar() {
           </button>
         )}
       </div>
-      <CohortDeliveryActions />
     </nav>
   );
 }
