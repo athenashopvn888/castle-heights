@@ -10,7 +10,6 @@ import TvThemeArtwork from "../tv-theme/TvThemeArtwork";
 import { getTvTheme, getTvThemeVariables } from "../tv-theme/theme";
 import {
   getTv2DaytimePromo,
-  isCigaretteOfferVisible,
   isTv2Daytime,
 } from "./tv2Promos";
 
@@ -31,13 +30,19 @@ const CARD_CONFIG = [
 ];
 
 /* -- HELPERS -- */
-const fmtPrice = (v?:string) => { const s=String(v||"").trim(); if(!s)return""; return /^\$/.test(s)?s:"$"+s; };
+const fmtPrice = (v?:string) => { const s=String(v||"").trim(); if(!s)return""; return /\$/.test(s)?s:"$"+s; };
 const fmtTHC = (v?:string) => { const s=String(v||"").trim(); if(!s)return""; if(/^\d+(\.\d+)?%?$/.test(s)){const n=parseFloat(s);return(n<=1?Math.round(n*100):Math.round(n))+"%";}return s; };
 const fmtMG = (v?:string) => { const s=String(v||"").trim(); if(!s)return""; if(/^\d+(\.\d+)?$/.test(s))return s+"mg"; return s; };
 
+const withTv2CigaretteDeals = (items: Item[]) => items.map(item => (
+  item.category === "CIGARETTES" && /^BB (FULL|LIGHTS)( CARTON)?$/i.test(item.name.trim())
+    ? { ...item, price: "2 FOR $5" }
+    : item
+));
+
 /* -- ITEM CARD -- */
-function ItemCard({ title, accent, items, hiIdx, preset, offerOverlay = false }: {
-  title:string; accent:string; items:Item[]; hiIdx:number; preset:string; offerOverlay?:boolean;
+function ItemCard({ title, accent, items, hiIdx, preset }: {
+  title:string; accent:string; items:Item[]; hiIdx:number; preset:string;
 }) {
   const MAX = 10;
   const hiW = Math.min(hiIdx % Math.max(1, items.length), items.length - 1);
@@ -138,14 +143,6 @@ function ItemCard({ title, accent, items, hiIdx, preset, offerOverlay = false }:
           </div>
         </div>
       </div>
-      {offerOverlay && (
-        <div className={styles.timedPromoOverlay} aria-label="Mix and Match 2 Pack $5 Cigarette Offer">
-          <img
-            src="/banners/2pack5cig.webp"
-            alt="Mix and Match 2 Pack $5 Cigarette Offer"
-          />
-        </div>
-      )}
     </div>
   );
 }
@@ -213,7 +210,6 @@ export default function TV2Page() {
   const [lastUpdate, setLastUpdate] = useState("");
   const [stockUpdated, setStockUpdated] = useState<string | null>(null);
   const [daytime, setDaytime] = useState(() => isTv2Daytime());
-  const [cigaretteOfferVisible, setCigaretteOfferVisible] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -221,22 +217,11 @@ export default function TV2Page() {
     return () => clearInterval(iv);
   }, []);
 
-  useEffect(() => {
-    const startedAt = performance.now();
-    const updateOffer = () => {
-      setCigaretteOfferVisible(
-        isCigaretteOfferVisible(isTv2Daytime(), performance.now() - startedAt),
-      );
-    };
-    const iv = setInterval(updateOffer, 250);
-    return () => clearInterval(iv);
-  }, []);
-
   const loadData = useCallback(async () => {
     try {
       const res = await fetch("/api/tv-data?type=items");
       const data: Item[] = res.ok ? await res.json() : [];
-      setItems(data);
+      setItems(withTv2CigaretteDeals(data));
       setStockUpdated(readStockUpdatedAt(res, data));
       const hi: Record<string,number> = {};
       CARD_CONFIG.forEach(c => { hi[c.id] = 0; });
@@ -329,8 +314,7 @@ export default function TV2Page() {
 
               return (
                 <ItemCard key={card.id} title={card.title} accent={card.accent}
-                  items={filtered} hiIdx={highlights[card.id]||0} preset={card.preset}
-                  offerOverlay={card.id === "CIGARETTES" && cigaretteOfferVisible} />
+                  items={filtered} hiIdx={highlights[card.id]||0} preset={card.preset} />
               );
             })}
           </div>
