@@ -74,6 +74,23 @@ export default async function TierPage({
   return (
     <main className={styles.main}>
       <Navbar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": `https://www.castleheightscannabis.ca/${tierInfo.config.slug}#collection`,
+            url: `https://www.castleheightscannabis.ca/${tierInfo.config.slug}`,
+            name: `${tierInfo.config.name} flower | Castle Heights Cannabis`,
+            mainEntity: {
+              "@type": "ItemList",
+              numberOfItems: flowers.length,
+              itemListElement: flowers.map((f, i) => ({ "@type": "ListItem", position: i + 1, name: f.name, url: `https://www.castleheightscannabis.ca/flower/${f.slug}` })),
+            },
+          }),
+        }}
+      />
 
       {/* ── Tier summary ── */}
       <section

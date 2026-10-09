@@ -27,6 +27,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/careers/budtender`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/hours`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE}/visit`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/games`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${BASE}/native-cigarettes-ottawa`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/grabba-leaf-shakers`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
