@@ -1,10 +1,20 @@
+import { getLiveMenu } from "../lib/liveMenu";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { getItemsByCategory } from "../lib/products";
 import styles from "./native-cigarettes.module.css";
+
+// Products come from the same loader as /api/tv-data on every request.
+export const dynamic = "force-dynamic";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  nativeCigaretteListings = __compute_nativeCigaretteListings();
+}
 
 export const metadata: Metadata = {
   title: "Native Cigarettes Ottawa | Castle Heights Cannabis on Center St",
@@ -21,12 +31,16 @@ export const metadata: Metadata = {
   },
 };
 
-const nativeCigaretteListings = getItemsByCategory("CIGARETTES").filter((item) => {
+function __compute_nativeCigaretteListings() {
+  return __menu.items.filter((i) => i.category.toUpperCase() === String("CIGARETTES").toUpperCase()).filter((item) => {
   const text = `${item.name} ${item.slug}`.toLowerCase();
   return !/(nicotine|pouch|velo|pablo|killa|zyn|grabba|backwood)/.test(text);
 });
+}
+let nativeCigaretteListings!: ReturnType<typeof __compute_nativeCigaretteListings>;
 
-export default function NativeCigarettesOttawaPage() {
+export default async function NativeCigarettesOttawaPage() {
+    await __loadMenuData();
   return (
     <main className={styles.page}>
       <Navbar />

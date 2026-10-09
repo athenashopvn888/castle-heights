@@ -1,23 +1,56 @@
+import { getLiveMenu } from "../lib/liveMenu";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { allItems, isGrabbaItem, isGrabbaShakerItem } from "../lib/products";
+import { isGrabbaItem, isGrabbaShakerItem } from "../lib/products";
 import styles from "../native-cigarettes-ottawa/native-cigarettes.module.css";
+
+// Products come from the same loader as /api/tv-data on every request.
+export const dynamic = "force-dynamic";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  grabbaItems = __compute_grabbaItems();
+  shakerItem = __compute_shakerItem();
+  leafItem = __compute_leafItem();
+  hasShaker = __compute_hasShaker();
+  menuDescription = __compute_menuDescription();
+  pageJsonLd = __compute_pageJsonLd();
+}
 
 const PAGE_URL = "https://www.castleheightscannabis.ca/grabba-leaf-shakers";
 const DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=605%20Center%20St%2C%20Ottawa%2C%20ON%20K1K%202N8";
-const grabbaItems = allItems.filter(isGrabbaItem);
-const shakerItem = grabbaItems.find(isGrabbaShakerItem);
-const leafItem = grabbaItems.find((item) => !isGrabbaShakerItem(item));
-const hasShaker = Boolean(shakerItem);
-const menuDescription = hasShaker
+function __compute_grabbaItems() {
+  return __menu.items.filter(isGrabbaItem);
+}
+let grabbaItems!: ReturnType<typeof __compute_grabbaItems>;
+function __compute_shakerItem() {
+  return grabbaItems.find(isGrabbaShakerItem);
+}
+let shakerItem!: ReturnType<typeof __compute_shakerItem>;
+function __compute_leafItem() {
+  return grabbaItems.find((item) => !isGrabbaShakerItem(item));
+}
+let leafItem!: ReturnType<typeof __compute_leafItem>;
+function __compute_hasShaker() {
+  return Boolean(shakerItem);
+}
+let hasShaker!: ReturnType<typeof __compute_hasShaker>;
+function __compute_menuDescription() {
+  return hasShaker
   ? "Compare Grabba leaf and Grabba Shaker formats at Castle Heights Cannabis in Ottawa East."
   : "Compare Grabba leaf and ask Castle Heights Cannabis about Grabba Shaker options in Ottawa East.";
+}
+let menuDescription!: ReturnType<typeof __compute_menuDescription>;
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+    await __loadMenuData();
+  return {
   title: "Grabba Leaf & Grabba Shakers Ottawa East",
   description: `${menuDescription} Visit 605 Center St, open 24 hours near Vanier and Overbrook.`,
   alternates: { canonical: PAGE_URL },
@@ -37,12 +70,14 @@ export const metadata: Metadata = {
     ],
   },
 };
+}
 
 function displayName(name: string) {
   return name.replace(/\*/g, "").replace(/\s+/g, " ").trim();
 }
 
-const pageJsonLd = {
+function __compute_pageJsonLd() {
+  return {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "@id": `${PAGE_URL}#webpage`,
@@ -51,6 +86,8 @@ const pageJsonLd = {
   description: menuDescription,
   about: { "@id": "https://www.castleheightscannabis.ca/#store" },
 };
+}
+let pageJsonLd!: ReturnType<typeof __compute_pageJsonLd>;
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
@@ -71,7 +108,8 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export default function GrabbaLeafShakersPage() {
+export default async function GrabbaLeafShakersPage() {
+    await __loadMenuData();
   return (
     <>
       <script
