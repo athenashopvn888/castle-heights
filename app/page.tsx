@@ -1,3 +1,4 @@
+import { getLiveMenu } from "./lib/liveMenu";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import FleetAnnouncementBanner from "./components/FleetAnnouncementBanner";
@@ -6,7 +7,16 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
-import { allFlowers } from "./lib/products";
+// Products come from the same loader as /api/tv-data on every request.
+export const dynamic = "force-dynamic";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  TIERS = __compute_TIERS();
+  FEATURED_STRAINS = __compute_FEATURED_STRAINS();
+}
 
 export const metadata: Metadata = {
   title: "Castle Heights Cannabis | Ottawa Cannabis Dispensary",
@@ -19,11 +29,12 @@ export const metadata: Metadata = {
 };
 
 function flowerTierCount(tier: string) {
-  return allFlowers.filter((flower) => flower.tier.toUpperCase() === tier).length;
+  return __menu.flowers.filter((flower) => flower.tier.toUpperCase() === tier).length;
 }
 
 /* ── Tier data (will come from Supabase later) ── */
-const TIERS = [
+function __compute_TIERS() {
+  return [
   {
     name: "EXOTIC",
     slug: "exotic",
@@ -79,13 +90,15 @@ const TIERS = [
     count: null,
   },
 ];
+}
+let TIERS!: ReturnType<typeof __compute_TIERS>;
 
 /* ── Build featured strains dynamically from real inventory ── */
 function buildFeatured() {
   // Prioritize: hot strains first, then sale, then highest THC
-  const hot = allFlowers.filter((f) => f.isHot);
-  const sale = allFlowers.filter((f) => f.isSale && !f.isHot);
-  const rest = allFlowers
+  const hot = __menu.flowers.filter((f) => f.isHot);
+  const sale = __menu.flowers.filter((f) => f.isSale && !f.isHot);
+  const rest = __menu.flowers
     .filter((f) => !f.isHot && !f.isSale && f.image)
     .sort((a, b) => parseFloat(b.thc) - parseFloat(a.thc));
 
@@ -116,7 +129,10 @@ function buildFeatured() {
   }));
 }
 
-const FEATURED_STRAINS = buildFeatured();
+function __compute_FEATURED_STRAINS() {
+  return buildFeatured();
+}
+let FEATURED_STRAINS!: ReturnType<typeof __compute_FEATURED_STRAINS>;
 
 const FEATURED_HIGHLIGHTS = [
   {
@@ -162,7 +178,8 @@ function getTierColor(tier: string) {
   return t?.color || "#94a3b8";
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+    await __loadMenuData();
   return (
     <main className={styles.main}>
       <Navbar />
@@ -197,7 +214,7 @@ export default function HomePage() {
             <span className={styles.heroLit}>Castle Heights.</span>
           </h1>
           <p className={styles.heroSubtitle}>
-            {allFlowers.length} listed flower options · Five flower tiers ·
+            {__menu.flowers.length} listed flower options · Five flower tiers ·
             605 Center St, Ottawa
           </p>
           <div className={styles.heroButtons}>
@@ -226,7 +243,7 @@ export default function HomePage() {
           {/* Stats bar */}
           <div className={styles.heroStats}>
             <div className={styles.heroStat}>
-              <span className={styles.heroStatNum}>{allFlowers.length}</span>
+              <span className={styles.heroStatNum}>{__menu.flowers.length}</span>
               <span className={styles.heroStatLabel}>Flower Options</span>
             </div>
             <div className={styles.heroStatDivider}></div>

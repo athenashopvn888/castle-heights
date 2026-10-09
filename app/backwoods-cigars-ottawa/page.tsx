@@ -1,10 +1,20 @@
+import { getLiveMenu } from "../lib/liveMenu";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { getItemsByCategory } from "../lib/products";
 import styles from "../native-cigarettes-ottawa/native-cigarettes.module.css";
+
+// Products come from the same loader as /api/tv-data on every request.
+export const dynamic = "force-dynamic";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  backwoodsItems = __compute_backwoodsItems();
+}
 
 export const metadata: Metadata = {
   title: "Backwoods Cigars Ottawa East | Castle Heights Cannabis",
@@ -21,12 +31,16 @@ export const metadata: Metadata = {
   },
 };
 
-const backwoodsItems = getItemsByCategory("CIGARETTES").filter((item) => {
+function __compute_backwoodsItems() {
+  return __menu.items.filter((i) => i.category.toUpperCase() === String("CIGARETTES").toUpperCase()).filter((item) => {
   const text = `${item.name} ${item.slug}`.toLowerCase();
   return /(backwood|woods)/.test(text);
 });
+}
+let backwoodsItems!: ReturnType<typeof __compute_backwoodsItems>;
 
-export default function BackwoodsCigarsOttawaPage() {
+export default async function BackwoodsCigarsOttawaPage() {
+    await __loadMenuData();
   return (
     <main className={styles.page}>
       <Navbar />

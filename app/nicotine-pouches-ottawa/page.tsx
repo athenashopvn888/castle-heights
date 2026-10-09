@@ -1,10 +1,21 @@
+import { getLiveMenu } from "../lib/liveMenu";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { allItems, getItemsByCategory } from "../lib/products";
 import styles from "../native-cigarettes-ottawa/native-cigarettes.module.css";
+
+// Products come from the same loader as /api/tv-data on every request.
+export const dynamic = "force-dynamic";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  pouchItems = __compute_pouchItems();
+  pouchAndVapeItems = __compute_pouchAndVapeItems();
+}
 
 export const metadata: Metadata = {
   title: "Castle Heights Cannabis | Nicotine Pouches Ottawa East | $10 Sale Tins",
@@ -21,15 +32,22 @@ export const metadata: Metadata = {
   },
 };
 
-const pouchItems = allItems.filter((item) =>
+function __compute_pouchItems() {
+  return __menu.items.filter((item) =>
   `${item.name} ${item.slug}`.toLowerCase().includes("pouch")
 );
-const pouchAndVapeItems = [
+}
+let pouchItems!: ReturnType<typeof __compute_pouchItems>;
+function __compute_pouchAndVapeItems() {
+  return [
   ...pouchItems,
-  ...getItemsByCategory("VAPE PENS").slice(0, 4),
-  ...getItemsByCategory("VAPE DISPOSABLE").slice(0, 4),
+  ...__menu.items.filter((i) => i.category.toUpperCase() === String("VAPE PENS").toUpperCase()).slice(0, 4),
+  ...__menu.items.filter((i) => i.category.toUpperCase() === String("VAPE DISPOSABLE").toUpperCase()).slice(0, 4),
 ].filter((item, index, items) => items.findIndex((candidate) => candidate.slug === item.slug) === index);
-export default function NicotinePouchesOttawaPage() {
+}
+let pouchAndVapeItems!: ReturnType<typeof __compute_pouchAndVapeItems>;
+export default async function NicotinePouchesOttawaPage() {
+    await __loadMenuData();
   return (
     <main className={styles.page}>
       <Navbar />

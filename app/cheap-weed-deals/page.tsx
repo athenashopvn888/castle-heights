@@ -1,10 +1,20 @@
+import { getLiveMenu } from "../lib/liveMenu";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { getFlowersByTier } from "../lib/products";
 import styles from "../native-cigarettes-ottawa/native-cigarettes.module.css";
+
+// Products come from the same loader as /api/tv-data on every request.
+export const dynamic = "force-dynamic";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+  budgetFlowers = __compute_budgetFlowers();
+}
 
 export const metadata: Metadata = {
   title: "Cheap Weed Ottawa East | Budget Cannabis at Castle Heights",
@@ -21,13 +31,17 @@ export const metadata: Metadata = {
   },
 };
 
-const budgetFlowers = [
-  ...getFlowersByTier("BUDGET").slice(0, 4),
-  ...getFlowersByTier("AA").slice(0, 4),
-  ...getFlowersByTier("AAA+").slice(0, 4),
+function __compute_budgetFlowers() {
+  return [
+  ...__menu.flowers.filter((f) => f.tier.toUpperCase() === String("BUDGET").toUpperCase()).slice(0, 4),
+  ...__menu.flowers.filter((f) => f.tier.toUpperCase() === String("AA").toUpperCase()).slice(0, 4),
+  ...__menu.flowers.filter((f) => f.tier.toUpperCase() === String("AAA+").toUpperCase()).slice(0, 4),
 ];
+}
+let budgetFlowers!: ReturnType<typeof __compute_budgetFlowers>;
 
-export default function CheapWeedDealsPage() {
+export default async function CheapWeedDealsPage() {
+    await __loadMenuData();
   return (
     <main className={styles.page}>
       <Navbar />

@@ -1,8 +1,14 @@
+import { getLiveMenu } from "../lib/liveMenu";
 import {
-  allFlowers,
-  allItems,
   isGrabbaItem,
 } from "../lib/products";
+
+// ONE product loader (same as /api/tv-data), filled per request by __loadMenuData(). Grok 2026-10-09.
+let __menu!: Awaited<ReturnType<typeof getLiveMenu>>;
+async function __loadMenuData(): Promise<void> {
+  __menu = await getLiveMenu();
+
+}
 
 const BASE = "https://www.castleheightscannabis.ca";
 
@@ -31,18 +37,19 @@ function addImage(
   entries.set(page, pageImages);
 }
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-export function GET() {
+export async function GET() {
+    await __loadMenuData();
   const entries = new Map<string, Set<string>>();
   addImage(entries, BASE, "/banners/chc-homepage.webp");
 
-  const grabbaItems = allItems.filter(isGrabbaItem);
+  const grabbaItems = __menu.items.filter(isGrabbaItem);
   grabbaItems.forEach((item) =>
     addImage(entries, `${BASE}/grabba-leaf-shakers`, item.image)
   );
 
-  const nativeCigarette = allItems.find((item) => {
+  const nativeCigarette = __menu.items.find((item) => {
     const text = `${item.name} ${item.slug}`.toLowerCase();
     return (
       item.category.toUpperCase() === "CIGARETTES" &&
@@ -56,10 +63,10 @@ export function GET() {
     nativeCigarette?.image
   );
 
-  allFlowers.forEach((flower) =>
+  __menu.flowers.forEach((flower) =>
     addImage(entries, `${BASE}/flower/${flower.slug}`, flower.image)
   );
-  allItems.forEach((item) =>
+  __menu.items.forEach((item) =>
     addImage(entries, `${BASE}/item/${item.slug}`, item.image)
   );
 
