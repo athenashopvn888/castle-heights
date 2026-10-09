@@ -67,6 +67,8 @@ export default function Footer() {
               <Link href="/items/cigarettes">Cigarettes</Link>
               <Link href="/items/vapes">Vape Pens</Link>
               <Link href="/faq">FAQ</Link>
+              <Link href="/hours">Store Hours</Link>
+              <Link href="/visit">Visit &amp; Directions</Link>
               <Link href="/contact">Contact Us</Link>
               <Link href="/guides">Guides</Link>
             </nav>
