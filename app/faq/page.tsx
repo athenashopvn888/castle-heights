@@ -21,6 +21,15 @@ export const metadata: Metadata = {
 
 const FAQ_CATEGORIES = [
   {
+    title: "Prices",
+    faqs: [
+      {
+        q: "Can I get the store price on a delivery order?",
+        a: "Delivery is coming soon. In-store prices are for purchases made in the store, and delivery orders will have their own prices.",
+      },
+    ],
+  },
+  {
     title: "Location and Hours",
     faqs: [
       {
@@ -110,7 +119,12 @@ export default function FAQPage() {
             <section key={category.title} className={styles.category}>
               <h2 className={styles.categoryTitle}>{category.title}</h2>
               {category.faqs.map((faq) => (
-                <details key={faq.q} className={styles.faqItem}>
+                <details
+                  key={faq.q}
+                  id={faq.q === "Can I get the store price on a delivery order?" ? "delivery-price-rule" : undefined}
+                  open={faq.q === "Can I get the store price on a delivery order?"}
+                  className={styles.faqItem}
+                >
                   <summary className={styles.faqQuestion}>{faq.q}</summary>
                   <p className={styles.faqAnswer}>{faq.a}</p>
                 </details>
