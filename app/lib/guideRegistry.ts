@@ -40,7 +40,7 @@ export type GuideEntry = {
 export const GUIDE_STORE = {
   code: "CHC01",
   brand: "Castle Heights Cannabis",
-  domain: "castleheightscannabis.com",
+  domain: "www.castleheightscannabis.ca",
   corridor: "Center Street / Ottawa",
 } as const;
 

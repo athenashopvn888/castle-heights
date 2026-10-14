@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import { getGuidesByLane, type GuideLane } from "../lib/guideRegistry";
 import styles from "./guides-index.module.css";
 
-const BASE = "https://castleheightscannabis.com";
+const BASE = "https://www.castleheightscannabis.ca";
 const TITLE = "Guides | Castle Heights Cannabis";
 const laneLabels: Record<GuideLane, string> = { strain: "Strains", native_cig: "Native Cigarettes", nic_vape: "Nicotine Vape", thc_vape: "THC Vape" };
 
