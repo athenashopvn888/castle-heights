@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "pub-eb3e1fe18a43477eabc885cfb791d97c.r2.dev" },
+      { protocol: "https", hostname: "farmerslink.ca", pathname: "/wp-content/uploads/**" },
       { protocol: "https", hostname: "athena-cannabis-images.vercel.app" },
       { protocol: "https", hostname: "afterdarkcannabis.com" },
       { protocol: "https", hostname: "kennedyloudcannabis.com" },
