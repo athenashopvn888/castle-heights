@@ -14,6 +14,7 @@ import styles from "./tier.module.css";
 import { getTierGuideLinks } from "../lib/guideRegistry";
 import guideStyles from "../guides/[slug]/guide.module.css";
 import { getResolvedProducts } from "../lib/resolvedProducts";
+import { storeTierRange, tierRangeText } from "../lib/tierPriceRanges";
 
 export const dynamic = "force-dynamic";
 
@@ -67,6 +68,7 @@ export default async function TierPage({
   const seo = TIER_SEO[tierInfo.key];
 
   const saleFlowers = flowers.filter((f) => f.isSale);
+  const tierRange = storeTierRange(flowers, tierInfo.key);
   const regularFlowers = flowers.filter((f) => !f.isSale);
   const hotFlowers = flowers.filter((f) => f.isHot);
   const guideLinks = getTierGuideLinks(`/${config.slug}`);
@@ -108,6 +110,8 @@ export default async function TierPage({
             <p className={styles.heroTagline}>
               {flowers.length > 0 ? config.tagline : `${config.name} flower information`}
             </p>
+            {tierRangeText(tierRange) && <p className="tier-live-range"><small className="price-scope-label">In-store price</small>{tierRangeText(tierRange)}</p>}
+            <p className="price-rule-notice"><strong>IN-STORE PRICES ONLY.</strong><br />Delivery coming soon.</p>
             <div className={styles.heroStats}>
               {flowers.length > 0 ? (
                 <span className={styles.stat}>

@@ -7,6 +7,7 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import HiringCallout from "./components/HiringCallout";
 import Footer from "./components/Footer";
+import { storeTierRange, tierRangeText } from "./lib/tierPriceRanges";
 // Products come from the same loader as /api/tv-data on every request.
 export const dynamic = "force-dynamic";
 
@@ -293,6 +294,7 @@ export default async function HomePage() {
 
       <section className={styles.tierSection} id="menu">
         <div className={styles.container}>
+          <p className="price-rule-notice"><strong>IN-STORE PRICES ONLY.</strong><br />Delivery coming soon.</p>
           <div className={styles.tierGrid}>
             {TIERS.map((tier, i) => (
               <a
@@ -315,6 +317,10 @@ export default async function HomePage() {
                     {tier.name}
                   </h3>
                   <div className={styles.tierCardMeta}>
+                      {(() => {
+                        const line = tierRangeText(storeTierRange(__menu.flowers, tier.name));
+                        return line ? <span className="tier-live-range"><small className="price-scope-label">In-store price</small>{line}</span> : null;
+                      })()}
                     {tier.count !== null && tier.count > 0 && (
                       <span className={styles.tierCardCount}>
                         {tier.count} flower options
