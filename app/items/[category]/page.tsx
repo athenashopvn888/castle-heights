@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -13,6 +13,7 @@ import Link from "next/link";
 import { getCategoryGuideGroups } from "../../lib/guideRegistry";
 import guideStyles from "../../guides/[slug]/guide.module.css";
 import { getResolvedProducts } from "../../lib/resolvedProducts";
+import { isCigaretteScheduleActive } from "../../lib/cigaretteSchedule";
 
 export const dynamic = "force-dynamic";
 
@@ -56,6 +57,7 @@ export default async function ItemsCategoryPage({
   const { category: catSlug } = await params;
   const catInfo = getCategoryFromSlug(catSlug);
   if (!catInfo) notFound();
+  if (catInfo.key === "CIGARETTES" && !isCigaretteScheduleActive()) redirect("/items/vapes");
 
   /* Pre-Rolls also shows accessories (ADD ONS) */
   const { items: resolvedItems } = await getResolvedProducts();
