@@ -14,6 +14,7 @@ import {
   isTv2Daytime,
   type Tv2DaytimePromo,
 } from "./tv2Promos";
+import { useCigaretteSchedule } from "../components/useCigaretteSchedule";
 
 /* -- TYPES -- */
 interface Item {
@@ -213,6 +214,7 @@ function VerticalTicker() {
 
 /* -- MAIN TV2 PAGE -- */
 export default function TV2Page() {
+  const cigaretteOn = useCigaretteSchedule();
   const theme = getTvTheme(tvHiring?.store);
   const [bgUrl, setBgUrl] = useState("");
   useEffect(() => {
@@ -312,7 +314,7 @@ export default function TV2Page() {
         <div className={styles.stage}>
           <HiringRibbon hiring={tvHiring} />
           <div className={styles.grid}>
-            {CARD_CONFIG.map(card => {
+            {CARD_CONFIG.filter(card => card.id !== "CIGARETTES" || cigaretteOn).map(card => {
               const filtered = items.filter(card.filter);
               const promo = getTv2DaytimePromo(card.id, daytime, promoElapsedMs);
 
